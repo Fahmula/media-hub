@@ -37,7 +37,9 @@
 
   {% if service_type.value == "emby" %}
     {{ ui.section_header("Now playing", fv.sessions|length) }}
-    {% if fv.sessions %}
+    {% if fv.sessions and layout == "compact" %}
+    <div class="panel space-y-0.5 p-2">{% for s in fv.sessions %}{{ items.session_row(s, multi) }}{% endfor %}</div>
+    {% elif fv.sessions %}
     <div class="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{% for s in fv.sessions %}{{ items.session_card(s, multi) }}{% endfor %}</div>
     {% else %}<div class="panel">{{ ui.empty_state("play", "Nothing playing") }}</div>{% endif %}
   {% elif service_type.value in ("sonarr", "radarr") %}

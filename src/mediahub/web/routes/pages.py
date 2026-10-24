@@ -30,6 +30,9 @@ DASHBOARD_SECTIONS = frozenset(
     {"attention", "summary", "streams", "downloads", "status", "infinidysk"}
 )
 ActivityTab = Literal["playback", "downloads", "history", "streams"]
+# Card layout on service pages (Emby: detailed cards or compact rows), remembered in a cookie.
+LAYOUT_COOKIE = "mh_layout"
+LAYOUTS = ("detailed", "compact")
 
 
 def _view(request: Request, ctx: AppContext) -> tuple[DashboardView, dict[str, object]]:
@@ -137,7 +140,9 @@ def _service_context(
     view, base = _view(request, ctx)
     instance = request.query_params.get("instance")
     filtered = filter_view(view, service_type, instance)
-    return view, {**base, "fv": filtered, "service_type": service_type}
+    requested = request.query_params.get("layout") or request.cookies.get(LAYOUT_COOKIE)
+    layout = requested if requested in LAYOUTS else LAYOUTS[0]
+    return view, {**base, "fv": filtered, "service_type": service_type, "layout": layout}
 
 
 @router.get("/activity", response_class=HTMLResponse)
@@ -171,6 +176,11 @@ def _service_page_handler(service_type: ServiceType):  # type: ignore[no-untyped
             {**base, "page_title": service_type.label, "back_href": "/"},
         )
         remember_scope(request, response, str(base["scope"]))
+        layout = str(base["layout"])
+        if request.query_params.get("layout") and request.cookies.get(LAYOUT_COOKIE) != layout:
+            response.set_cookie(
+                LAYOUT_COOKIE, layout, max_age=31_536_000, samesite="lax", httponly=True
+            )
         return response
 
     return handler

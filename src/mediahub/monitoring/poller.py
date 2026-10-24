@@ -58,6 +58,9 @@ class Poller:
     def keys(self) -> set[str]:
         return set(self._targets)
 
+    def get(self, key: str) -> PollTarget | None:
+        return self._targets.get(key)
+
     def wake_all(self) -> None:
         for target in self._targets.values():
             target.wake.set()

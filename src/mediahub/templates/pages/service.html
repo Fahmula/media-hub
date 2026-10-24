@@ -11,6 +11,16 @@
   {% endfor %}
 </nav>
 {% endif %}
-{% set q = "?server=" ~ scope ~ ("&instance=" ~ fv.instance if fv.instance else "") %}
+{% set inst = "&instance=" ~ fv.instance if fv.instance else "" %}
+{% if service_type.value == "emby" and fv.instances %}
+<div class="mb-3 flex justify-end">
+  <div class="join" role="group" aria-label="Layout">
+    {% for value, label, glyph in [("detailed", "Detailed", "layout-grid"), ("compact", "Compact", "list")] %}
+    <a href="?layout={{ value }}{{ inst }}" class="btn btn-xs join-item {{ 'btn-primary' if layout == value else 'btn-ghost bg-base-100' }}"{% if layout == value %} aria-current="true"{% endif %}>{{ icon(glyph, "size-3.5") }} {{ label }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% set q = "?server=" ~ scope ~ inst ~ "&layout=" ~ layout %}
 {% call ui.poll_section("sec-service", "/partials/service/" ~ service_type.value ~ q, 5 if service_type.value == "emby" else 10) %}{% include "partials/service_body.html" %}{% endcall %}
 {% endblock %}
