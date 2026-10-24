@@ -7,9 +7,9 @@ monitors its own services; trusted installs can be linked read-only (coming in a
 Built with FastAPI, Jinja2 + HTMX, Tailwind CSS + daisyUI, SQLite. One small container, no
 Redis, no Node.js at runtime.
 
-> **Status: Phase 1 (foundation).** Login, service configuration with live connection tests,
-> health monitoring, and the full dashboard UI (driven by demo data). Emby sessions, Sonarr/
-> Radarr queues, InfiniDysk metrics and peer federation land in Phases 2–5.
+> **Status: Phase 4.** Emby live sessions, Sonarr/Radarr queues and history, InfiniDysk
+> streaming, provider and cache metrics with live reads, and a Needs Attention list you can
+> acknowledge or mute. Linking installs (peer federation) lands in Phase 5.
 
 ## Quick start
 

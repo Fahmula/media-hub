@@ -1,0 +1,590 @@
+{
+ "_note": "Recorded live (5 min of ls/ar frames, t = seconds since connect) while Emby played a file through InfiniDysk (STRM, ffmpeg) with one seek; redacted with capture-infinidysk.py's Redactor.",
+ "ws_frames": [
+  {
+   "t": 0.01,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 0, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 0, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879110596, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 0.01,
+   "Topic": "ar",
+   "Message": "{\"reads\": []}"
+  },
+  {
+   "t": 0.01,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 0, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 0, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879110596, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 0.01,
+   "Topic": "ar",
+   "Message": "{\"reads\": []}"
+  },
+  {
+   "t": 2.28,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 0, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 0, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879115598, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 7.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 0, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 0, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879120599, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 12.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 0, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 0, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879125600, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 16.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879129553, \"bytesRead\": 795934, \"bytesFetched\": 0, \"currentOffset\": 795934, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": []}]}"
+  },
+  {
+   "t": 17.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 0, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 3321287, \"inFlightArticleBytes\": 84253710, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879130601, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 17.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879130617, \"bytesRead\": 3321287, \"bytesFetched\": 0, \"currentOffset\": 451485, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1}]}]}"
+  },
+  {
+   "t": 18.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879131615, \"bytesRead\": 6802471, \"bytesFetched\": 10569693, \"currentOffset\": 2761782, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 27}]}]}"
+  },
+  {
+   "t": 19.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879132623, \"bytesRead\": 9353332, \"bytesFetched\": 53846157, \"currentOffset\": 5312643, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 87}]}]}"
+  },
+  {
+   "t": 20.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879133593, \"bytesRead\": 14225637, \"bytesFetched\": 90255607, \"currentOffset\": 10184948, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 139}]}]}"
+  },
+  {
+   "t": 21.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879134621, \"bytesRead\": 19161426, \"bytesFetched\": 126751727, \"currentOffset\": 15120737, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 189}]}]}"
+  },
+  {
+   "t": 22.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 71, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 24111089, \"inFlightArticleBytes\": 231192072, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879135602, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 22.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879135611, \"bytesRead\": 24111089, \"bytesFetched\": 158597563, \"currentOffset\": 20070400, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 233}]}]}"
+  },
+  {
+   "t": 23.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879136623, \"bytesRead\": 41314289, \"bytesFetched\": 189130492, \"currentOffset\": 37273600, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 275}]}]}"
+  },
+  {
+   "t": 24.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879137626, \"bytesRead\": 97224689, \"bytesFetched\": 229884894, \"currentOffset\": 93184000, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 334}]}]}"
+  },
+  {
+   "t": 25.43,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879138622, \"bytesRead\": 143296497, \"bytesFetched\": 272734968, \"currentOffset\": 139255808, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 396}]}]}"
+  },
+  {
+   "t": 26.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879139620, \"bytesRead\": 183764977, \"bytesFetched\": 313305693, \"currentOffset\": 179724288, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 452}]}]}"
+  },
+  {
+   "t": 27.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 321, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 217843697, \"inFlightArticleBytes\": 180288560, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879140603, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 27.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879140622, \"bytesRead\": 217843697, \"bytesFetched\": 353833283, \"currentOffset\": 213803008, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 509}]}]}"
+  },
+  {
+   "t": 28.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879141589, \"bytesRead\": 252119025, \"bytesFetched\": 394876364, \"currentOffset\": 248078336, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 566}]}]}"
+  },
+  {
+   "t": 29.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879142596, \"bytesRead\": 289327089, \"bytesFetched\": 437501858, \"currentOffset\": 285286400, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 624}]}]}"
+  },
+  {
+   "t": 30.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879143619, \"bytesRead\": 329209841, \"bytesFetched\": 482487125, \"currentOffset\": 325169152, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 687}]}]}"
+  },
+  {
+   "t": 31.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879144592, \"bytesRead\": 362768369, \"bytesFetched\": 526898670, \"currentOffset\": 358727680, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 750}]}]}"
+  },
+  {
+   "t": 32.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 614, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 362768369, \"inFlightArticleBytes\": 232584793, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879145603, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 32.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879145614, \"bytesRead\": 362768369, \"bytesFetched\": 570251406, \"currentOffset\": 358727680, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 811}]}]}"
+  },
+  {
+   "t": 33.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879146418, \"bytesRead\": 362768369, \"bytesFetched\": 593341228, \"currentOffset\": 358727680, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 837}]}]}"
+  },
+  {
+   "t": 34.31,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879146418, \"bytesRead\": 362768369, \"bytesFetched\": 593990187, \"currentOffset\": 358727680, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 837}]}]}"
+  },
+  {
+   "t": 37.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 880, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 367458289, \"inFlightArticleBytes\": 230112704, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879150604, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 37.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879150241, \"bytesRead\": 367458289, \"bytesFetched\": 594343246, \"currentOffset\": 363417600, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 838}]}]}"
+  },
+  {
+   "t": 38.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879151619, \"bytesRead\": 416790513, \"bytesFetched\": 607188169, \"currentOffset\": 412749824, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 865}]}]}"
+  },
+  {
+   "t": 39.39,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879152621, \"bytesRead\": 460449777, \"bytesFetched\": 647414029, \"currentOffset\": 456409088, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 917}]}]}"
+  },
+  {
+   "t": 40.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879153581, \"bytesRead\": 460449777, \"bytesFetched\": 687890748, \"currentOffset\": 456409088, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 970}]}]}"
+  },
+  {
+   "t": 41.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879153711, \"bytesRead\": 460449777, \"bytesFetched\": 691474987, \"currentOffset\": 456409088, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 973}]}]}"
+  },
+  {
+   "t": 42.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 914, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 460449777, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879155605, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 47.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1016, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 460449777, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879160606, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 49.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879162352, \"bytesRead\": 464099313, \"bytesFetched\": 691542263, \"currentOffset\": 460058624, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 974}]}]}"
+  },
+  {
+   "t": 50.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879163501, \"bytesRead\": 464099313, \"bytesFetched\": 693862369, \"currentOffset\": 460058624, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 977}]}]}"
+  },
+  {
+   "t": 51.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879164545, \"bytesRead\": 464099313, \"bytesFetched\": 694342187, \"currentOffset\": 460058624, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 977}]}]}"
+  },
+  {
+   "t": 52.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1016, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 474302449, \"inFlightArticleBytes\": 75708551, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879165605, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 52.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879165496, \"bytesRead\": 474302449, \"bytesFetched\": 694342187, \"currentOffset\": 10203136, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 977}]}]}"
+  },
+  {
+   "t": 53.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879166606, \"bytesRead\": 476862663, \"bytesFetched\": 695625889, \"currentOffset\": 3759466102, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 979}]}]}"
+  },
+  {
+   "t": 54.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879167631, \"bytesRead\": 482055339, \"bytesFetched\": 712052668, \"currentOffset\": 1886337413, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1008}]}]}"
+  },
+  {
+   "t": 55.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879168634, \"bytesRead\": 495565606, \"bytesFetched\": 749442264, \"currentOffset\": 1899847680, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1060}]}]}"
+  },
+  {
+   "t": 56.34,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879169621, \"bytesRead\": 545997278, \"bytesFetched\": 782978945, \"currentOffset\": 1950279352, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1109}]}]}"
+  },
+  {
+   "t": 57.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1127, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 579300134, \"inFlightArticleBytes\": 131559323, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879170606, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 57.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879170629, \"bytesRead\": 582502668, \"bytesFetched\": 810497976, \"currentOffset\": 1986784742, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1147}]}]}"
+  },
+  {
+   "t": 58.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879171606, \"bytesRead\": 601879860, \"bytesFetched\": 836739665, \"currentOffset\": 2006161934, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1181}]}]}"
+  },
+  {
+   "t": 59.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879172631, \"bytesRead\": 634670216, \"bytesFetched\": 863905705, \"currentOffset\": 2038952290, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1222}]}]}"
+  },
+  {
+   "t": 60.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879173623, \"bytesRead\": 660729079, \"bytesFetched\": 891710447, \"currentOffset\": 2065011153, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1259}]}]}"
+  },
+  {
+   "t": 61.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879174634, \"bytesRead\": 683952934, \"bytesFetched\": 918125362, \"currentOffset\": 2088235008, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1295}]}]}"
+  },
+  {
+   "t": 62.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1345, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 713764477, \"inFlightArticleBytes\": 132989130, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879175607, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 62.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879175634, \"bytesRead\": 713764477, \"bytesFetched\": 944825467, \"currentOffset\": 2118046551, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1336}]}]}"
+  },
+  {
+   "t": 63.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879176614, \"bytesRead\": 740277964, \"bytesFetched\": 974622952, \"currentOffset\": 2144560038, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1376}]}]}"
+  },
+  {
+   "t": 64.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879177600, \"bytesRead\": 769986495, \"bytesFetched\": 1002175012, \"currentOffset\": 2174268569, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1416}]}]}"
+  },
+  {
+   "t": 65.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879178579, \"bytesRead\": 797606245, \"bytesFetched\": 1030862606, \"currentOffset\": 2201888319, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1454}]}]}"
+  },
+  {
+   "t": 66.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879179636, \"bytesRead\": 829139750, \"bytesFetched\": 1058526348, \"currentOffset\": 2233421824, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1494}]}]}"
+  },
+  {
+   "t": 67.29,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1538, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 841714470, \"inFlightArticleBytes\": 29646684, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879180608, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 67.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879180631, \"bytesRead\": 841714470, \"bytesFetched\": 1087365534, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1533}]}]}"
+  },
+  {
+   "t": 68.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879181553, \"bytesRead\": 841714470, \"bytesFetched\": 1117460087, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1572}]}]}"
+  },
+  {
+   "t": 69.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879182629, \"bytesRead\": 841714470, \"bytesFetched\": 1148481796, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1618}]}]}"
+  },
+  {
+   "t": 70.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879183622, \"bytesRead\": 841714470, \"bytesFetched\": 1180884644, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1664}]}]}"
+  },
+  {
+   "t": 71.33,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879184564, \"bytesRead\": 841714470, \"bytesFetched\": 1213953019, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1708}]}]}"
+  },
+  {
+   "t": 72.3,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1740, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 838393183, \"inFlightArticleBytes\": 187331091, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879185609, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 72.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879185614, \"bytesRead\": 841714470, \"bytesFetched\": 1246001574, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1755}]}]}"
+  },
+  {
+   "t": 73.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879186627, \"bytesRead\": 841714470, \"bytesFetched\": 1280899352, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1802}]}]}"
+  },
+  {
+   "t": 74.32,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879186978, \"bytesRead\": 841714470, \"bytesFetched\": 1296073543, \"currentOffset\": 2245996544, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1819}]}]}"
+  },
+  {
+   "t": 77.3,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1941, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 817603381, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879190610, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 82.3,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1697, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 623870773, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879195612, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 87.3,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1422, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 478946101, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879200613, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 89.33,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879202609, \"bytesRead\": 848427814, \"bytesFetched\": 1296073543, \"currentOffset\": 2252709888, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1826}]}]}"
+  },
+  {
+   "t": 90.33,
+   "Topic": "ar",
+   "Message": "{\"reads\": [{\"id\": \"b67d662b-f8d6-486f-9aed-f20ea9f8cb77\", \"fileName\": \"File 1.mkv\", \"parentDirectoryName\": \"Folder 1\", \"path\": \"/content/file-1\", \"startedAt\": 1792879128906, \"lastActivityAt\": 1792879202843, \"bytesRead\": 848427814, \"bytesFetched\": 1302524743, \"currentOffset\": 2252709888, \"fileSize\": 3759466102, \"clientIp\": \"192.0.2.1\", \"clientUserAgent\": \"Lavf/59.27.100\", \"playerSession\": null, \"providers\": [{\"host\": \"provider1.example\", \"nickname\": \"Provider 1\", \"segments\": 1828}]}]}"
+  },
+  {
+   "t": 92.3,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1119, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 480969525, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879205615, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 97.3,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 1101, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 387978037, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879210618, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 102.3,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 966, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 387978037, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879215619, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 105.33,
+   "Topic": "ar",
+   "Message": "{\"reads\": []}"
+  },
+  {
+   "t": 107.31,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 966, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 374125365, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879220620, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 112.32,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 932, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 269127680, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879225621, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 117.31,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 690, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 134663337, \"inFlightArticleBytes\": 218280526, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879230622, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 122.35,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 650, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 6713344, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879235622, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 127.32,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 452, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 6713344, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879240633, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 132.32,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 230, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 6713344, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879245635, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 137.32,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 166, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 6713344, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879250636, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 142.32,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 166, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 6713344, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879255637, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 147.32,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 168, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879260637, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 152.32,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 165, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879265638, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 157.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 165, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879270639, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 162.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 165, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879275640, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 167.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 170, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879280641, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 172.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 168, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879285642, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 177.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 77, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231570011, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879290643, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 182.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 28, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879295644, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 187.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 28, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879300645, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 192.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 28, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879305646, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 197.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 28, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879310647, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 202.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 28, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 231526400, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879315648, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 207.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 20, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 186491029, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879320649, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 212.33,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 99, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879325650, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 217.34,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 130, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879330650, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 222.34,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 130, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879335651, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 227.34,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 118, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879340652, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 232.41,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 118, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879345652, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 237.35,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 124, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879350652, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 242.34,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 118, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879355652, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 247.37,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 118, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879360653, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 252.37,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 118, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879365653, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 257.34,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 118, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232290833, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879370654, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 262.42,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 126, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879375656, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 267.34,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 96, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 227531257, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879380657, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 272.45,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 105, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879385657, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 277.34,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 107, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879390659, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 282.35,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 107, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879395660, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 287.36,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 107, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232286792, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879400661, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 292.37,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 107, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879405662, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  },
+  {
+   "t": 297.35,
+   "Topic": "ls",
+   "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 107, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 0, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792879410661, \"providerBreakers\": [{\"provider\": \"5b68c6f626e44483833bba9dc41e04f7\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"c6ae647728504aa7a28f14b019ff43cf\", \"nickname\": \"Backup\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+  }
+ ]
+}

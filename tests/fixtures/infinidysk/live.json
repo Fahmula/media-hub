@@ -1,0 +1,2303 @@
+{
+  "_note": "Captured with scripts/capture-infinidysk.py (live, nothing playing at the time); redacted.",
+  "provider_usage": {
+    "providers": [
+      {
+        "index": 0,
+        "host": "provider1.example",
+        "nickname": "Provider 1",
+        "providerId": "key-1",
+        "bytesUsed": 195061832691,
+        "byteLimit": null,
+        "overLimit": false,
+        "bytesPerDay": 14314567624,
+        "daysRemaining": null,
+        "learnedConnectionLimit": null,
+        "effectiveMaxConnections": 15,
+        "configuredMaxConnections": 15,
+        "connectionBudget": null
+      },
+      {
+        "index": 1,
+        "host": "provider2.example",
+        "nickname": "Provider 2",
+        "providerId": "key-2",
+        "bytesUsed": 3004712259,
+        "byteLimit": null,
+        "overLimit": false,
+        "bytesPerDay": 339687256,
+        "daysRemaining": null,
+        "learnedConnectionLimit": null,
+        "effectiveMaxConnections": 15,
+        "configuredMaxConnections": 15,
+        "connectionBudget": null
+      }
+    ],
+    "status": true,
+    "error": null
+  },
+  "overview": {
+    "window": "1h",
+    "includedSections": [
+      "window",
+      "detail"
+    ],
+    "tiles": {
+      "activeReads": 0,
+      "articlesPerMinute": 953,
+      "errorsPerMinute": 0,
+      "bytesServedPerMinute": 411696003,
+      "inFlightArticleBytes": 232338528,
+      "inFlightArticleBudgetBytes": 8377073664,
+      "inFlightArticleThrottleEvents": 0
+    },
+    "throughput": [
+      {
+        "bucket": 1792875300000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875360000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875420000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875480000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875540000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875600000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875660000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875720000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875780000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875840000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875900000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792875960000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876020000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876080000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876140000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876200000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876260000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876320000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876380000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876440000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876500000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876560000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876620000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876680000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876740000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876800000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876860000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876920000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792876980000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877040000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877100000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877160000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877220000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877280000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877340000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877400000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877460000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877520000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877580000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877640000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877700000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877760000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877820000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877880000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792877940000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878000000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878060000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878120000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878180000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878240000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878300000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878360000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878420000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878480000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878540000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878600000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878660000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878720000,
+        "articles": 0,
+        "clientArticles": 0,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 0
+      },
+      {
+        "bucket": 1792878780000,
+        "articles": 46,
+        "clientArticles": 46,
+        "queueArticles": 0,
+        "misses": 0,
+        "errors": 0,
+        "bytesServed": 0,
+        "bytesFetched": 32319095
+      }
+    ],
+    "throughputBucketSizeMs": 60000,
+    "peakFetchBytesPerSec": 47508039,
+    "totalArticles": 46,
+    "totalClientArticles": 46,
+    "totalQueueArticles": 0,
+    "totalMisses": 0,
+    "totalErrors": 0,
+    "totalBytesFetched": 32319095,
+    "providers": [
+      {
+        "provider": "key-1",
+        "nickname": "Provider 1",
+        "articles": 46,
+        "bytesFetched": 32319095,
+        "errors": 0,
+        "retries": 0,
+        "speedMbPerSec": 1.6756932130450561,
+        "peakMbPerSec": 47.508039,
+        "activeAverageMbPerSec": 28.786271637257574,
+        "peakSpeedSpark": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          16.166272,
+          47.508039
+        ],
+        "sampledSpeedSeries": [
+          {
+            "bucket": 1792875240000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875300000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875360000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875420000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875480000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875540000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875600000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875660000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875720000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875780000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875840000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875900000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875960000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876020000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876080000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876140000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876200000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876260000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876320000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876380000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876440000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876500000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876560000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876620000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876680000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876740000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876800000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876860000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876920000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876980000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877040000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877100000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877160000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877220000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877280000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877340000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877400000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877460000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877520000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877580000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877640000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877700000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877760000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877820000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877880000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877940000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878000000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878060000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878120000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878180000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878240000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878300000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878360000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878420000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878480000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878540000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878600000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878660000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878720000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878780000,
+            "peakMbPerSec": 16.166272,
+            "activeAverageMbPerSec": 8.114061740261972
+          },
+          {
+            "bucket": 1792878840000,
+            "peakMbPerSec": 47.508039,
+            "activeAverageMbPerSec": 30.377156534443934
+          }
+        ],
+        "speedSpark": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1.6756932130450561
+        ],
+        "speedSeries": [
+          {
+            "bucket": 1792875240000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875300000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875360000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875420000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875480000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875540000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875600000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875660000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875720000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875780000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875840000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875900000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792875960000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876020000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876080000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876140000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876200000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876260000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876320000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876380000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876440000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876500000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876560000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876620000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876680000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876740000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876800000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876860000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876920000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792876980000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877040000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877100000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877160000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877220000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877280000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877340000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877400000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877460000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877520000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877580000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877640000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877700000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877760000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877820000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877880000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792877940000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878000000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878060000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878120000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878180000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878240000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878300000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878360000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878420000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878480000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878540000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878600000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878660000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878720000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          },
+          {
+            "bucket": 1792878780000,
+            "speedMbPerSec": 1.6756932130450561,
+            "bytesFetched": 32319095
+          },
+          {
+            "bucket": 1792878840000,
+            "speedMbPerSec": 0,
+            "bytesFetched": 0
+          }
+        ],
+        "avgDurationMs": 419.2826086956522,
+        "errorRate": 0,
+        "spark": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          46
+        ],
+        "errorSpark": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "retrySpark": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "outageSpark": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "circuitState": "closed",
+        "cooldownRemainingSeconds": null,
+        "lastFailureReason": null,
+        "tripCount": 0,
+        "failureCount": 1,
+        "articleMissCount": 0,
+        "providerType": "Pooled"
+      },
+      {
+        "provider": "key-2",
+        "nickname": "Provider 2",
+        "articles": 0,
+        "bytesFetched": 0,
+        "errors": 0,
+        "retries": 0,
+        "speedMbPerSec": null,
+        "peakMbPerSec": null,
+        "activeAverageMbPerSec": null,
+        "peakSpeedSpark": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "sampledSpeedSeries": [
+          {
+            "bucket": 1792875240000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875300000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875360000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875420000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875480000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875540000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875600000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875660000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875720000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875780000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875840000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875900000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792875960000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876020000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876080000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876140000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876200000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876260000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876320000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876380000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876440000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876500000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876560000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876620000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876680000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876740000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876800000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876860000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876920000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792876980000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877040000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877100000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877160000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877220000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877280000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877340000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877400000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877460000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877520000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877580000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877640000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877700000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877760000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877820000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877880000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792877940000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878000000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878060000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878120000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878180000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878240000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878300000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878360000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878420000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878480000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878540000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878600000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878660000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878720000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878780000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          },
+          {
+            "bucket": 1792878840000,
+            "peakMbPerSec": null,
+            "activeAverageMbPerSec": null
+          }
+        ],
+        "speedSpark": [],
+        "speedSeries": [],
+        "avgDurationMs": 0,
+        "errorRate": 0,
+        "spark": [],
+        "errorSpark": [],
+        "retrySpark": [],
+        "outageSpark": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "circuitState": "closed",
+        "cooldownRemainingSeconds": null,
+        "lastFailureReason": null,
+        "tripCount": 0,
+        "failureCount": 0,
+        "articleMissCount": 0,
+        "providerType": "BackupOnly"
+      }
+    ],
+    "providerSpeedBucketSizeMs": 60000,
+    "providerSpeedWindowStartMs": 1792875240000,
+    "providerSpeedWindowEndMs": 1792878900000,
+    "providerSpeedHistoryTruncated": false,
+    "catalogue": {
+      "fileCount": 0,
+      "totalBytes": 0,
+      "largestFileBytes": 0,
+      "addedLast7Days": 0
+    },
+    "sessions": {
+      "count": 1,
+      "totalBytesServed": 417602333,
+      "avgDurationMs": 29932,
+      "longestDurationMs": 29932,
+      "biggestReadBytes": 417602333
+    },
+    "heatmap": {
+      "maxCell": 9739,
+      "mode": "day",
+      "windowStartMs": 1792792800000,
+      "windowEndMs": 1792875600000,
+      "bucketSizeMs": 3600000,
+      "cells": [
+        {
+          "bucket": 1792792800000,
+          "count": 536
+        },
+        {
+          "bucket": 1792796400000,
+          "count": 2350
+        },
+        {
+          "bucket": 1792800000000,
+          "count": 6267
+        },
+        {
+          "bucket": 1792803600000,
+          "count": 5387
+        },
+        {
+          "bucket": 1792807200000,
+          "count": 2264
+        },
+        {
+          "bucket": 1792861200000,
+          "count": 1437
+        },
+        {
+          "bucket": 1792868400000,
+          "count": 8507
+        },
+        {
+          "bucket": 1792872000000,
+          "count": 9739
+        },
+        {
+          "bucket": 1792875600000,
+          "count": 0
+        }
+      ]
+    },
+    "latency": {
+      "p50Ms": 127,
+      "p95Ms": 729,
+      "p99Ms": 1244,
+      "samples": 969,
+      "buckets": [
+        {
+          "loMs": 0,
+          "hiMs": 10,
+          "count": 0
+        },
+        {
+          "loMs": 50,
+          "hiMs": 100,
+          "count": 25
+        },
+        {
+          "loMs": 100,
+          "hiMs": 200,
+          "count": 640
+        },
+        {
+          "loMs": 200,
+          "hiMs": 400,
+          "count": 159
+        },
+        {
+          "loMs": 400,
+          "hiMs": 800,
+          "count": 106
+        },
+        {
+          "loMs": 800,
+          "hiMs": 1500,
+          "count": 34
+        },
+        {
+          "loMs": 1500,
+          "hiMs": 3000,
+          "count": 5
+        }
+      ]
+    },
+    "errors": [],
+    "indexers": [],
+    "indexerApiUsage": [],
+    "lifetime": {
+      "bytesFetched": 0,
+      "bytesRead": 0,
+      "articles": 0,
+      "readSessions": 0,
+      "readSeconds": 0,
+      "firstSeenAt": null
+    },
+    "records": {
+      "bestDayBytes": 0,
+      "bestDayAt": null,
+      "bestHourBytes": 0,
+      "bestHourAt": null
+    },
+    "failover": {
+      "articlesRecovered": 0,
+      "previousArticlesRecovered": 0,
+      "segmentsCovered": 0,
+      "readsSaved": 0,
+      "readSessions": 1,
+      "totalArticles": 46,
+      "bucketSizeMs": 60000,
+      "rescuedBy": [],
+      "rescuedFrom": [],
+      "reasons": [],
+      "buckets": []
+    },
+    "metricsHealth": {
+      "queued": 132,
+      "dropped": 0,
+      "lastSuccessfulFlushAtMs": 1792878891108,
+      "lastFlushError": null
+    }
+  },
+  "metrics": "# HELP nzbdav_active_reads Current active read sessions.\n# TYPE nzbdav_active_reads gauge\nnzbdav_active_reads 0\n# HELP nzbdav_bytes_served_total Bytes served to readers.\n# TYPE nzbdav_bytes_served_total counter\nnzbdav_bytes_served_total 417602333\n# HELP nzbdav_concurrent_read_starts_total Read starts.\n# TYPE nzbdav_concurrent_read_starts_total counter\nnzbdav_concurrent_read_starts_total{region=\"full\"} 0\nnzbdav_concurrent_read_starts_total{region=\"start_range\"} 2\nnzbdav_concurrent_read_starts_total{region=\"offset_range\"} 4\nnzbdav_concurrent_read_starts_total{region=\"suffix_range\"} 0\n# HELP nzbdav_concurrent_read_overlap_events_total Overlapping read opportunities.\n# TYPE nzbdav_concurrent_read_overlap_events_total counter\nnzbdav_concurrent_read_overlap_events_total 3\n# HELP nzbdav_concurrent_read_duplicate_segment_fetches_total Duplicate in-flight segment fetches.\n# TYPE nzbdav_concurrent_read_duplicate_segment_fetches_total counter\nnzbdav_concurrent_read_duplicate_segment_fetches_total 5\n# HELP nzbdav_concurrent_overlapping_paths Current paths with overlapping readers.\n# TYPE nzbdav_concurrent_overlapping_paths gauge\nnzbdav_concurrent_overlapping_paths 0\n# HELP nzbdav_concurrent_in_flight_segment_fetches Current in-flight segment fetches.\n# TYPE nzbdav_concurrent_in_flight_segment_fetches gauge\nnzbdav_concurrent_in_flight_segment_fetches 0\n# HELP nzbdav_inflight_article_bytes Article bytes currently leased.\n# TYPE nzbdav_inflight_article_bytes gauge\nnzbdav_inflight_article_bytes 230092800\n# HELP nzbdav_inflight_article_budget_bytes Configured in-flight article byte budget.\n# TYPE nzbdav_inflight_article_budget_bytes gauge\nnzbdav_inflight_article_budget_bytes 8377073664\n# HELP nzbdav_inflight_article_destination_bytes Logical decoded article destination bytes currently leased.\n# TYPE nzbdav_inflight_article_destination_bytes gauge\nnzbdav_inflight_article_destination_bytes 230092800\n# HELP nzbdav_decoded_body_pipe_bytes Decoded BODY bytes currently unread in NNTP pipes.\n# TYPE nzbdav_decoded_body_pipe_bytes gauge\nnzbdav_decoded_body_pipe_bytes 0\n# HELP nzbdav_inflight_article_waiters Current FIFO waiters for in-flight article memory.\n# TYPE nzbdav_inflight_article_waiters gauge\nnzbdav_inflight_article_waiters 0\n# HELP nzbdav_inflight_article_throttle_events_total Article RAM lease requests that encountered budget backpressure.\n# TYPE nzbdav_inflight_article_throttle_events_total counter\nnzbdav_inflight_article_throttle_events_total 0\n# HELP nzbdav_segment_buffer_checked_out_bytes Actual capacity of custom segment buffers currently checked out.\n# TYPE nzbdav_segment_buffer_checked_out_bytes gauge\nnzbdav_segment_buffer_checked_out_bytes 252444672\n# HELP nzbdav_segment_buffer_idle_bytes Actual capacity retained idle by the custom segment-buffer pool.\n# TYPE nzbdav_segment_buffer_idle_bytes gauge\nnzbdav_segment_buffer_idle_bytes 0\n# HELP nzbdav_segment_buffer_max_idle_bytes Configured maximum idle capacity for the custom segment-buffer pool.\n# TYPE nzbdav_segment_buffer_max_idle_bytes gauge\nnzbdav_segment_buffer_max_idle_bytes 268435456\n# HELP nzbdav_metrics_queue_length Queued internal metric rows.\n# TYPE nzbdav_metrics_queue_length gauge\nnzbdav_metrics_queue_length{queue=\"fetches\"} 0\nnzbdav_metrics_queue_length{queue=\"events\"} 0\nnzbdav_metrics_queue_length{queue=\"sessions\"} 0\nnzbdav_metrics_queue_length{queue=\"failover_misses\"} 0\n# HELP nzbdav_metrics_dropped_total Dropped internal metric rows.\n# TYPE nzbdav_metrics_dropped_total counter\nnzbdav_metrics_dropped_total{queue=\"fetches\"} 0\nnzbdav_metrics_dropped_total{queue=\"events\"} 0\nnzbdav_metrics_dropped_total{queue=\"sessions\"} 0\nnzbdav_metrics_dropped_total{queue=\"failover_misses\"} 0\n# HELP nzbdav_nntp_pool_connections NNTP pool connection and admitted-operation state.\n# TYPE nzbdav_nntp_pool_connections gauge\nnzbdav_nntp_pool_connections{provider_key=\"key-1\",state=\"live\"} 15\nnzbdav_nntp_pool_connections{provider_key=\"key-1\",state=\"idle\"} 15\nnzbdav_nntp_pool_connections{provider_key=\"key-1\",state=\"active\"} 0\nnzbdav_nntp_pool_connections{provider_key=\"key-1\",state=\"available\"} 15\nnzbdav_nntp_pool_connections{provider_key=\"key-1\",state=\"pending\"} 0\nnzbdav_nntp_pool_connections{provider_key=\"key-2\",state=\"live\"} 0\nnzbdav_nntp_pool_connections{provider_key=\"key-2\",state=\"idle\"} 0\nnzbdav_nntp_pool_connections{provider_key=\"key-2\",state=\"active\"} 0\nnzbdav_nntp_pool_connections{provider_key=\"key-2\",state=\"available\"} 15\nnzbdav_nntp_pool_connections{provider_key=\"key-2\",state=\"pending\"} 0\n# HELP nzbdav_nntp_pool_max_connections NNTP pool and operation-admission limits.\n# TYPE nzbdav_nntp_pool_max_connections gauge\nnzbdav_nntp_pool_max_connections{provider_key=\"key-1\",limit=\"configured\"} 15\nnzbdav_nntp_pool_max_connections{provider_key=\"key-1\",limit=\"effective\"} 15\nnzbdav_nntp_pool_max_connections{provider_key=\"key-2\",limit=\"configured\"} 15\nnzbdav_nntp_pool_max_connections{provider_key=\"key-2\",limit=\"effective\"} 15\n# HELP nzbdav_nntp_pool_churn_total NNTP pool lifetime churn.\n# TYPE nzbdav_nntp_pool_churn_total gauge\nnzbdav_nntp_pool_churn_total{provider_key=\"key-1\",event=\"opened\"} 15\nnzbdav_nntp_pool_churn_total{provider_key=\"key-1\",event=\"reused\"} 668\nnzbdav_nntp_pool_churn_total{provider_key=\"key-1\",event=\"destroyed\"} 0\nnzbdav_nntp_pool_churn_total{provider_key=\"key-1\",event=\"stale_eviction\"} 0\nnzbdav_nntp_pool_churn_total{provider_key=\"key-1\",event=\"handshake_failure\"} 1\nnzbdav_nntp_pool_churn_total{provider_key=\"key-2\",event=\"opened\"} 0\nnzbdav_nntp_pool_churn_total{provider_key=\"key-2\",event=\"reused\"} 0\nnzbdav_nntp_pool_churn_total{provider_key=\"key-2\",event=\"destroyed\"} 0\nnzbdav_nntp_pool_churn_total{provider_key=\"key-2\",event=\"stale_eviction\"} 0\nnzbdav_nntp_pool_churn_total{provider_key=\"key-2\",event=\"handshake_failure\"} 0\n# HELP nzbdav_health_check_gate_operations Process-wide health and queue verification admission state.\n# TYPE nzbdav_health_check_gate_operations gauge\nnzbdav_health_check_gate_operations{state=\"active\"} 0\nnzbdav_health_check_gate_operations{state=\"waiting_queue\"} 0\nnzbdav_health_check_gate_operations{state=\"waiting_background\"} 0\n# HELP nzbdav_health_check_gate_limit Process-wide health and queue verification admission limits.\n# TYPE nzbdav_health_check_gate_limit gauge\nnzbdav_health_check_gate_limit{limit=\"effective\"} 15\n# HELP nzbdav_circuit_state Circuit state: 0=closed, 1=open, 2=half_open.\n# TYPE nzbdav_circuit_state gauge\nnzbdav_circuit_state{provider_key=\"key-1\"} 0\nnzbdav_circuit_state{provider_key=\"key-2\"} 0\n# HELP nzbdav_circuit_cooldown_remaining_seconds Circuit cooldown remaining.\n# TYPE nzbdav_circuit_cooldown_remaining_seconds gauge\nnzbdav_circuit_cooldown_remaining_seconds{provider_key=\"key-1\"} 0\nnzbdav_circuit_cooldown_remaining_seconds{provider_key=\"key-2\"} 0\n# HELP nzbdav_circuit_trips_total Circuit trips.\n# TYPE nzbdav_circuit_trips_total gauge\nnzbdav_circuit_trips_total{provider_key=\"key-1\"} 0\nnzbdav_circuit_trips_total{provider_key=\"key-2\"} 0\n# HELP nzbdav_circuit_failures_total Circuit failures.\n# TYPE nzbdav_circuit_failures_total gauge\nnzbdav_circuit_failures_total{provider_key=\"key-1\"} 1\nnzbdav_circuit_failures_total{provider_key=\"key-2\"} 0\n# HELP nzbdav_circuit_article_misses_total Circuit article misses.\n# TYPE nzbdav_circuit_article_misses_total gauge\nnzbdav_circuit_article_misses_total{provider_key=\"key-1\"} 0\nnzbdav_circuit_article_misses_total{provider_key=\"key-2\"} 0\n# HELP nzbdav_segment_fetches_total Segment fetch outcomes.\n# TYPE nzbdav_segment_fetches_total counter\nnzbdav_segment_fetches_total{provider_key=\"key-1\",status=\"ok\"} 1101\n# HELP nzbdav_segment_fetch_duration_seconds Segment fetch duration.\n# TYPE nzbdav_segment_fetch_duration_seconds histogram\nnzbdav_segment_fetch_duration_seconds_sum{provider_key=\"key-1\"} 288.3030000000006\nnzbdav_segment_fetch_duration_seconds_count{provider_key=\"key-1\"} 1101\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"0.01\"} 0\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"0.02\"} 0\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"0.04\"} 0\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"0.08\"} 0\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"0.16\"} 664\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"0.32\"} 841\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"0.64\"} 1005\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"1.28\"} 1089\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"2.56\"} 1101\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"5.12\"} 1101\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"10.24\"} 1101\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"20.48\"} 1101\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"40.96\"} 1101\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"81.92\"} 1101\nnzbdav_segment_fetch_duration_seconds_bucket{provider_key=\"key-1\",le=\"+Inf\"} 1101\n# HELP nzbdav_seek_total Seek operations.\n# TYPE nzbdav_seek_total counter\nnzbdav_seek_total{kind=\"fresh\"} 4\nnzbdav_seek_total{kind=\"noop\"} 1\n# HELP nzbdav_seek_latency_seconds Post-seek preparation latency.\n# TYPE nzbdav_seek_latency_seconds histogram\nnzbdav_seek_latency_seconds_sum{kind=\"fresh\"} 1.7991763\nnzbdav_seek_latency_seconds_count{kind=\"fresh\"} 4\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.001\"} 0\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.002\"} 0\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.004\"} 0\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.008\"} 0\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.016\"} 0\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.032\"} 0\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.064\"} 0\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.128\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.256\"} 2\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"0.512\"} 3\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"1.024\"} 3\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"2.048\"} 4\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"4.096\"} 4\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"8.192\"} 4\nnzbdav_seek_latency_seconds_bucket{kind=\"fresh\",le=\"+Inf\"} 4\nnzbdav_seek_latency_seconds_sum{kind=\"noop\"} 0\nnzbdav_seek_latency_seconds_count{kind=\"noop\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.001\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.002\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.004\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.008\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.016\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.032\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.064\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.128\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.256\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"0.512\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"1.024\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"2.048\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"4.096\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"8.192\"} 1\nnzbdav_seek_latency_seconds_bucket{kind=\"noop\",le=\"+Inf\"} 1\n# HELP nzbdav_par2_repair_jobs_total PAR2 background repair job state transitions.\n# TYPE nzbdav_par2_repair_jobs_total counter\n# HELP nzbdav_par2_repair_duration_seconds PAR2 background repair job duration.\n# TYPE nzbdav_par2_repair_duration_seconds histogram\nnzbdav_par2_repair_duration_seconds_sum 0\nnzbdav_par2_repair_duration_seconds_count 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"1\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"2\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"4\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"8\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"16\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"32\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"64\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"128\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"256\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"512\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"1024\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"2048\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"4096\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"8192\"} 0\nnzbdav_par2_repair_duration_seconds_bucket{le=\"+Inf\"} 0\n# HELP nzbdav_par2_repair_active Active admitted PAR2 repair jobs.\n# TYPE nzbdav_par2_repair_active gauge\nnzbdav_par2_repair_active 0\n# HELP nzbdav_par2_repair_admission_waiters PAR2 jobs waiting for process-wide admission.\n# TYPE nzbdav_par2_repair_admission_waiters gauge\nnzbdav_par2_repair_admission_waiters 0\n# HELP nzbdav_par2_repair_admission_wait_seconds PAR2 admission wait duration.\n# TYPE nzbdav_par2_repair_admission_wait_seconds histogram\nnzbdav_par2_repair_admission_wait_seconds_sum 0\nnzbdav_par2_repair_admission_wait_seconds_count 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"0.01\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"0.02\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"0.04\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"0.08\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"0.16\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"0.32\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"0.64\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"1.28\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"2.56\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"5.12\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"10.24\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"20.48\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"40.96\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"81.92\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"163.84\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"327.68\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"655.36\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"1310.72\"} 0\nnzbdav_par2_repair_admission_wait_seconds_bucket{le=\"+Inf\"} 0\n# HELP nzbdav_par2_repair_bytes_read_total NNTP bytes read during PAR2 repairs.\n# TYPE nzbdav_par2_repair_bytes_read_total counter\nnzbdav_par2_repair_bytes_read_total 0\n# HELP nzbdav_par2_repair_slices_reconstructed_total PAR2 slices reconstructed from recovery data.\n# TYPE nzbdav_par2_repair_slices_reconstructed_total counter\nnzbdav_par2_repair_slices_reconstructed_total 0\n# HELP nzbdav_par2_repair_segments_committed_total Segments committed to the repair patch store by PAR2 repair.\n# TYPE nzbdav_par2_repair_segments_committed_total counter\nnzbdav_par2_repair_segments_committed_total 0\n# HELP nzbdav_par2_validation_failures_total PAR2 validation gate failures.\n# TYPE nzbdav_par2_validation_failures_total counter\n# HELP nzbdav_par2_patch_store_bytes Current repair patch store size in bytes.\n# TYPE nzbdav_par2_patch_store_bytes gauge\nnzbdav_par2_patch_store_bytes 32256000\n# HELP nzbdav_par2_patch_hits_total Segment fetches served from the repair patch store.\n# TYPE nzbdav_par2_patch_hits_total counter\nnzbdav_par2_patch_hits_total 0\n# HELP nzbdav_par2_patch_evictions_total Repair patch store evictions.\n# TYPE nzbdav_par2_patch_evictions_total counter\nnzbdav_par2_patch_evictions_total 0\n# HELP nzbdav_shared_stream_ring_retained_bytes ArrayPool capacity currently rented by shared-stream rings. Returning buffers to the pool does not release those pages to the OS.\n# TYPE nzbdav_shared_stream_ring_retained_bytes gauge\nnzbdav_shared_stream_ring_retained_bytes 0\n# HELP nzbdav_shared_stream_ring_retained_bytes_peak Peak ArrayPool capacity rented by shared-stream rings.\n# TYPE nzbdav_shared_stream_ring_retained_bytes_peak gauge\nnzbdav_shared_stream_ring_retained_bytes_peak 2097152\n# HELP nzbdav_shared_stream_ring_logical_bytes Logical decoded bytes currently stored in shared-stream rings.\n# TYPE nzbdav_shared_stream_ring_logical_bytes gauge\nnzbdav_shared_stream_ring_logical_bytes 0\n# HELP nzbdav_shared_stream_pump_scratch_bytes ArrayPool capacity currently rented by shared-stream pump scratch buffers.\n# TYPE nzbdav_shared_stream_pump_scratch_bytes gauge\nnzbdav_shared_stream_pump_scratch_bytes 0\n# HELP nzbdav_shared_stream_live_entries Live shared-stream region entries.\n# TYPE nzbdav_shared_stream_live_entries gauge\nnzbdav_shared_stream_live_entries 0\n# HELP nzbdav_shared_stream_ready_entries Shared-stream entries currently serving readers.\n# TYPE nzbdav_shared_stream_ready_entries gauge\nnzbdav_shared_stream_ready_entries 0\n# HELP nzbdav_shared_stream_draining_entries Shared-stream entries in the last-reader grace period.\n# TYPE nzbdav_shared_stream_draining_entries gauge\nnzbdav_shared_stream_draining_entries 0\n# HELP nzbdav_shared_stream_lagging_readers Shared-stream readers more than lead-bytes behind the fastest cursor.\n# TYPE nzbdav_shared_stream_lagging_readers gauge\nnzbdav_shared_stream_lagging_readers 0\n# HELP nzbdav_shared_stream_pressure_detaches_total Readers detached because shared-stream retention pressure required a private fallback.\n# TYPE nzbdav_shared_stream_pressure_detaches_total counter\nnzbdav_shared_stream_pressure_detaches_total 0\n# HELP nzbdav_shared_stream_pressure_reaps_total Shared-stream entries reaped because of retention pressure.\n# TYPE nzbdav_shared_stream_pressure_reaps_total counter\nnzbdav_shared_stream_pressure_reaps_total 0\n# HELP nzbdav_shared_stream_attach_hits_total Requests served from an existing shared stream.\n# TYPE nzbdav_shared_stream_attach_hits_total counter\nnzbdav_shared_stream_attach_hits_total 0\n# HELP nzbdav_shared_stream_attach_misses_total Requests that did not attach to a shared stream.\n# TYPE nzbdav_shared_stream_attach_misses_total counter\nnzbdav_shared_stream_attach_misses_total 6\n# HELP nzbdav_shared_stream_entries_created_total Shared stream region entries created.\n# TYPE nzbdav_shared_stream_entries_created_total counter\nnzbdav_shared_stream_entries_created_total 3\n# HELP nzbdav_shared_stream_readers_served_total Readers attached to a shared stream, including the creator.\n# TYPE nzbdav_shared_stream_readers_served_total counter\nnzbdav_shared_stream_readers_served_total 3\n# HELP nzbdav_concurrent_read_private_fallbacks_total Overlapping reads that used a private stream.\n# TYPE nzbdav_concurrent_read_private_fallbacks_total counter\nnzbdav_concurrent_read_private_fallbacks_total 2\n# HELP nzbdav_streaming_corrupt_segments_total Streaming-confirmed corrupt Usenet articles.\n# TYPE nzbdav_streaming_corrupt_segments_total counter\nnzbdav_streaming_corrupt_segments_total 0\n# HELP nzbdav_segment_cache_enabled Whether the active NNTP client generation has a segment-cache wrapper.\n# TYPE nzbdav_segment_cache_enabled gauge\nnzbdav_segment_cache_enabled 0\n# HELP nzbdav_segment_cache_catalog_ready Whether the active segment-cache generation finished its catalog scan.\n# TYPE nzbdav_segment_cache_catalog_ready gauge\nnzbdav_segment_cache_catalog_ready 0\n# HELP nzbdav_segment_cache_catalog_load_duration_seconds Duration of the active generation's completed catalog scan.\n# TYPE nzbdav_segment_cache_catalog_load_duration_seconds gauge\nnzbdav_segment_cache_catalog_load_duration_seconds 0\n# HELP nzbdav_segment_cache_entries Indexed segment-cache entries in the active generation.\n# TYPE nzbdav_segment_cache_entries gauge\nnzbdav_segment_cache_entries 0\n# HELP nzbdav_segment_cache_bytes Indexed segment-cache body bytes in the active generation.\n# TYPE nzbdav_segment_cache_bytes gauge\nnzbdav_segment_cache_bytes 0\n# HELP nzbdav_segment_cache_max_bytes Effective segment-cache byte limit.\n# TYPE nzbdav_segment_cache_max_bytes gauge\nnzbdav_segment_cache_max_bytes 0\n# HELP nzbdav_segment_cache_hits_total Eligible article lookups served by a validated local cache entry.\n# TYPE nzbdav_segment_cache_hits_total counter\nnzbdav_segment_cache_hits_total 0\n# HELP nzbdav_segment_cache_misses_total Eligible lookups attempted after catalog readiness that were not served.\n# TYPE nzbdav_segment_cache_misses_total counter\nnzbdav_segment_cache_misses_total 0\n# HELP nzbdav_segment_cache_lookup_unavailable_total Lookups skipped because catalog hydration was incomplete.\n# TYPE nzbdav_segment_cache_lookup_unavailable_total counter\nnzbdav_segment_cache_lookup_unavailable_total 0\n# HELP nzbdav_segment_cache_bytes_served_total Decoded body bytes represented by segment-cache hits.\n# TYPE nzbdav_segment_cache_bytes_served_total counter\nnzbdav_segment_cache_bytes_served_total 0\n# HELP nzbdav_segment_cache_batch_bypass_requests_total DecodedBodiesAsync calls forwarded without per-article cache lookup.\n# TYPE nzbdav_segment_cache_batch_bypass_requests_total counter\nnzbdav_segment_cache_batch_bypass_requests_total 0\n# HELP nzbdav_segment_cache_batch_bypass_articles_total Articles in DecodedBodiesAsync calls forwarded without per-article cache lookup.\n# TYPE nzbdav_segment_cache_batch_bypass_articles_total counter\nnzbdav_segment_cache_batch_bypass_articles_total 0\n# HELP nzbdav_segment_cache_write_attempts_total Valid remote BODY responses wrapped for possible cache population.\n# TYPE nzbdav_segment_cache_write_attempts_total counter\nnzbdav_segment_cache_write_attempts_total 0\n# HELP nzbdav_segment_cache_write_commits_total Complete validated bodies atomically committed to the segment cache.\n# TYPE nzbdav_segment_cache_write_commits_total counter\nnzbdav_segment_cache_write_commits_total 0\n# HELP nzbdav_segment_cache_write_skipped_total Cache write attempts ended without commit because of partial read, early dispose, or size validation.\n# TYPE nzbdav_segment_cache_write_skipped_total counter\nnzbdav_segment_cache_write_skipped_total 0\n# HELP nzbdav_segment_cache_write_failures_total Cache I/O or serialization failures that prevented commit while playback continued.\n# TYPE nzbdav_segment_cache_write_failures_total counter\nnzbdav_segment_cache_write_failures_total 0\n# HELP nzbdav_segment_cache_read_failures_total Indexed cache entries that could not be validated or opened and were dropped.\n# TYPE nzbdav_segment_cache_read_failures_total counter\nnzbdav_segment_cache_read_failures_total 0\n# HELP nzbdav_segment_cache_evictions_total Segment-cache entries removed for capacity.\n# TYPE nzbdav_segment_cache_evictions_total counter\nnzbdav_segment_cache_evictions_total 0\n# HELP nzbdav_segment_cache_evicted_bytes_total Body bytes removed from the segment cache for capacity.\n# TYPE nzbdav_segment_cache_evicted_bytes_total counter\nnzbdav_segment_cache_evicted_bytes_total 0\n# HELP nzbdav_segment_cache_temporary_files_cleaned_total Stale cache .tmp files removed during catalog scan.\n# TYPE nzbdav_segment_cache_temporary_files_cleaned_total counter\nnzbdav_segment_cache_temporary_files_cleaned_total 0",
+  "backend_health": {
+    "/health": {
+      "status": 200,
+      "body": "Healthy"
+    },
+    "/ready": {
+      "status": 200,
+      "body": "Healthy"
+    }
+  },
+  "ws_frames": [
+    {
+      "Topic": "ls",
+      "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 969, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 411696003, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792878895555, \"providerBreakers\": [{\"provider\": \"key-1\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"key-2\", \"nickname\": \"Provider 2\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+    },
+    {
+      "Topic": "ar",
+      "Message": "{\"reads\": []}"
+    },
+    {
+      "Topic": "ls",
+      "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 969, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 411696003, \"inFlightArticleBytes\": 230092800, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792878895555, \"providerBreakers\": [{\"provider\": \"key-1\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"key-2\", \"nickname\": \"Provider 2\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+    },
+    {
+      "Topic": "ar",
+      "Message": "{\"reads\": []}"
+    },
+    {
+      "Topic": "ls",
+      "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 913, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 267431936, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792878900556, \"providerBreakers\": [{\"provider\": \"key-1\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"key-2\", \"nickname\": \"Provider 2\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+    },
+    {
+      "Topic": "ls",
+      "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 802, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 92662028, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792878905557, \"providerBreakers\": [{\"provider\": \"key-1\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"key-2\", \"nickname\": \"Provider 2\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+    },
+    {
+      "Topic": "ls",
+      "Message": "{\"activeReads\": 0, \"articlesPerMinute\": 560, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 6516736, \"inFlightArticleBytes\": 232243200, \"inFlightArticleBudgetBytes\": 8377073664, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1792878910558, \"providerBreakers\": [{\"provider\": \"key-1\", \"nickname\": \"Provider 1\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 1, \"articleMissCount\": 0}, {\"provider\": \"key-2\", \"nickname\": \"Provider 2\", \"providerType\": \"BackupOnly\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 0, \"consecutiveTrips\": 0, \"failureCount\": 0, \"articleMissCount\": 0}]}"
+    }
+  ]
+}

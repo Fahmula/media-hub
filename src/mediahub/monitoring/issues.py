@@ -112,6 +112,18 @@ def derive_issues(snap: ServiceSnapshot) -> list[Issue]:
                         link=_service_link(snap),
                     )
                 )
+            if provider.over_limit:
+                out.append(
+                    Issue(
+                        fingerprint=_fp(src.key, "provider-limit", provider.name),
+                        severity=Severity.WARNING,
+                        category=IssueCategory.PROVIDER,
+                        source=src,
+                        title=f"Provider {provider.name} reached its byte limit",
+                        detail="InfiniDysk skips this provider while it is over the limit.",
+                        link=_service_link(snap),
+                    )
+                )
     return out
 
 

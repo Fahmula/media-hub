@@ -1,0 +1,792 @@
+{
+  "_note": "Constructed from the InfiniDysk source (main @ a72e11d7), not captured.",
+  "now_ms": 1793000000000,
+  "provider_usage": {
+    "status": true,
+    "error": null,
+    "providers": [
+      {
+        "index": 0,
+        "host": "news.example.com",
+        "nickname": "Primary",
+        "providerId": "key-a",
+        "bytesUsed": 912345678901,
+        "byteLimit": null,
+        "overLimit": false,
+        "bytesPerDay": 52428800000,
+        "daysRemaining": null,
+        "learnedConnectionLimit": null,
+        "effectiveMaxConnections": 50,
+        "configuredMaxConnections": 50,
+        "connectionBudget": {
+          "configuredTransferLimit": 50,
+          "effectiveTransferLimit": 48,
+          "baseMetadataCapacity": 2,
+          "metadataBurstAllowance": 2,
+          "maxMetadataCapacity": 4,
+          "activeTransferOperations": 12,
+          "activeMetadataOperations": 0,
+          "waitingTransferOperations": 0,
+          "waitingMetadataOperations": 0
+        }
+      },
+      {
+        "index": 1,
+        "host": "block.example.net",
+        "nickname": null,
+        "providerId": "key-b",
+        "bytesUsed": 500000000000,
+        "byteLimit": 500000000000,
+        "overLimit": true,
+        "bytesPerDay": 1000000000,
+        "daysRemaining": null,
+        "learnedConnectionLimit": 20,
+        "effectiveMaxConnections": 20,
+        "configuredMaxConnections": 30,
+        "connectionBudget": null
+      },
+      {
+        "index": 2,
+        "host": "legacy.example.org",
+        "nickname": "  ",
+        "providerId": null,
+        "bytesUsed": 0,
+        "byteLimit": null,
+        "overLimit": false,
+        "bytesPerDay": 0,
+        "daysRemaining": null,
+        "learnedConnectionLimit": null,
+        "effectiveMaxConnections": null,
+        "configuredMaxConnections": 10,
+        "connectionBudget": null
+      }
+    ]
+  },
+  "overview": {
+    "window": "1h",
+    "includedSections": [
+      "window",
+      "detail"
+    ],
+    "tiles": {
+      "activeReads": 2,
+      "articlesPerMinute": 1830,
+      "errorsPerMinute": 3,
+      "bytesServedPerMinute": 6291456000,
+      "inFlightArticleBytes": 0,
+      "inFlightArticleBudgetBytes": 268435456,
+      "inFlightArticleThrottleEvents": 0
+    },
+    "throughput": [
+      {
+        "bucket": 1792999940000,
+        "articles": 159,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3774873600,
+        "bytesFetched": 3837788160
+      },
+      {
+        "bucket": 1792999880000,
+        "articles": 158,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3711959040,
+        "bytesFetched": 3773825024
+      },
+      {
+        "bucket": 1792999820000,
+        "articles": 157,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3649044480,
+        "bytesFetched": 3709861888
+      },
+      {
+        "bucket": 1792999760000,
+        "articles": 156,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3586129920,
+        "bytesFetched": 3645898752
+      },
+      {
+        "bucket": 1792999700000,
+        "articles": 155,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3523215360,
+        "bytesFetched": 3581935616
+      },
+      {
+        "bucket": 1792999640000,
+        "articles": 154,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3460300800,
+        "bytesFetched": 3517972480
+      },
+      {
+        "bucket": 1792999580000,
+        "articles": 153,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3397386240,
+        "bytesFetched": 3454009344
+      },
+      {
+        "bucket": 1792999520000,
+        "articles": 152,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3334471680,
+        "bytesFetched": 3390046208
+      },
+      {
+        "bucket": 1792999460000,
+        "articles": 151,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3271557120,
+        "bytesFetched": 3326083072
+      },
+      {
+        "bucket": 1792999400000,
+        "articles": 150,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3208642560,
+        "bytesFetched": 3262119936
+      },
+      {
+        "bucket": 1792999340000,
+        "articles": 149,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3145728000,
+        "bytesFetched": 3198156800
+      },
+      {
+        "bucket": 1792999280000,
+        "articles": 148,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3082813440,
+        "bytesFetched": 3134193664
+      },
+      {
+        "bucket": 1792999220000,
+        "articles": 147,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 3019898880,
+        "bytesFetched": 3070230528
+      },
+      {
+        "bucket": 1792999160000,
+        "articles": 146,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2956984320,
+        "bytesFetched": 3006267392
+      },
+      {
+        "bucket": 1792999100000,
+        "articles": 145,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2894069760,
+        "bytesFetched": 2942304256
+      },
+      {
+        "bucket": 1792999040000,
+        "articles": 144,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2831155200,
+        "bytesFetched": 2878341120
+      },
+      {
+        "bucket": 1792998980000,
+        "articles": 143,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2768240640,
+        "bytesFetched": 2814377984
+      },
+      {
+        "bucket": 1792998920000,
+        "articles": 142,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2705326080,
+        "bytesFetched": 2750414848
+      },
+      {
+        "bucket": 1792998860000,
+        "articles": 141,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2642411520,
+        "bytesFetched": 2686451712
+      },
+      {
+        "bucket": 1792998800000,
+        "articles": 140,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2579496960,
+        "bytesFetched": 2622488576
+      },
+      {
+        "bucket": 1792998740000,
+        "articles": 139,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2516582400,
+        "bytesFetched": 2558525440
+      },
+      {
+        "bucket": 1792998680000,
+        "articles": 138,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2453667840,
+        "bytesFetched": 2494562304
+      },
+      {
+        "bucket": 1792998620000,
+        "articles": 137,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2390753280,
+        "bytesFetched": 2430599168
+      },
+      {
+        "bucket": 1792998560000,
+        "articles": 136,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2327838720,
+        "bytesFetched": 2366636032
+      },
+      {
+        "bucket": 1792998500000,
+        "articles": 135,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2264924160,
+        "bytesFetched": 2302672896
+      },
+      {
+        "bucket": 1792998440000,
+        "articles": 134,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2202009600,
+        "bytesFetched": 2238709760
+      },
+      {
+        "bucket": 1792998380000,
+        "articles": 133,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2139095040,
+        "bytesFetched": 2174746624
+      },
+      {
+        "bucket": 1792998320000,
+        "articles": 132,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2076180480,
+        "bytesFetched": 2110783488
+      },
+      {
+        "bucket": 1792998260000,
+        "articles": 131,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 2013265920,
+        "bytesFetched": 2046820352
+      },
+      {
+        "bucket": 1792998200000,
+        "articles": 130,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1950351360,
+        "bytesFetched": 1982857216
+      },
+      {
+        "bucket": 1792998140000,
+        "articles": 129,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1887436800,
+        "bytesFetched": 1918894080
+      },
+      {
+        "bucket": 1792998080000,
+        "articles": 128,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1824522240,
+        "bytesFetched": 1854930944
+      },
+      {
+        "bucket": 1792998020000,
+        "articles": 127,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1761607680,
+        "bytesFetched": 1790967808
+      },
+      {
+        "bucket": 1792997960000,
+        "articles": 126,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1698693120,
+        "bytesFetched": 1727004672
+      },
+      {
+        "bucket": 1792997900000,
+        "articles": 125,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1635778560,
+        "bytesFetched": 1663041536
+      },
+      {
+        "bucket": 1792997840000,
+        "articles": 124,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1572864000,
+        "bytesFetched": 1599078400
+      },
+      {
+        "bucket": 1792997780000,
+        "articles": 123,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1509949440,
+        "bytesFetched": 1535115264
+      },
+      {
+        "bucket": 1792997720000,
+        "articles": 122,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1447034880,
+        "bytesFetched": 1471152128
+      },
+      {
+        "bucket": 1792997660000,
+        "articles": 121,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1384120320,
+        "bytesFetched": 1407188992
+      },
+      {
+        "bucket": 1792997600000,
+        "articles": 120,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1321205760,
+        "bytesFetched": 1343225856
+      },
+      {
+        "bucket": 1792997540000,
+        "articles": 119,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1258291200,
+        "bytesFetched": 1279262720
+      },
+      {
+        "bucket": 1792997480000,
+        "articles": 118,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1195376640,
+        "bytesFetched": 1215299584
+      },
+      {
+        "bucket": 1792997420000,
+        "articles": 117,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1132462080,
+        "bytesFetched": 1151336448
+      },
+      {
+        "bucket": 1792997360000,
+        "articles": 116,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1069547520,
+        "bytesFetched": 1087373312
+      },
+      {
+        "bucket": 1792997300000,
+        "articles": 115,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 1006632960,
+        "bytesFetched": 1023410176
+      },
+      {
+        "bucket": 1792997240000,
+        "articles": 114,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 943718400,
+        "bytesFetched": 959447040
+      },
+      {
+        "bucket": 1792997180000,
+        "articles": 113,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 880803840,
+        "bytesFetched": 895483904
+      },
+      {
+        "bucket": 1792997120000,
+        "articles": 112,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 817889280,
+        "bytesFetched": 831520768
+      },
+      {
+        "bucket": 1792997060000,
+        "articles": 111,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 754974720,
+        "bytesFetched": 767557632
+      },
+      {
+        "bucket": 1792997000000,
+        "articles": 110,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 692060160,
+        "bytesFetched": 703594496
+      },
+      {
+        "bucket": 1792996940000,
+        "articles": 109,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 629145600,
+        "bytesFetched": 639631360
+      },
+      {
+        "bucket": 1792996880000,
+        "articles": 108,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 566231040,
+        "bytesFetched": 575668224
+      },
+      {
+        "bucket": 1792996820000,
+        "articles": 107,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 503316480,
+        "bytesFetched": 511705088
+      },
+      {
+        "bucket": 1792996760000,
+        "articles": 106,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 440401920,
+        "bytesFetched": 447741952
+      },
+      {
+        "bucket": 1792996700000,
+        "articles": 105,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 377487360,
+        "bytesFetched": 383778816
+      },
+      {
+        "bucket": 1792996640000,
+        "articles": 104,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 314572800,
+        "bytesFetched": 319815680
+      },
+      {
+        "bucket": 1792996580000,
+        "articles": 103,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 251658240,
+        "bytesFetched": 255852544
+      },
+      {
+        "bucket": 1792996520000,
+        "articles": 102,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 188743680,
+        "bytesFetched": 191889408
+      },
+      {
+        "bucket": 1792996460000,
+        "articles": 101,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 125829120,
+        "bytesFetched": 127926272
+      },
+      {
+        "bucket": 1792996400000,
+        "articles": 100,
+        "clientArticles": 90,
+        "queueArticles": 10,
+        "misses": 1,
+        "errors": 0,
+        "bytesServed": 62914560,
+        "bytesFetched": 63963136
+      }
+    ],
+    "throughputBucketSizeMs": 60000,
+    "peakFetchBytesPerSec": 125829120,
+    "totalArticles": 109800,
+    "totalClientArticles": 98000,
+    "totalQueueArticles": 11800,
+    "totalMisses": 60,
+    "totalErrors": 4,
+    "totalBytesFetched": 123456789012,
+    "providers": [
+      {
+        "provider": "key-a",
+        "nickname": "Primary",
+        "articles": 100000,
+        "bytesFetched": 1,
+        "errors": 4,
+        "retries": 2,
+        "speedMbPerSec": 42.5,
+        "peakMbPerSec": 80.1,
+        "activeAverageMbPerSec": 40.0,
+        "peakSpeedSpark": [],
+        "sampledSpeedSeries": [],
+        "speedSpark": [],
+        "speedSeries": [],
+        "avgDurationMs": 41.2,
+        "errorRate": 4e-05,
+        "spark": [],
+        "errorSpark": [],
+        "retrySpark": [],
+        "outageSpark": [],
+        "circuitState": "halfOpen",
+        "cooldownRemainingSeconds": null,
+        "lastFailureReason": null,
+        "tripCount": 1,
+        "failureCount": 3,
+        "articleMissCount": 7,
+        "providerType": "Pooled"
+      },
+      {
+        "provider": "key-b",
+        "nickname": "block.example.net",
+        "articles": 9800,
+        "bytesFetched": 1,
+        "errors": 0,
+        "retries": 0,
+        "speedMbPerSec": null,
+        "peakMbPerSec": null,
+        "activeAverageMbPerSec": null,
+        "peakSpeedSpark": [],
+        "sampledSpeedSeries": [],
+        "speedSpark": [],
+        "speedSeries": [],
+        "avgDurationMs": 0,
+        "errorRate": 0,
+        "spark": [],
+        "errorSpark": [],
+        "retrySpark": [],
+        "outageSpark": [],
+        "circuitState": "open",
+        "cooldownRemainingSeconds": 42,
+        "lastFailureReason": "502 Authentication failed: account expired",
+        "tripCount": 5,
+        "failureCount": 50,
+        "articleMissCount": 0,
+        "providerType": "BackupOnly"
+      },
+      {
+        "provider": "key-gone",
+        "nickname": "Removed provider",
+        "articles": 5,
+        "errorRate": 1,
+        "circuitState": "closed"
+      }
+    ],
+    "latency": {
+      "p50Ms": 41,
+      "p95Ms": 118,
+      "p99Ms": 262,
+      "samples": 109800,
+      "buckets": [
+        {
+          "loMs": 0,
+          "hiMs": 10,
+          "count": 5
+        }
+      ]
+    },
+    "errors": [
+      {
+        "status": "Timeout",
+        "count": 3
+      }
+    ],
+    "metricsHealth": {
+      "queued": 0,
+      "dropped": 0,
+      "lastSuccessfulFlushAtMs": 1793000000000,
+      "lastFlushError": null
+    }
+  },
+  "metrics": "# HELP nzbdav_active_reads Active read sessions.\n# TYPE nzbdav_active_reads gauge\nnzbdav_active_reads 2\n# HELP nzbdav_circuit_state Circuit state: 0=closed, 1=open, 2=half_open.\n# TYPE nzbdav_circuit_state gauge\nnzbdav_circuit_state{provider_key=\"key-a\"} 0\nnzbdav_circuit_state{provider_key=\"key-b\"} 1\n# TYPE nzbdav_segment_cache_enabled gauge\nnzbdav_segment_cache_enabled 1\nnzbdav_segment_cache_entries 81234\nnzbdav_segment_cache_bytes 53687091200\nnzbdav_segment_cache_max_bytes 107374182400\nnzbdav_segment_cache_hits_total 750\nnzbdav_segment_cache_misses_total 250\nnzbdav_nntp_pool_connections{provider_key=\"key-a\",state=\"active\"} 12\nnzbdav_seek_latency_seconds_bucket{kind=\"cold\",le=\"+Inf\"} 3\nnzbdav_segment_fetch_duration_seconds_sum{provider_key=\"key-a\"} NaN\nprocess_cpu_seconds_total 12.5\n",
+  "ws_frames": [
+    {
+      "Topic": "ls",
+      "Message": "{\"activeReads\": 1, \"articlesPerMinute\": 2400, \"errorsPerMinute\": 0, \"bytesServedPerMinute\": 7340032000, \"inFlightArticleBytes\": 1048576, \"inFlightArticleBudgetBytes\": 268435456, \"inFlightArticleThrottleEvents\": 0, \"ts\": 1793000000000, \"providerBreakers\": [{\"provider\": \"key-a\", \"nickname\": \"Primary\", \"providerType\": \"Pooled\", \"circuitState\": \"closed\", \"cooldownRemainingSeconds\": null, \"lastFailureReason\": null, \"tripCount\": 1, \"consecutiveTrips\": 0, \"failureCount\": 3, \"articleMissCount\": 7}, {\"provider\": \"key-b\", \"nickname\": null, \"providerType\": \"BackupOnly\", \"circuitState\": \"open\", \"cooldownRemainingSeconds\": 40, \"lastFailureReason\": \"502 Authentication failed: account expired (live)\", \"tripCount\": 5, \"consecutiveTrips\": 2, \"failureCount\": 50, \"articleMissCount\": 0}]}"
+    },
+    {
+      "Topic": "ar",
+      "Message": "{\"reads\": [{\"id\": \"0f1e2d3c-0000-4000-8000-000000000001\", \"fileName\": \"Movie.1.2026.2160p.WEB-DL.mkv\", \"parentDirectoryName\": \"Movie.1.2026.2160p.WEB-DL\", \"path\": \"/content/movies/Movie.1.2026.2160p.WEB-DL/Movie.1.2026.2160p.WEB-DL.mkv\", \"startedAt\": 1792999280000, \"lastActivityAt\": 1793000000000, \"bytesRead\": 4294967296, \"bytesFetched\": 4400000000, \"currentOffset\": 8589934592, \"fileSize\": 17179869184, \"clientIp\": \"172.18.0.5\", \"clientUserAgent\": \"Emby/4.9.1.90\", \"playerSession\": null, \"providers\": [{\"host\": \"news.example.com\", \"nickname\": \"Primary\", \"segments\": 5400}]}]}"
+    }
+  ]
+}
