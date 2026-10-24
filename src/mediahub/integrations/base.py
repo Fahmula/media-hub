@@ -70,6 +70,7 @@ class PollResult:
     downloads: list[DownloadItem] | None = None
     history: list[ActivityEvent] | None = None
     infinidysk: InfiniDyskStats | None = None
+    import_warning_grace_s: int | None = None  # None = the default
 
 
 @dataclass(frozen=True)
@@ -82,7 +83,7 @@ class FieldSpec:
     required: bool = False
     placeholder: str = ""
     help: str = ""
-    kind: str = "text"  # text | url | checkbox
+    kind: str = "text"  # text | url | checkbox | minutes
 
 
 class Integration(ABC):

@@ -248,3 +248,53 @@ def test_url_normalization() -> None:
     assert normalize_base_url(" HTTP://Emby.LAN:8096/ ") == "http://emby.lan:8096"
     assert normalize_base_url("https://h/sonarr/") == "https://h/sonarr"
     assert normalize_base_url("http://[::1]:8989") == "http://[::1]:8989"
+
+
+def test_import_warning_issue_waits_for_grace_period() -> None:
+    store = SnapshotStore(identity=IDENTITY)
+    warning = DownloadItem(
+        source=source(),
+        item_id="1",
+        title="Supergirl",
+        state=DownloadState.IMPORT_WARNING,
+        messages=[StatusMessage(title="r", messages=["No files found are eligible for import"])],
+    )
+    blocked = warning.model_copy(update={"item_id": "2", "state": DownloadState.IMPORT_BLOCKED})
+    snap = ServiceSnapshot(source=source(), status=ServiceStatus.OK, downloads=[warning, blocked])
+
+    store.put_local(snap)
+    first = store.get_local("i1")
+    assert first is not None
+    assert [i.link for i in first.issues] == ["/sonarr?instance=i1#dl-2"]  # blocked: at once
+
+    # Still there after the grace period: now it is an issue too.
+    for fp in store._first_seen:
+        store._first_seen[fp] -= timedelta(seconds=601)
+    store.put_local(snap)
+    later = store.get_local("i1")
+    assert later is not None and len(later.issues) == 2
+
+    # Resolved, then back: the clock starts again.
+    store.put_local(snap.model_copy(update={"downloads": []}))
+    store.put_local(snap)
+    again = store.get_local("i1")
+    assert again is not None and len(again.issues) == 1
+
+
+def test_import_warning_delay_is_configurable_per_instance() -> None:
+    store = SnapshotStore(identity=IDENTITY)
+    warning = DownloadItem(
+        source=source(), item_id="1", title="X", state=DownloadState.IMPORT_WARNING
+    )
+    snap = ServiceSnapshot(source=source(), downloads=[warning], import_warning_grace_s=0)
+    store.put_local(snap)
+    immediate = store.get_local("i1")
+    assert immediate is not None and len(immediate.issues) == 1
+
+    store.put_local(snap.model_copy(update={"downloads": [], "import_warning_grace_s": None}))
+    store.put_local(snap.model_copy(update={"import_warning_grace_s": 3600}))
+    for fp in store._first_seen:
+        store._first_seen[fp] -= timedelta(seconds=601)  # past the default, not the override
+    store.put_local(snap.model_copy(update={"import_warning_grace_s": 3600}))
+    delayed = store.get_local("i1")
+    assert delayed is not None and delayed.issues == []
