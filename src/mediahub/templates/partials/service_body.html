@@ -68,7 +68,14 @@
         {{ ui.section_header("Active reads", fv.reads|length) }}
         {% if fv.reads %}
         <div class="panel divide-y divide-base-300/50 p-2">{% for r, snap in fv.reads %}{{ items.active_read_row(r, multi) }}{% endfor %}</div>
-        {% else %}<div class="panel">{{ ui.empty_state("radio-tower", "No active reads", "Configure the backend URL and internal key to see live streams.") }}</div>{% endif %}
+        {% else %}
+        {%- set stats = fv.snapshots|selectattr("infinidysk")|map(attribute="infinidysk")|list -%}
+        {%- set feed_errors = stats|selectattr("feed_error")|map(attribute="feed_error")|list -%}
+        {%- if stats|selectattr("live")|list %}{% set hint = "Nothing is streaming right now." %}
+        {%- elif feed_errors %}{% set hint = "Live feed: " ~ feed_errors[0] %}
+        {%- else %}{% set hint = "Configure the backend URL and internal key to see live streams." %}{% endif %}
+        <div class="panel">{{ ui.empty_state("radio-tower", "No active reads", hint) }}</div>
+        {% endif %}
       </div>
     </div>
   {% endif %}

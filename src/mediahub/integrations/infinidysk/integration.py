@@ -8,13 +8,19 @@ InfiniDysk exposes two HTTP surfaces:
 
 Several InfiniDysk GET routes change state (backups, queue resets, SAB pause/delete), so
 every request goes through :meth:`InfiniDyskIntegration._get`, which enforces a read-only
-allowlist. Phase 1 covers connection tests and health; full metrics arrive in Phase 4.
+allowlist.
+
+Every poll reads provider usage (frontend) and, with a backend URL, ``/health``, ``/ready`` and
+``/metrics``: cheap, and enough for issues (circuits, byte limits, health). While someone is
+looking, polls add the overview statistics (at most every 30 s, like InfiniDysk's own UI;
+the query is not free) and keep the live WebSocket feed open. See ``mapper.py`` for fields.
 """
 
 from __future__ import annotations
 
 import asyncio
 import contextlib
+import time
 from typing import Any, ClassVar
 from urllib.parse import urlsplit, urlunsplit
 
@@ -32,8 +38,10 @@ from mediahub.integrations.base import (
 )
 from mediahub.integrations.errors import ErrorKind, IntegrationError
 from mediahub.integrations.http import USER_AGENT, get_json, make_client, request
+from mediahub.integrations.infinidysk.mapper import build_stats
+from mediahub.integrations.infinidysk.metrics import Metrics
+from mediahub.integrations.infinidysk.ws import LiveFeed
 from mediahub.models.common import ServiceStatus, ServiceType, SourceRef
-from mediahub.models.infinidysk import InfiniDyskStats
 from mediahub.models.issues import Severity
 from mediahub.models.snapshot import HealthCheck
 
@@ -43,6 +51,10 @@ FRONTEND_READ_PATHS = frozenset(
 )
 SAB_READ_MODES = frozenset({"queue", "history", "warnings", "status", "server_stats"})
 BACKEND_READ_PATHS = frozenset({"/health", "/ready", "/metrics"})
+
+OVERVIEW_PARAMS = {"window": "1h", "sections": "window,detail"}
+OVERVIEW_EVERY_S = 30.0
+OVERVIEW_MAX_AGE_S = 90.0  # keep showing the last overview through a failed refresh
 
 
 def assert_read_only(path: str, params: dict[str, Any] | None, *, backend: bool) -> None:
@@ -106,6 +118,12 @@ class InfiniDyskIntegration(Integration):
         self._backend = (
             make_client(backend_url, headers=headers, verify_tls=verify) if backend_url else None
         )
+        internal_key = config.secrets.get("internal_key")
+        self._feed = (
+            LiveFeed(ws_url(backend_url), internal_key) if backend_url and internal_key else None
+        )
+        self._overview: dict[str, Any] | None = None
+        self._overview_at = 0.0
 
     async def _get(self, path: str, params: dict[str, Any] | None = None) -> Any:
         assert_read_only(path, params, backend=False)
@@ -190,12 +208,14 @@ class InfiniDyskIntegration(Integration):
         return result
 
     async def poll(self, *, full: bool) -> PollResult:
-        await self._get("/api/get-provider-usage")  # reachability + auth
-        healthy = ready = None
+        usage = await self._get("/api/get-provider-usage")  # also reachability + auth
         checks: list[HealthCheck] = []
+        healthy = ready = None
+        metrics = None
         if self._backend is not None:
-            healthy = await self._backend_status("/health")
-            ready = await self._backend_status("/ready")
+            healthy, ready = await asyncio.gather(
+                self._backend_status("/health"), self._backend_status("/ready")
+            )
             if not healthy:
                 checks.append(
                     HealthCheck(level=Severity.ERROR, message="Backend reports Unhealthy")
@@ -204,14 +224,62 @@ class InfiniDyskIntegration(Integration):
                 checks.append(
                     HealthCheck(level=Severity.WARNING, message="Streaming readiness check failing")
                 )
+            try:
+                metrics = Metrics.from_text(await self._backend_text("/metrics"))
+            except IntegrationError as exc:
+                checks.append(
+                    HealthCheck(
+                        level=Severity.WARNING, message=f"Metrics unavailable: {exc.message}"
+                    )
+                )
+
+        overview = None
+        if full:
+            overview = await self._fresh_overview(checks)
+            if self._feed is not None:
+                self._feed.start()
+        elif self._feed is not None:
+            await self._feed.stop()  # nobody is looking: no live feed, no overview queries
+
         status = ServiceStatus.DEGRADED if checks else ServiceStatus.OK
         return PollResult(
             status=status,
             health_checks=checks,
-            infinidysk=InfiniDyskStats(healthy=healthy, ready=ready),
+            infinidysk=build_stats(
+                usage=usage,
+                overview=overview,
+                metrics=metrics,
+                live=self._feed.state() if self._feed is not None and full else None,
+                healthy=healthy,
+                ready=ready,
+            ),
         )
 
+    async def _fresh_overview(self, checks: list[HealthCheck]) -> dict[str, Any] | None:
+        now = time.monotonic()
+        if self._overview is not None and now - self._overview_at < OVERVIEW_EVERY_S:
+            return self._overview
+        try:
+            data = await self._get("/api/get-overview-stats", OVERVIEW_PARAMS)
+        except IntegrationError as exc:
+            checks.append(
+                HealthCheck(
+                    level=Severity.WARNING,
+                    message=f"Overview statistics unavailable: {exc.message}",
+                )
+            )
+            fresh_enough = now - self._overview_at <= OVERVIEW_MAX_AGE_S
+            return self._overview if fresh_enough else None
+        if not isinstance(data, dict):
+            raise IntegrationError(
+                ErrorKind.PROTOCOL, "Unexpected /api/get-overview-stats response"
+            )
+        self._overview, self._overview_at = data, now
+        return data
+
     async def aclose(self) -> None:
+        if self._feed is not None:
+            await self._feed.stop()
         await self._client.aclose()
         if self._backend is not None:
             await self._backend.aclose()

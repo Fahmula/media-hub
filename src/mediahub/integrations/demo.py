@@ -455,6 +455,7 @@ def _infinidysk(seed: int, plays: list[_Play], src: SourceRef) -> InfiniDyskStat
     return InfiniDyskStats(
         healthy=True,
         ready=True,
+        live=True,
         active_reads=len(reads),
         articles_per_min=1830 + rng.uniform(-90, 90),
         errors_per_min=rng.choice([0, 0, 0, 1, 2]),

@@ -266,7 +266,7 @@
   <div class="grid grid-cols-3 gap-2 text-center">
     <div class="panel-inset px-2 py-2"><p class="stat-num">{{ s.active_reads }}</p><p class="text-[0.68rem] muted">Streams</p></div>
     <div class="panel-inset px-2 py-2"><p class="stat-num">{{ s.throughput_bps|filesize(True) if s.throughput_bps is not none else "—" }}</p><p class="text-[0.68rem] muted">Served</p></div>
-    <div class="panel-inset px-2 py-2"><p class="stat-num">{{ ((s.cache.hit_rate * 100)|pct) if s.cache and s.cache.hit_rate is not none else "—" }}</p><p class="text-[0.68rem] muted">Cache hits</p></div>
+    <div class="panel-inset px-2 py-2"><p class="stat-num">{% if s.cache and not s.cache.enabled %}Off{% elif s.cache and s.cache.hit_rate is not none %}{{ (s.cache.hit_rate * 100)|pct }}{% else %}—{% endif %}</p><p class="text-[0.68rem] muted">Cache hits</p></div>
   </div>
   {% if s.throughput %}
   {%- set sp = s.throughput|sparkline(240, 40) -%}
@@ -287,6 +287,7 @@
     <li class="flex items-center gap-2">
       {{ ui.status_dot({"closed": "ok", "half_open": "degraded", "open": "error"}.get(p.circuit.value, "pending")) }}
       <span class="min-w-0 flex-1 truncate">{{ p.name }}</span>
+      {% if p.over_limit %}<span class="badge badge-warning badge-soft badge-xs">Over limit</span>{% endif %}
       {% if p.speed_mbps is not none %}<span class="tabular-nums muted">{{ "%.1f"|format(p.speed_mbps) }} MB/s</span>{% endif %}
       {% if p.connections_max %}<span class="tabular-nums muted">{{ p.connections_active }}/{{ p.connections_max }}</span>{% endif %}
     </li>
@@ -300,11 +301,11 @@
 {%- endmacro %}
 
 {% macro active_read_row(r, show_server=False, source=None) -%}
-<div class="flex items-center gap-3 px-2 py-2">
+<div class="flex items-center gap-3 px-2 py-2{{ ' opacity-60' if r.idle }}">
   <span class="svc-tile svc-infinidysk size-9">{{ icon("radio-tower", "size-4") }}</span>
   <div class="min-w-0 flex-1 space-y-1">
     <p class="truncate text-sm font-medium" title="{{ r.file_name }}">{{ r.file_name }}</p>
-    <p class="truncate text-xs muted">{% if r.client_label %}{{ r.client_label }} · {% endif %}{{ r.bytes_read|filesize }}{% if r.file_size %} of {{ r.file_size|filesize }}{% endif %}{% if r.speed_bps %} · {{ r.speed_bps|filesize(True) }}{% endif %}{% if r.started_at %} · {{ r.started_at|reltime }}{% endif %}</p>
+    <p class="truncate text-xs muted">{% if r.client_label %}{{ r.client_label }} · {% endif %}{{ r.bytes_read|filesize }}{% if r.file_size %} of {{ r.file_size|filesize }}{% endif %}{% if r.idle %} · <span title="InfiniDysk stopped tracking this read after 15 s without data; the player may still be playing from its buffer">Idle · last data {{ r.last_activity_at|reltime }}</span>{% else %}{% if r.speed_bps %} · {{ r.speed_bps|filesize(True) }}{% endif %}{% if r.started_at %} · {{ r.started_at|reltime }}{% endif %}{% endif %}</p>
     {% if r.offset_pct is not none %}{{ ui.progress(r.offset_pct, "secondary", "w-full") }}{% endif %}
   </div>
 </div>

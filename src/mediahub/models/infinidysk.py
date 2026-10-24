@@ -22,9 +22,10 @@ class ProviderStats(Model):
     circuit: CircuitState = CircuitState.UNKNOWN
     speed_mbps: float | None = None
     error_rate: float | None = None  # 0..1
-    last_failure: str | None = None
+    last_failure: str | None = None  # verbatim from InfiniDysk
     connections_active: int | None = None
     connections_max: int | None = None
+    over_limit: bool = False  # reached its configured byte limit
 
 
 class CacheStats(Model):
@@ -54,6 +55,9 @@ class ActiveRead(Model):
     file_size: int | None = None
     offset_pct: float | None = None
     speed_bps: float | None = None
+    # InfiniDysk stopped tracking it (no data for 15 s); the player may still be playing
+    # from its buffer. Kept for a while so buffered playback doesn't vanish from the list.
+    idle: bool = False
 
 
 class InfiniDyskStats(Model):
@@ -70,6 +74,8 @@ class InfiniDyskStats(Model):
     providers: list[ProviderStats] = []
     cache: CacheStats | None = None
     reads: list[ActiveRead] = []
+    live: bool = False  # reads come from the live feed (backend WebSocket)
+    feed_error: str | None = None  # why the live feed isn't connected, when configured
     queue_count: int | None = None
 
     @computed_field  # type: ignore[prop-decorator]
