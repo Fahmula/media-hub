@@ -1,0 +1,18 @@
+{% if form_errors %}
+<div role="alert" class="alert alert-warning alert-soft text-sm">{{ icon("triangle-alert", "size-4") }}<span>Fix the highlighted fields before testing: {{ form_errors.values()|join(" ") }}</span></div>
+{% elif result %}
+<div class="panel-inset space-y-2 p-3">
+  <p class="flex items-center gap-2 text-sm font-semibold {{ 'text-success' if result.ok else 'text-error' }}">
+    {{ icon("circle-check" if result.ok else "circle-x", "size-4") }}
+    {{ "Connected" if result.ok else "Connection failed" }}{% if result.server_name %} · {{ result.server_name }}{% endif %}
+  </p>
+  <ul class="space-y-1 text-sm">
+    {% for step in result.steps %}
+    <li class="flex items-start gap-2">
+      <span class="mt-0.5 {{ 'text-success' if step.ok else 'text-warning' }}">{{ icon("circle-check" if step.ok else "circle-alert", "size-3.5") }}</span>
+      <span>{{ step.label }}{% if step.detail %} <span class="muted">— {{ step.detail }}</span>{% endif %}</span>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

@@ -1,0 +1,11 @@
+<form hx-post="/settings/general" hx-swap="outerHTML" class="space-y-3">
+  <label class="block space-y-1.5">
+    <span class="text-sm font-medium">Server name</span>
+    <input class="input w-full {{ 'input-error' if error }}" name="server_name" value="{{ server_name }}" maxlength="64" required>
+    <span class="block text-xs {{ 'text-error' if error else 'muted' }}">{{ error or "Shown in the server selector, and to connected peers." }}</span>
+  </label>
+  <div class="flex items-center gap-3">
+    <button class="btn btn-primary btn-sm" type="submit">Save</button>
+    {% if saved %}<span class="flex items-center gap-1 text-sm text-success">{{ icon("circle-check", "size-4") }} Saved</span>{% endif %}
+  </div>
+</form>

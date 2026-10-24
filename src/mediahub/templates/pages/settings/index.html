@@ -1,0 +1,76 @@
+{% extends "layouts/app.html" %}
+{% import "components/ui.html" as ui %}
+{% block content %}
+<div class="mx-auto max-w-4xl space-y-4 lg:space-y-6">
+  {% if notice == "service" %}<div role="status" class="alert alert-success alert-soft text-sm">{{ icon("circle-check", "size-4") }} Service saved. Its status updates below within a few seconds.</div>{% endif %}
+  {% if notice == "deleted" %}<div role="status" class="alert alert-info alert-soft text-sm">{{ icon("trash-2", "size-4") }} Service removed.</div>{% endif %}
+
+  <section class="panel p-4" id="services">
+    <div class="mb-3 flex items-center gap-2">
+      <h2 class="section-title">Services</h2>
+      <span class="badge badge-ghost badge-sm">{{ instances|length }}</span>
+      <a href="/settings/services/new" class="btn btn-primary btn-sm ml-auto">{{ icon("plus", "size-4") }} Add service</a>
+    </div>
+    {% if instances %}
+    <ul class="divide-y divide-base-300/50">
+      {% for inst in instances %}
+      {% set snap = snapshots.get(inst.id) %}
+      <li class="flex items-center gap-3 py-2.5">
+        {{ ui.service_tile(inst.service_type, "size-9", "size-4.5") }}
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-sm font-medium">{{ inst.name }} <span class="font-normal muted">· {{ ServiceType(inst.service_type).label }}</span></p>
+          <p class="truncate text-xs muted">{{ inst.base_url }}</p>
+          {% if snap and snap.error %}<p class="truncate text-xs text-error">{{ snap.error }}</p>
+          {% elif inst.last_success_at %}<p class="truncate text-xs muted">Last connected {{ inst.last_success_at|reltime }}</p>{% endif %}
+        </div>
+        <div class="hidden sm:block">{{ ui.status_badge(snap.status if snap else ("disabled" if not inst.enabled else "pending")) }}</div>
+        <div class="dropdown dropdown-end">
+          <button type="button" tabindex="0" class="btn btn-ghost btn-sm btn-circle" aria-label="Actions for {{ inst.name }}">{{ icon("menu", "size-4") }}</button>
+          <ul tabindex="0" class="menu dropdown-content z-40 mt-1 w-44 rounded-box border border-base-300/60 bg-base-100 p-1.5 shadow-lg">
+            <li><a href="/settings/services/{{ inst.id }}">{{ icon("pencil", "size-4") }} Edit</a></li>
+            <li><button type="button" hx-post="/settings/services/{{ inst.id }}/toggle">{{ icon("pause" if inst.enabled else "play", "size-4") }} {{ "Disable" if inst.enabled else "Enable" }}</button></li>
+            <li><button type="button" class="text-error" hx-post="/settings/services/{{ inst.id }}/delete" hx-confirm="Remove {{ inst.name }}? Its stored credentials are deleted.">{{ icon("trash-2", "size-4") }} Remove</button></li>
+          </ul>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    {{ ui.empty_state("plug", "No services yet", "Add Emby, Sonarr, Radarr or InfiniDysk. Credentials are encrypted at rest and never sent to your browser.") }}
+    {% endif %}
+  </section>
+
+  <section class="panel p-4">
+    <h2 class="section-title mb-3">General</h2>
+    {% with server_name=identity.server_name %}{% include "partials/settings/general_form.html" %}{% endwith %}
+  </section>
+
+  <section class="panel p-4">
+    <div class="flex items-start gap-3">
+      <span class="svc-tile svc-peer size-9">{{ icon("network", "size-4.5") }}</span>
+      <div class="min-w-0 flex-1">
+        <h2 class="section-title">Connected servers</h2>
+        <p class="mt-1 text-sm muted">Pairing with another MediaHub (read-only, token-authenticated) arrives in a later release.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel p-4">
+    <h2 class="section-title mb-3">Account</h2>
+    {% include "partials/settings/password_form.html" %}
+    <div class="mt-4 border-t border-base-300/60 pt-4">
+      <button type="button" class="btn btn-ghost btn-sm" hx-post="/logout">{{ icon("log-out", "size-4") }} Sign out</button>
+    </div>
+  </section>
+
+  <section class="panel p-4">
+    <h2 class="section-title mb-3">About</h2>
+    <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-sm">
+      <dt class="muted">Version</dt><dd>{{ about.version }}{% if about.demo_mode %} <span class="badge badge-secondary badge-soft badge-xs">demo mode</span>{% endif %}</dd>
+      <dt class="muted">Server ID</dt><dd class="break-all font-mono text-xs">{{ about.server_id }}</dd>
+      <dt class="muted">Config directory</dt><dd class="break-all font-mono text-xs">{{ about.config_dir }}</dd>
+    </dl>
+    <p class="mt-3 text-xs muted">Back up <code>mediahub.db</code> and <code>secret.key</code> together: without the key, stored credentials can't be decrypted.</p>
+  </section>
+</div>
+{% endblock %}

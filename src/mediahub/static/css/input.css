@@ -165,6 +165,15 @@
   }
 }
 
+/* htmx's built-in indicator styles are disabled (CSP: no inline styles), so define them. */
+.htmx-indicator {
+  display: none;
+}
+.htmx-request.htmx-indicator,
+.htmx-request .htmx-indicator {
+  display: inline-block;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
