@@ -7,12 +7,13 @@ instantly regardless of how slow or unreachable the monitored services are.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import UTC, datetime, timedelta
 from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import HTMLResponse
 
-from mediahub.aggregation.dashboard import DashboardView, build_view
+from mediahub.aggregation.dashboard import SCOPE_ALL, DashboardView, build_view
 from mediahub.context import AppContext, get_context
 from mediahub.models.common import ServiceType
 from mediahub.models.downloads import ActivityEvent, DownloadItem
@@ -30,6 +31,8 @@ DASHBOARD_SECTIONS = frozenset(
     {"attention", "summary", "streams", "downloads", "status", "infinidysk"}
 )
 ActivityTab = Literal["playback", "downloads", "history", "streams"]
+# Mute choices on Needs Attention, in hours.
+MUTE_HOURS = (1, 24, 168)
 # Card layout on service pages (Emby: detailed cards or compact rows), remembered in a cookie.
 LAYOUT_COOKIE = "mh_layout"
 LAYOUTS = ("detailed", "compact")
@@ -90,6 +93,34 @@ async def attention(request: Request, ctx: AppContext = Depends(get_context)) ->
 async def attention_partial(
     request: Request, ctx: AppContext = Depends(get_context)
 ) -> HTMLResponse:
+    _, base = _view(request, ctx)
+    return render(request, "partials/attention_list.html", base)
+
+
+@router.post("/attention/issues", response_class=HTMLResponse)
+async def update_issue(request: Request, ctx: AppContext = Depends(get_context)) -> HTMLResponse:
+    """Acknowledge, mute or restore one issue; responds with the refreshed list."""
+    form = await request.form()
+    fingerprint, action = form.get("fingerprint"), form.get("action")
+    states = ctx.monitor.store.issue_states
+    everything = build_view(ctx.monitor.store, SCOPE_ALL)
+    issue = next(
+        (i for i in everything.issues + everything.hidden_issues if i.fingerprint == fingerprint),
+        None,
+    )
+    # An issue that resolved in the meantime is simply gone from the refreshed list.
+    if issue is not None:
+        if action == "ack":
+            await states.acknowledge(issue)
+        elif action == "mute":
+            hours = form.get("hours")
+            if not (isinstance(hours, str) and hours.isdigit() and int(hours) in MUTE_HOURS):
+                raise HTTPException(400, "Invalid mute duration")
+            await states.mute(issue, datetime.now(UTC) + timedelta(hours=int(hours)))
+        elif action == "restore":
+            await states.restore(issue.fingerprint)
+        else:
+            raise HTTPException(400, "Unknown action")
     _, base = _view(request, ctx)
     return render(request, "partials/attention_list.html", base)
 

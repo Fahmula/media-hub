@@ -86,7 +86,8 @@ class DashboardView:
     sessions: list[PlaybackSession] = field(default_factory=list)
     downloads: list[DownloadItem] = field(default_factory=list)
     history: list[ActivityEvent] = field(default_factory=list)
-    issues: list[Issue] = field(default_factory=list)
+    issues: list[Issue] = field(default_factory=list)  # what still needs attention
+    hidden_issues: list[Issue] = field(default_factory=list)  # acknowledged or muted
     streams: list[StreamStats] = field(default_factory=list)
 
     @property
@@ -187,7 +188,19 @@ def _summaries(snapshots: list[ServiceSnapshot]) -> list[ServiceSummary]:
     return out
 
 
+def _peer_fingerprint(peer: PeerState, category: IssueCategory) -> str:
+    return f"peer:{peer.peer_id}:{category}"
+
+
 def _peer_issue(store: SnapshotStore, peer: PeerState) -> Issue | None:
+    if peer.status is ServiceStatus.OK:
+        store.issue_states.resolve(
+            [
+                _peer_fingerprint(peer, c)
+                for c in (IssueCategory.PEER_DOWN, IssueCategory.PEER_INCOMPATIBLE)
+            ],
+            datetime.now(UTC),
+        )
     if peer.status in (ServiceStatus.OK, ServiceStatus.PENDING, ServiceStatus.DISABLED):
         return None
     incompatible = peer.status is ServiceStatus.ERROR and bool(
@@ -196,7 +209,7 @@ def _peer_issue(store: SnapshotStore, peer: PeerState) -> Issue | None:
     category = IssueCategory.PEER_INCOMPATIBLE if incompatible else IssueCategory.PEER_DOWN
     return store.stamp_issue(
         Issue(
-            fingerprint=f"peer:{peer.peer_id}:{category}",
+            fingerprint=_peer_fingerprint(peer, category),
             severity=Severity.ERROR,
             category=category,
             source=SourceRef(
@@ -277,5 +290,9 @@ def build_view(store: SnapshotStore, scope: str) -> DashboardView:
     view.sessions.sort(key=lambda s: (s.state.value != "playing", s.media.title.lower()))
     view.downloads.sort(key=lambda d: (_DOWNLOAD_ORDER.get(d.state, 9), -(d.progress_pct or 0)))
     view.history.sort(key=lambda e: e.at, reverse=True)
-    view.issues.sort(key=lambda i: (i.severity.rank, -(i.first_seen or epoch).timestamp()))
+    now = datetime.now(UTC)
+    issues = [store.issue_states.apply(i, now) for i in view.issues]
+    issues.sort(key=lambda i: (i.severity.rank, -(i.first_seen or epoch).timestamp()))
+    view.issues = [i for i in issues if not i.hidden]
+    view.hidden_issues = [i for i in issues if i.hidden]
     return view

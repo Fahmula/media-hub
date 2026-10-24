@@ -87,6 +87,8 @@ class DownloadItem(Model):
     messages: list[StatusMessage] = []
     error_message: str | None = None
     episode_count: int = 1
+    # Upstream ids of what this download is for ("e<episodeId>" / "m<movieId>").
+    media_ids: list[str] = []
 
     @computed_field  # type: ignore[prop-decorator]
     @property
@@ -114,9 +116,11 @@ class ActivityKind(StrEnum):
 class ActivityEvent(Model):
     source: SourceRef
     event_id: str
+    download_id: str | None = None
     kind: ActivityKind
     title: str
     subtitle: str | None = None
     image_url: str | None = None
     at: datetime
     detail: str | None = None
+    media_ids: list[str] = []  # same ids as DownloadItem.media_ids

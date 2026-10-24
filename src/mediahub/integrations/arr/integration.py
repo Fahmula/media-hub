@@ -1,9 +1,10 @@
 """Sonarr and Radarr integrations (API v3).
 
-Every poll fetches status, health and the queue (issues depend on it); full polls add recent
-history. Posters come from ``/api/v3/mediacover/{id}/poster-250.jpg``, which accepts the API
-key (``/MediaCover/...`` doesn't). Auth is the ``X-Api-Key`` header only: a stray ``?apikey=``
-query parameter would override it.
+Every poll fetches status, health, the queue and recent history: issues depend on all of them
+(failed downloads mostly show up only in history). Posters come from
+``/api/v3/mediacover/{id}/poster-250.jpg``, which accepts the API key (``/MediaCover/...``
+doesn't). Auth is the ``X-Api-Key`` header only: a stray ``?apikey=`` query parameter would
+override it.
 """
 
 from __future__ import annotations
@@ -115,15 +116,12 @@ class ArrIntegration(Integration):
         return result
 
     async def poll(self, *, full: bool) -> PollResult:
-        status, health, queue = await asyncio.gather(
+        status, health, queue, history = await asyncio.gather(
             self._status(),
             get_json(self._client, "/api/v3/health"),
             self._page("/api/v3/queue", QUEUE_PAGE_SIZE, self.queue_params),
+            self._page("/api/v3/history", HISTORY_PAGE_SIZE, self.history_params),
         )
-        # History only matters while someone is looking; idle polls keep the last one.
-        history = None
-        if full:
-            history = await self._page("/api/v3/history", HISTORY_PAGE_SIZE, self.history_params)
         checks = map_health(health)
         degraded = any(c.level is Severity.ERROR for c in checks)
         return PollResult(
@@ -131,7 +129,7 @@ class ArrIntegration(Integration):
             version=str(status.get("version")),
             health_checks=checks,
             downloads=map_queue(queue, self.source, self._image_url),
-            history=map_history(history, self.source, self._image_url) if full else None,
+            history=map_history(history, self.source, self._image_url),
             import_warning_grace_s=self._import_warning_grace_s(),
         )
 

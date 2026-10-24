@@ -1,9 +1,18 @@
 {% import "components/items.html" as items %}
 {% import "components/ui.html" as ui %}
+{%- set actions_url = "/attention/issues?server=" ~ scope -%}
 {% if view.issues %}
 <div class="panel divide-y divide-base-300/50 p-2">
-  {% for issue in view.issues %}{{ items.issue_row(issue, view.multi_server) }}{% endfor %}
+  {% for issue in view.issues %}{{ items.issue_row(issue, view.multi_server, actions_url) }}{% endfor %}
 </div>
 {% else %}
 <div class="panel">{{ ui.empty_state("circle-check", "All clear", "Nothing needs your attention right now.") }}</div>
+{% endif %}
+{% if view.hidden_issues %}
+<div class="mt-5">
+  {{ ui.section_header("Acknowledged & muted", view.hidden_issues|length) }}
+  <div class="panel divide-y divide-base-300/50 p-2">
+    {% for issue in view.hidden_issues %}{{ items.issue_row(issue, view.multi_server, actions_url) }}{% endfor %}
+  </div>
+</div>
 {% endif %}

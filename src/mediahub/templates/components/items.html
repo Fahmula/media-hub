@@ -188,17 +188,43 @@
 {%- endmacro %}
 
 {# ---------- Issues ---------- #}
-{% macro issue_row(i, show_server=True) -%}
+{% macro issue_row(i, show_server=True, actions_url=None) -%}
 {%- set tone = {"error": "text-error", "warning": "text-warning"}.get(i.severity.value, "text-info") -%}
-<a href="{{ i.link or '#' }}" {% if i.link and i.link.startswith("http") %}target="_blank" rel="noopener noreferrer"{% endif %} class="flex items-start gap-3 rounded-field px-2 py-2 transition-colors hover:bg-base-300/40">
-  <span class="mt-0.5 shrink-0 {{ tone }}">{{ icon("circle-x" if i.severity.value == "error" else "triangle-alert", "size-4.5") }}</span>
+{%- if actions_url %}<div class="flex items-start gap-1{{ ' opacity-70' if i.hidden }}">{% endif %}
+<a href="{{ i.link or '#' }}" {% if i.link and i.link.startswith("http") %}target="_blank" rel="noopener noreferrer"{% endif %} class="flex min-w-0 flex-1 items-start gap-3 rounded-field px-2 py-2 transition-colors hover:bg-base-300/40">
+  <span class="mt-0.5 shrink-0 {{ 'muted' if i.hidden else tone }}">{{ icon("circle-x" if i.severity.value == "error" else "triangle-alert", "size-4.5") }}</span>
   <div class="min-w-0 flex-1">
     <p class="line-clamp-2 text-sm font-medium">{{ i.title }}</p>
     <p class="truncate text-xs muted">{{ i.category.label }} · {{ source_label(i.source, show_server) }}{% if i.first_seen %} · since {{ i.first_seen|reltime }}{% endif %}</p>
     {% if i.detail %}<p class="mt-0.5 line-clamp-2 text-xs muted">{{ i.detail }}</p>{% endif %}
+    {% if i.muted_until %}<p class="mt-0.5 text-xs muted">{{ icon("bell-off", "size-3 inline") }} Muted · shows again {{ i.muted_until|reltime }}</p>
+    {% elif i.acknowledged_at %}<p class="mt-0.5 text-xs muted">{{ icon("check", "size-3 inline") }} Acknowledged {{ i.acknowledged_at|reltime }} · shows again if it recurs</p>{% endif %}
   </div>
-  <span class="mt-1 shrink-0 muted">{{ icon("chevron-right", "size-4") }}</span>
+  {% if not actions_url %}<span class="mt-1 shrink-0 muted">{{ icon("chevron-right", "size-4") }}</span>{% endif %}
 </a>
+{%- if actions_url %}{{ issue_actions(i, actions_url) }}</div>{% endif %}
+{%- endmacro %}
+
+{% macro issue_action(i, url, action, label, icon_name, hours=None) -%}
+{%- set vals = {"fingerprint": i.fingerprint, "action": action} -%}
+{%- if hours %}{% set _ = vals.update({"hours": hours}) %}{% endif -%}
+<li><button type="button" hx-post="{{ url }}" hx-vals='{{ vals|tojson }}' hx-target="#sec-attention-list" hx-swap="innerHTML">{{ icon(icon_name, "size-4") }} {{ label }}</button></li>
+{%- endmacro %}
+
+{% macro issue_actions(i, url) -%}
+<div class="dropdown dropdown-end mt-1">
+  <button type="button" tabindex="0" class="btn btn-ghost btn-sm btn-circle" aria-label="Actions for this issue">{{ icon("menu", "size-4") }}</button>
+  <ul tabindex="0" class="menu dropdown-content z-40 mt-1 w-44 rounded-box border border-base-300/60 bg-base-100 p-1.5 shadow-lg">
+    {% if i.hidden %}
+    {{ issue_action(i, url, "restore", "Show again", "eye") }}
+    {% else %}
+    {{ issue_action(i, url, "ack", "Acknowledge", "check") }}
+    {{ issue_action(i, url, "mute", "Mute for 1 hour", "bell-off", "1") }}
+    {{ issue_action(i, url, "mute", "Mute for 1 day", "bell-off", "24") }}
+    {{ issue_action(i, url, "mute", "Mute for 1 week", "bell-off", "168") }}
+    {% endif %}
+  </ul>
+</div>
 {%- endmacro %}
 
 {# ---------- Services ---------- #}

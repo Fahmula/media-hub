@@ -101,3 +101,15 @@ class PeerGrant(Base):
     last_used_at: Mapped[datetime | None]
     last_used_ip: Mapped[str | None] = mapped_column(String(64))
     revoked_at: Mapped[datetime | None]
+
+
+class IssueStateRow(Base):
+    """What the user decided about an issue (acknowledged / muted), keyed by its fingerprint."""
+
+    __tablename__ = "issue_states"
+
+    fingerprint: Mapped[str] = mapped_column(String(128), primary_key=True)
+    source_key: Mapped[str] = mapped_column(String(80), index=True)
+    first_seen: Mapped[datetime | None]
+    acknowledged_at: Mapped[datetime | None]
+    muted_until: Mapped[datetime | None]

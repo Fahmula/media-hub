@@ -65,10 +65,21 @@
     if (isActive()) refreshAll();
   });
 
+  // A refresh would close a menu the user has open inside the section.
+  const menuOpenIn = (elt) => {
+    const focused = document.activeElement;
+    return focused instanceof Element && elt.contains(focused) && focused.closest(".dropdown") !== null;
+  };
+
   // Polled sections load once regardless, then only refresh while live and visible.
   document.addEventListener("htmx:beforeRequest", (evt) => {
     const elt = evt.detail.elt;
-    if (elt instanceof Element && elt.hasAttribute("data-poll") && elt.dataset.loaded && !isActive()) {
+    if (
+      elt instanceof Element &&
+      elt.hasAttribute("data-poll") &&
+      elt.dataset.loaded &&
+      (!isActive() || menuOpenIn(elt))
+    ) {
       evt.preventDefault();
     }
   });

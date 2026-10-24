@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import hashlib
+from datetime import UTC, datetime, timedelta
 
 from mediahub.models.common import ServiceStatus
-from mediahub.models.downloads import DownloadState
+from mediahub.models.downloads import ActivityEvent, ActivityKind, DownloadState
 from mediahub.models.infinidysk import CircuitState
 from mediahub.models.issues import Issue, IssueCategory, Severity
 from mediahub.models.snapshot import ServiceSnapshot
@@ -13,6 +14,11 @@ from mediahub.models.snapshot import ServiceSnapshot
 # An import warning the *arr is still retrying only becomes an issue if it sticks around
 # (e.g. a post-processor like FileFlows is still converting). Configurable per instance.
 IMPORT_WARNING_GRACE_S = 600
+# Failed downloads mostly leave the queue at once and show up only in history. The *arr
+# usually searches again and grabs another release within moments, so a failure becomes an
+# issue only when nothing newer was grabbed or imported for the same episodes/movie.
+FAILED_RETRY_GRACE_S = 900
+FAILED_HISTORY_MAX_AGE = timedelta(days=7)
 
 
 def _fp(*parts: object) -> str:
@@ -89,6 +95,8 @@ def derive_issues(snap: ServiceSnapshot) -> list[Issue]:
             )
         )
 
+    out.extend(_history_failures(snap))
+
     stats = snap.infinidysk
     if stats is not None:
         for provider in stats.providers:
@@ -104,4 +112,40 @@ def derive_issues(snap: ServiceSnapshot) -> list[Issue]:
                         link=_service_link(snap),
                     )
                 )
+    return out
+
+
+def _history_failures(snap: ServiceSnapshot) -> list[Issue]:
+    src = snap.source
+    cutoff = datetime.now(UTC) - FAILED_HISTORY_MAX_AGE
+    queued = {media for item in snap.downloads for media in item.media_ids}
+    retried_at: dict[str, datetime] = {}
+    for event in snap.history:
+        if event.kind in (ActivityKind.GRABBED, ActivityKind.IMPORTED):
+            for media in event.media_ids:
+                retried_at[media] = max(event.at, retried_at.get(media, event.at))
+
+    def superseded(event: ActivityEvent) -> bool:
+        return bool(event.media_ids) and all(
+            media in queued or (media in retried_at and retried_at[media] > event.at)
+            for media in event.media_ids
+        )
+
+    out: list[Issue] = []
+    for event in snap.history:
+        if event.kind is not ActivityKind.FAILED or event.at < cutoff or superseded(event):
+            continue
+        out.append(
+            Issue(
+                fingerprint=_fp(src.key, "history-failed", event.download_id or event.event_id),
+                severity=Severity.WARNING,
+                category=IssueCategory.DOWNLOAD_FAILED,
+                source=src,
+                title=f"{event.title}{f' · {event.subtitle}' if event.subtitle else ''}",
+                detail=event.detail,
+                first_seen=event.at,
+                link=_service_link(snap),
+                grace_s=FAILED_RETRY_GRACE_S,
+            )
+        )
     return out
