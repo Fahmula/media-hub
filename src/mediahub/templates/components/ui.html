@@ -1,0 +1,95 @@
+{# Reusable UI macros. Import with: {% import "components/ui.html" as ui %} #}
+
+{# `uid` must be unique per page: a gradient defined inside a hidden copy won't render. #}
+{% macro logo(size="size-8", uid="a") -%}
+<svg class="{{ size }}" viewBox="0 0 32 32" aria-hidden="true">
+  <defs>
+    <linearGradient id="mh-logo-{{ uid }}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <path d="M9 5.5c0-1.6 1.7-2.5 3-1.7l15 9.5c1.3.8 1.3 2.6 0 3.4l-15 9.5c-1.3.8-3-.1-3-1.7z" fill="url(#mh-logo-{{ uid }})"/>
+  <path d="M5 9v14" stroke="url(#mh-logo-{{ uid }})" stroke-width="3" stroke-linecap="round"/>
+</svg>
+{%- endmacro %}
+
+{% set SERVICE_ICONS = {"emby": "play", "sonarr": "tv", "radarr": "clapperboard", "infinidysk": "disc-3", "peer": "server", "demo": "layers"} %}
+{% set SERVICE_LABELS = {"emby": "Emby", "sonarr": "Sonarr", "radarr": "Radarr", "infinidysk": "InfiniDysk"} %}
+
+{% macro service_tile(service_type, size="size-9", icon_size="size-4.5") -%}
+<span class="svc-tile svc-{{ service_type }} {{ size }}">{{ icon(SERVICE_ICONS.get(service_type, "server"), icon_size) }}</span>
+{%- endmacro %}
+
+{% macro status_dot(status) -%}
+{%- set cls = {"ok": "bg-success", "degraded": "bg-warning", "error": "bg-error", "unreachable": "bg-error", "disabled": "bg-base-content/30", "pending": "bg-base-content/40"}.get(status, "bg-base-content/40") -%}
+<span class="relative inline-flex size-2 shrink-0 rounded-full {{ cls }}" aria-hidden="true"></span>
+{%- endmacro %}
+
+{% macro status_label(status) -%}
+{{ {"ok": "Online", "degraded": "Degraded", "error": "Error", "unreachable": "Offline", "disabled": "Disabled", "pending": "Connecting…"}.get(status, status|title) }}
+{%- endmacro %}
+
+{% macro status_badge(status) -%}
+<span class="inline-flex items-center gap-1.5 text-xs font-medium {{ {'ok': 'text-success', 'degraded': 'text-warning', 'error': 'text-error', 'unreachable': 'text-error'}.get(status, 'muted') }}">
+  {{ status_dot(status) }} {{ status_label(status) }}
+</span>
+{%- endmacro %}
+
+{% macro stale_badge(view) -%}
+{% if view.stale %}<span class="badge badge-warning badge-soft badge-xs gap-1" title="Last updated {{ view.fetched_at|reltime }}">{{ icon("clock", "size-3") }} {{ view.fetched_at|reltime }}</span>{% endif %}
+{%- endmacro %}
+
+{% macro progress(value, tone="primary", cls="") -%}
+<progress class="progress progress-{{ tone }} h-1.5 {{ cls }}" value="{{ (value or 0)|round(1) }}" max="100" aria-label="{{ (value or 0)|round|int }}% complete"></progress>
+{%- endmacro %}
+
+{% macro empty_state(icon_name, title, text=None) -%}
+<div class="flex flex-col items-center justify-center gap-2 px-4 py-8 text-center">
+  <span class="flex size-10 items-center justify-center rounded-full bg-base-300/60 text-base-content/50">{{ icon(icon_name, "size-5") }}</span>
+  <p class="text-sm font-medium">{{ title }}</p>
+  {% if text %}<p class="max-w-xs text-xs muted">{{ text }}</p>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro skeleton_rows(n=3, poster=True) -%}
+<div class="space-y-3 p-3" aria-hidden="true">
+  {% for _ in range(n) %}
+  <div class="flex items-center gap-3">
+    {% if poster %}<div class="skeleton h-14 w-10 shrink-0 rounded-field"></div>{% endif %}
+    <div class="flex-1 space-y-2"><div class="skeleton-line w-2/3"></div><div class="skeleton-line w-1/3"></div></div>
+  </div>
+  {% endfor %}
+</div>
+{%- endmacro %}
+
+{% macro alert_list(errors) -%}
+{% if errors %}
+<div role="alert" class="alert alert-error alert-soft text-sm">
+  {{ icon("circle-alert", "size-4") }}
+  <div>{% for e in errors %}<p>{{ e }}</p>{% endfor %}</div>
+</div>
+{% endif %}
+{%- endmacro %}
+
+{% macro poster(image_url, alt, cls="h-16 w-11", fallback_icon="film") -%}
+{% if image_url %}
+<img src="{{ image_url }}" alt="{{ alt }}" loading="lazy" decoding="async" class="poster {{ cls }}">
+{% else %}
+<div class="poster {{ cls }} flex items-center justify-center text-base-content/30">{{ icon(fallback_icon, "size-5") }}</div>
+{% endif %}
+{%- endmacro %}
+
+{# A section refreshed by polling. Rendered server-side first, so it never flashes empty. #}
+{% macro poll_section(id, url, every, cls="") -%}
+<section id="{{ id }}" class="{{ cls }}" hx-get="{{ url }}" hx-trigger="every {{ every }}s, mh:refresh" hx-swap="innerHTML" data-poll data-loaded="1">
+{{ caller() }}
+</section>
+{%- endmacro %}
+
+{% macro section_header(title, count=None, href=None, link_label="View all") -%}
+<div class="flex items-center gap-2 px-1 pb-2">
+  <h2 class="section-title">{{ title }}</h2>
+  {% if count is not none %}<span class="badge badge-ghost badge-sm tabular-nums">{{ count }}</span>{% endif %}
+  {% if href %}<a href="{{ href }}" class="ml-auto text-xs font-medium text-primary hover:underline">{{ link_label }}</a>{% endif %}
+</div>
+{%- endmacro %}

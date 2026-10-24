@@ -1,0 +1,16 @@
+{% extends "layouts/app.html" %}
+{% import "components/ui.html" as ui %}
+{% block content %}
+{% if fv.instances|length > 1 %}
+<nav class="mb-4 flex gap-2 overflow-x-auto pb-1" aria-label="Instances">
+  <a href="/{{ service_type.value }}" class="btn btn-sm {{ 'btn-primary' if not fv.instance else 'btn-ghost bg-base-100' }}">All</a>
+  {% for snap in fv.instances %}
+  <a href="/{{ service_type.value }}?instance={{ snap.source.instance_id }}" class="btn btn-sm whitespace-nowrap {{ 'btn-primary' if fv.instance == snap.source.instance_id else 'btn-ghost bg-base-100' }}">
+    {{ snap.source.instance_name }}{% if view.multi_server %} <span class="text-xs opacity-70">· {{ snap.source.server_name }}</span>{% endif %}
+  </a>
+  {% endfor %}
+</nav>
+{% endif %}
+{% set q = "?server=" ~ scope ~ ("&instance=" ~ fv.instance if fv.instance else "") %}
+{% call ui.poll_section("sec-service", "/partials/service/" ~ service_type.value ~ q, 5 if service_type.value == "emby" else 10) %}{% include "partials/service_body.html" %}{% endcall %}
+{% endblock %}

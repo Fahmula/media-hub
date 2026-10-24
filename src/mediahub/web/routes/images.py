@@ -1,0 +1,71 @@
+"""Image endpoints.
+
+Real posters (Phase 2+) are proxied through signed references so the browser never sees an
+API key and can't make MediaHub fetch arbitrary URLs. Demo mode serves generated SVG posters.
+"""
+
+from __future__ import annotations
+
+import hashlib
+from typing import Annotated
+from xml.sax.saxutils import escape
+
+from fastapi import APIRouter, Depends, Query
+from fastapi.responses import Response
+
+from mediahub.web.deps import require_auth
+
+router = APIRouter(dependencies=[Depends(require_auth)])
+
+_PALETTES = [
+    ("#1e3a8a", "#7c3aed"),
+    ("#7f1d1d", "#ea580c"),
+    ("#064e3b", "#0891b2"),
+    ("#312e81", "#db2777"),
+    ("#1f2937", "#2563eb"),
+    ("#422006", "#ca8a04"),
+    ("#134e4a", "#65a30d"),
+    ("#3b0764", "#2563eb"),
+]
+
+
+def _wrap(title: str, width: int = 12, lines: int = 4) -> list[str]:
+    words, out, line = title.split(), [], ""
+    for word in words:
+        candidate = f"{line} {word}".strip()
+        if len(candidate) > width and line:
+            out.append(line)
+            line = word
+        else:
+            line = candidate
+    if line:
+        out.append(line)
+    return out[:lines]
+
+
+@router.get("/img/demo/{slug}.svg")
+async def demo_poster(slug: str, t: Annotated[str, Query(max_length=60)] = "") -> Response:
+    digest = hashlib.sha1((slug + t).encode(), usedforsecurity=False).digest()
+    top, bottom = _PALETTES[digest[0] % len(_PALETTES)]
+    lines = _wrap(t or "MediaHub")
+    text = "".join(
+        f'<text x="20" y="{200 - (len(lines) - i) * 22}" font-size="19" font-weight="700" '
+        f'fill="#fff" font-family="system-ui,sans-serif">{escape(line)}</text>'
+        for i, line in enumerate(lines)
+    )
+    svg = (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 240">'
+        f'<defs><linearGradient id="g" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" '
+        f'stop-color="{bottom}"/><stop offset="1" stop-color="{top}"/></linearGradient></defs>'
+        '<rect width="160" height="240" fill="url(#g)"/>'
+        '<circle cx="128" cy="40" r="60" fill="#fff" opacity="0.08"/>'
+        f"{text}</svg>"
+    )
+    return Response(
+        svg,
+        media_type="image/svg+xml",
+        headers={
+            "Cache-Control": "private, max-age=86400",
+            "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'",
+        },
+    )

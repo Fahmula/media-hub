@@ -9,7 +9,11 @@ from sqlalchemy import DateTime, Text
 from sqlalchemy.engine import Dialect
 from sqlalchemy.types import TypeDecorator
 
-from mediahub.db.crypto import get_keyring
+from mediahub.db.crypto import DecryptionError, get_keyring
+
+# Returned instead of raising when stored ciphertext can't be decrypted (secret key changed),
+# so rows still load and the UI can ask for the credentials to be re-entered.
+UNDECRYPTABLE = "__undecryptable__"
 
 
 class UTCDateTime(TypeDecorator[datetime]):
@@ -39,4 +43,9 @@ class EncryptedJSON(TypeDecorator[dict[str, Any]]):
         return None if value is None else get_keyring().encrypt_json(value)
 
     def process_result_value(self, value: str | None, dialect: Dialect) -> dict[str, Any] | None:
-        return None if value is None else get_keyring().decrypt_json(value)
+        if value is None:
+            return None
+        try:
+            return get_keyring().decrypt_json(value)
+        except DecryptionError:
+            return {UNDECRYPTABLE: True}

@@ -1,0 +1,13 @@
+.git
+.venv
+.dev-config
+.pytest_cache
+.ruff_cache
+.mypy_cache
+**/__pycache__
+bin
+src/mediahub/static/dist
+tests
+docs
+*.md
+!README.md

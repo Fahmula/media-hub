@@ -1,0 +1,277 @@
+{# Row/card macros for normalized items. Import with: {% import "components/items.html" as items %} #}
+{% import "components/ui.html" as ui %}
+
+{% macro source_label(source, show_server) -%}
+{{ source.instance_name }}{% if show_server %} · {{ source.server_name }}{% endif %}
+{%- endmacro %}
+
+{% macro server_chip(source, show_server) -%}
+{% if show_server %}<span class="badge badge-ghost badge-xs shrink-0 gap-1 font-normal">{{ icon("hard-drive", "size-2.5") }}{{ source.server_name }}</span>{% endif %}
+{%- endmacro %}
+
+{% macro play_method_badge(s) -%}
+{%- set tone = {"direct_play": "badge-success", "direct_stream": "badge-info", "transcode": "badge-warning"}.get(s.play_method.value, "badge-ghost") -%}
+<span class="badge {{ tone }} badge-soft badge-xs font-medium">{{ s.play_method.label }}</span>
+{%- endmacro %}
+
+{% macro stream_specs(s) -%}
+{%- set parts = [] -%}
+{%- if s.source_stream.resolution %}{% set _ = parts.append(s.source_stream.resolution) %}{% endif -%}
+{%- if s.source_stream.hdr and s.source_stream.hdr.value != "sdr" %}{% set _ = parts.append(s.source_stream.hdr.label) %}{% endif -%}
+{%- if s.source_stream.video_codec %}{% set _ = parts.append(s.source_stream.video_codec|upper) %}{% endif -%}
+{{ parts|join(" · ") }}
+{%- endmacro %}
+
+{# ---------- Playback ---------- #}
+{% macro session_row(s, show_server=False) -%}
+<a href="/emby?instance={{ s.source.instance_id }}" class="flex items-center gap-3 rounded-field px-2 py-2 transition-colors hover:bg-base-300/40">
+  {{ ui.poster(s.media.image_url, s.media.title, "h-14 w-10") }}
+  <div class="min-w-0 flex-1 space-y-1">
+    <div class="flex items-center gap-2">
+      <p class="truncate text-sm font-medium">{{ s.media.title }}{% if s.media.year %} <span class="muted">({{ s.media.year }})</span>{% endif %}</p>
+      {{ server_chip(s.source, show_server) }}
+    </div>
+    <p class="truncate text-xs muted">
+      {% if s.media.subtitle %}{{ s.media.subtitle }} · {% endif %}{{ s.user or "Unknown user" }} · {{ s.device or s.client or "Unknown device" }}
+    </p>
+    <div class="flex items-center gap-2">
+      {{ ui.progress(s.progress_pct, "primary", "flex-1") }}
+      <span class="shrink-0 text-[0.68rem] tabular-nums muted">{{ s.progress_pct|pct }}</span>
+    </div>
+  </div>
+  <div class="flex shrink-0 flex-col items-end gap-1.5">
+    {% if s.state.value == "paused" %}<span class="text-warning" title="Paused">{{ icon("pause", "size-4") }}</span>{% else %}<span class="text-success" title="Playing">{{ icon("play", "size-4") }}</span>{% endif %}
+    {{ play_method_badge(s) }}
+  </div>
+</a>
+{%- endmacro %}
+
+{% macro session_card(s, show_server=False) -%}
+<article class="panel p-3 sm:p-4">
+  <div class="flex gap-3 sm:gap-4">
+    {{ ui.poster(s.media.image_url, s.media.title, "h-28 w-20 sm:h-36 sm:w-24") }}
+    <div class="min-w-0 flex-1 space-y-2">
+      <div>
+        <div class="flex items-start gap-2">
+          <h3 class="min-w-0 flex-1 truncate font-semibold">{{ s.media.title }}{% if s.media.year %} <span class="font-normal muted">({{ s.media.year }})</span>{% endif %}</h3>
+          {{ server_chip(s.source, show_server) }}
+        </div>
+        {% if s.media.subtitle %}<p class="truncate text-sm muted">{{ s.media.subtitle }}</p>{% endif %}
+      </div>
+      <p class="flex items-center gap-1.5 text-sm">
+        {% if s.state.value == "paused" %}<span class="text-warning">{{ icon("pause", "size-4") }}</span><span class="text-warning">Paused</span>
+        {% else %}<span class="text-success">{{ icon("play", "size-4") }}</span><span class="text-success">Playing</span>{% endif %}
+        <span class="muted">· {{ source_label(s.source, False) }}</span>
+      </p>
+      <dl class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 text-xs">
+        <dt class="muted">{{ icon("user", "size-3.5") }}</dt><dd class="truncate">{{ s.user or "Unknown user" }}</dd>
+        <dt class="muted">{{ icon("monitor", "size-3.5") }}</dt><dd class="truncate">{{ s.device or "Unknown device" }}{% if s.client %} <span class="muted">· {{ s.client }}</span>{% endif %}</dd>
+        <dt class="muted">{{ icon("clock", "size-3.5") }}</dt><dd class="tabular-nums">{{ s.position_s|clock }} / {{ s.duration_s|clock }} <span class="muted">({{ s.progress_pct|pct }})</span></dd>
+        <dt class="muted">{{ icon("film", "size-3.5") }}</dt>
+        <dd class="truncate">{{ s.play_method.label }}{% if s.source_stream.container %} · {{ s.source_stream.container|upper }}{% endif %}{% if s.source_stream.video_codec %} ({{ s.source_stream.video_codec|upper }}){% endif %}</dd>
+        <dt class="muted">{{ icon("zap", "size-3.5") }}</dt>
+        <dd class="truncate">{{ stream_specs(s) or "—" }}{% if s.source_stream.bitrate %} · {{ s.source_stream.bitrate|bitrate }}{% endif %}</dd>
+      </dl>
+    </div>
+  </div>
+  {% if s.transcode %}
+  <div class="mt-3 space-y-1.5 rounded-field bg-warning/10 px-3 py-2 text-xs">
+    <p class="font-medium text-warning">Transcoding
+      {%- if s.transcode.video_direct %} audio only{% elif s.transcode.audio_direct %} video only{% endif %}
+      → {{ (s.transcode.container or "?")|upper }} · {{ (s.transcode.video_codec or "copy")|upper }}{% if s.transcode.audio_codec %} / {{ s.transcode.audio_codec|upper }}{% endif %}{% if s.transcode.bitrate %} · {{ s.transcode.bitrate|bitrate }}{% endif %}
+    </p>
+    <p class="muted">
+      {% if s.transcode.hw_decode or s.transcode.hw_encode %}Hardware {{ "decode + encode" if s.transcode.hw_decode and s.transcode.hw_encode else ("decode" if s.transcode.hw_decode else "encode") }}{% else %}Software{% endif %}
+      {%- if s.transcode.tonemapping %} · HDR → SDR tone mapping{% endif %}
+      {%- if s.transcode.progress_pct is not none %} · buffered {{ s.transcode.progress_pct|pct }}{% endif %}
+    </p>
+    {% if s.transcode.reasons %}<p class="muted">Reason: {{ s.transcode.reasons|map("short_reason")|join(", ") }}</p>{% endif %}
+  </div>
+  {% endif %}
+  <div class="mt-3 flex items-center gap-2">
+    {{ ui.progress(s.progress_pct, "primary", "flex-1") }}
+  </div>
+</article>
+{%- endmacro %}
+
+{# ---------- Downloads ---------- #}
+{% macro download_state_badge(d) -%}
+<span class="badge badge-{{ d.state.tone }} badge-soft badge-xs shrink-0 font-medium">{{ d.state.label }}</span>
+{%- endmacro %}
+
+{% macro download_problem(d) -%}
+{%- if d.error_message -%}
+<p class="line-clamp-2 text-xs text-{{ d.state.tone }}">{{ d.error_message }}</p>
+{%- elif d.messages and d.state.needs_attention -%}
+{%- set first = d.messages[0] -%}
+<p class="line-clamp-2 text-xs text-{{ d.state.tone }}">{{ (first.messages[0] if first.messages else first.title) }}</p>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro download_row(d, show_server=False) -%}
+<a href="/{{ d.source.slug }}?instance={{ d.source.instance_id }}#dl-{{ d.item_id }}" class="flex items-center gap-3 rounded-field px-2 py-2 transition-colors hover:bg-base-300/40">
+  {{ ui.poster(d.image_url, d.title, "h-14 w-10") }}
+  <div class="min-w-0 flex-1 space-y-1">
+    <div class="flex items-center gap-2">
+      <p class="truncate text-sm font-medium">{{ d.title }}{% if d.subtitle %} <span class="font-normal muted">· {{ d.subtitle }}</span>{% endif %}</p>
+    </div>
+    <p class="flex items-center gap-1.5 truncate text-xs muted">
+      {{ source_label(d.source, show_server) }}
+      {%- if d.progress_pct is not none and d.state.value in ("downloading", "stalled", "waiting") %} · {{ d.progress_pct|pct }}{% endif %}
+      {%- if d.eta_s and d.state.value == "downloading" %} · {{ d.eta_s|duration }} left{% endif %}
+    </p>
+    {{ download_problem(d) }}
+    {% if d.state.value in ("downloading", "stalled", "waiting") %}{{ ui.progress(d.progress_pct, d.state.tone, "w-full") }}{% endif %}
+  </div>
+  {{ download_state_badge(d) }}
+</a>
+{%- endmacro %}
+
+{% macro download_card(d, show_server=False) -%}
+<article id="dl-{{ d.item_id }}" class="panel scroll-mt-24 p-3 sm:p-4 {% if d.state.needs_attention %}border-{{ d.state.tone }}/40{% endif %}">
+  <div class="flex gap-3">
+    {{ ui.poster(d.image_url, d.title, "h-24 w-16") }}
+    <div class="min-w-0 flex-1 space-y-1.5">
+      <div class="flex items-start gap-2">
+        <div class="min-w-0 flex-1">
+          <h3 class="truncate font-semibold">{{ d.title }}</h3>
+          {% if d.subtitle %}<p class="truncate text-sm muted">{{ d.subtitle }}{% if d.episode_count > 1 %} · {{ d.episode_count }} episodes{% endif %}</p>{% endif %}
+        </div>
+        {{ download_state_badge(d) }}
+      </div>
+      <p class="text-xs muted">{{ source_label(d.source, show_server) }}{% if d.client %} · {{ d.client }}{% endif %}{% if d.protocol %} · {{ d.protocol|title }}{% endif %}{% if d.indexer %} · {{ d.indexer }}{% endif %}</p>
+      {% if d.size_bytes %}
+      <p class="text-xs tabular-nums">
+        {{ (d.size_bytes - (d.remaining_bytes or 0))|filesize }} / {{ d.size_bytes|filesize }}
+        {%- if d.progress_pct is not none %} · {{ d.progress_pct|pct }}{% endif %}
+        {%- if d.eta_s and d.state.value == "downloading" %} · {{ d.eta_s|duration }} left{% endif %}
+      </p>
+      {% endif %}
+      {% if d.release_title %}<p class="truncate text-[0.7rem] muted" title="{{ d.release_title }}">{{ d.release_title }}</p>{% endif %}
+    </div>
+  </div>
+  {% if d.state.value in ("downloading", "stalled", "waiting") %}<div class="mt-3">{{ ui.progress(d.progress_pct, d.state.tone, "w-full") }}</div>{% endif %}
+  {% if d.error_message or d.messages %}
+  <div class="mt-3 space-y-1 rounded-field bg-{{ d.state.tone if d.state.needs_attention else 'base-300' }}/10 px-3 py-2 text-xs">
+    {% if d.error_message %}<p class="font-medium">{{ d.error_message }}</p>{% endif %}
+    {% for m in d.messages %}
+      {% if m.title %}<p class="font-medium break-all">{{ m.title }}</p>{% endif %}
+      {% for line in m.messages %}<p class="muted">{{ line }}</p>{% endfor %}
+    {% endfor %}
+  </div>
+  {% endif %}
+  <p class="mt-2 text-[0.68rem] muted">
+    Reported: status <code>{{ d.raw_status or "—" }}</code>{% if d.raw_tracked_state %} · state <code>{{ d.raw_tracked_state }}</code>{% endif %}{% if d.raw_tracked_status %} · <code>{{ d.raw_tracked_status }}</code>{% endif %}
+  </p>
+</article>
+{%- endmacro %}
+
+{# ---------- History ---------- #}
+{% macro history_row(e, show_server=False) -%}
+{%- set tone = {"imported": "text-success", "failed": "text-error", "grabbed": "text-info", "deleted": "text-warning"}.get(e.kind.value, "muted") -%}
+<div class="flex items-center gap-3 px-2 py-2">
+  {{ ui.poster(e.image_url, e.title, "h-12 w-9") }}
+  <div class="min-w-0 flex-1">
+    <p class="truncate text-sm font-medium">{{ e.title }}{% if e.subtitle %} <span class="font-normal muted">· {{ e.subtitle }}</span>{% endif %}</p>
+    <p class="truncate text-xs"><span class="{{ tone }}">{{ e.kind.label }}</span> <span class="muted">· {{ source_label(e.source, show_server) }} · {{ e.at|reltime }}</span></p>
+    {% if e.detail %}<p class="truncate text-xs muted">{{ e.detail }}</p>{% endif %}
+  </div>
+</div>
+{%- endmacro %}
+
+{# ---------- Issues ---------- #}
+{% macro issue_row(i, show_server=True) -%}
+{%- set tone = {"error": "text-error", "warning": "text-warning"}.get(i.severity.value, "text-info") -%}
+<a href="{{ i.link or '#' }}" {% if i.link and i.link.startswith("http") %}target="_blank" rel="noopener noreferrer"{% endif %} class="flex items-start gap-3 rounded-field px-2 py-2 transition-colors hover:bg-base-300/40">
+  <span class="mt-0.5 shrink-0 {{ tone }}">{{ icon("circle-x" if i.severity.value == "error" else "triangle-alert", "size-4.5") }}</span>
+  <div class="min-w-0 flex-1">
+    <p class="line-clamp-2 text-sm font-medium">{{ i.title }}</p>
+    <p class="truncate text-xs muted">{{ i.category.label }} · {{ source_label(i.source, show_server) }}{% if i.first_seen %} · since {{ i.first_seen|reltime }}{% endif %}</p>
+    {% if i.detail %}<p class="mt-0.5 line-clamp-2 text-xs muted">{{ i.detail }}</p>{% endif %}
+  </div>
+  <span class="mt-1 shrink-0 muted">{{ icon("chevron-right", "size-4") }}</span>
+</a>
+{%- endmacro %}
+
+{# ---------- Services ---------- #}
+{% macro service_status_row(svc, show_server=False) -%}
+<a href="/{{ svc.source.slug }}?instance={{ svc.source.instance_id }}" class="flex items-center gap-3 rounded-field px-2 py-2 transition-colors hover:bg-base-300/40">
+  {{ ui.service_tile(svc.source.slug, "size-8", "size-4") }}
+  <div class="min-w-0 flex-1">
+    <p class="truncate text-sm font-medium">{{ source_label(svc.source, show_server) }}</p>
+    <p class="truncate text-xs muted">{% if svc.error %}{{ svc.error }}{% elif svc.version %}v{{ svc.version }}{% else %}{{ ui.status_label(svc.status) }}{% endif %}</p>
+  </div>
+  <div class="flex shrink-0 flex-col items-end gap-1">
+    {{ ui.status_badge(svc.status) }}
+    <span class="text-xs muted">{{ svc.headline }}</span>
+  </div>
+</a>
+{%- endmacro %}
+
+{% macro service_tile_card(svc) -%}
+<a href="/{{ svc.source.slug }}?instance={{ svc.source.instance_id }}" class="panel-inset flex items-center gap-2.5 p-2.5 transition-colors hover:bg-base-300/70">
+  {{ ui.service_tile(svc.source.slug, "size-9", "size-4.5") }}
+  <div class="min-w-0">
+    <p class="flex items-center gap-1.5 truncate text-sm font-medium">{{ svc.source.instance_name }}{% if svc.stale and svc.status.value not in ("disabled", "pending") %}<span class="text-warning" title="Data is stale">{{ icon("clock", "size-3") }}</span>{% endif %}</p>
+    <p class="flex items-center gap-1.5 truncate text-xs {{ 'text-error' if svc.status.value in ('error', 'unreachable') else 'muted' }}">{{ ui.status_dot(svc.status) }}{{ svc.headline }}</p>
+  </div>
+</a>
+{%- endmacro %}
+
+{# ---------- InfiniDysk ---------- #}
+{% macro stream_stats_panel(st, show_server=False) -%}
+{%- set s = st.stats -%}
+<div class="space-y-3">
+  <div class="flex items-center gap-2">
+    {{ ui.service_tile("infinidysk", "size-7", "size-3.5") }}
+    <p class="min-w-0 flex-1 truncate text-sm font-medium">{{ source_label(st.source, show_server) }}</p>
+    {% if s.healthy is false %}<span class="badge badge-error badge-soft badge-xs">Unhealthy</span>
+    {% elif s.ready is false %}<span class="badge badge-warning badge-soft badge-xs">Not ready</span>
+    {% else %}{{ ui.status_badge(st.status) }}{% endif %}
+  </div>
+  <div class="grid grid-cols-3 gap-2 text-center">
+    <div class="panel-inset px-2 py-2"><p class="stat-num">{{ s.active_reads }}</p><p class="text-[0.68rem] muted">Streams</p></div>
+    <div class="panel-inset px-2 py-2"><p class="stat-num">{{ s.throughput_bps|filesize(True) if s.throughput_bps is not none else "—" }}</p><p class="text-[0.68rem] muted">Served</p></div>
+    <div class="panel-inset px-2 py-2"><p class="stat-num">{{ ((s.cache.hit_rate * 100)|pct) if s.cache and s.cache.hit_rate is not none else "—" }}</p><p class="text-[0.68rem] muted">Cache hits</p></div>
+  </div>
+  {% if s.throughput %}
+  {%- set sp = s.throughput|sparkline(240, 40) -%}
+  <svg class="h-10 w-full" viewBox="0 0 240 40" preserveAspectRatio="none" role="img" aria-label="Throughput, last {{ s.throughput|length }} samples">
+    <path d="{{ sp.area }}" class="fill-infinidysk/15"></path>
+    <path d="{{ sp.line }}" class="fill-none stroke-infinidysk" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+  </svg>
+  {% endif %}
+  {% if s.cache and s.cache.used_bytes is not none %}
+  <div class="space-y-1">
+    <div class="flex justify-between text-xs"><span class="muted">Cache</span><span class="tabular-nums">{{ s.cache.used_bytes|filesize }} / {{ s.cache.max_bytes|filesize }}</span></div>
+    {{ ui.progress(s.cache.used_pct, "secondary", "w-full") }}
+  </div>
+  {% endif %}
+  {% if s.providers %}
+  <ul class="space-y-1 text-xs">
+    {% for p in s.providers %}
+    <li class="flex items-center gap-2">
+      {{ ui.status_dot({"closed": "ok", "half_open": "degraded", "open": "error"}.get(p.circuit.value, "pending")) }}
+      <span class="min-w-0 flex-1 truncate">{{ p.name }}</span>
+      {% if p.speed_mbps is not none %}<span class="tabular-nums muted">{{ "%.1f"|format(p.speed_mbps) }} MB/s</span>{% endif %}
+      {% if p.connections_max %}<span class="tabular-nums muted">{{ p.connections_active }}/{{ p.connections_max }}</span>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% if s.latency_p95_ms is not none %}
+  <p class="text-xs muted">Article latency p50 {{ s.latency_p50_ms|round|int }} ms · p95 {{ s.latency_p95_ms|round|int }} ms{% if s.errors_per_min %} · {{ s.errors_per_min|round|int }} errors/min{% endif %}</p>
+  {% endif %}
+</div>
+{%- endmacro %}
+
+{% macro active_read_row(r, show_server=False, source=None) -%}
+<div class="flex items-center gap-3 px-2 py-2">
+  <span class="svc-tile svc-infinidysk size-9">{{ icon("radio-tower", "size-4") }}</span>
+  <div class="min-w-0 flex-1 space-y-1">
+    <p class="truncate text-sm font-medium" title="{{ r.file_name }}">{{ r.file_name }}</p>
+    <p class="truncate text-xs muted">{% if r.client_label %}{{ r.client_label }} · {% endif %}{{ r.bytes_read|filesize }}{% if r.file_size %} of {{ r.file_size|filesize }}{% endif %}{% if r.speed_bps %} · {{ r.speed_bps|filesize(True) }}{% endif %}{% if r.started_at %} · {{ r.started_at|reltime }}{% endif %}</p>
+    {% if r.offset_pct is not none %}{{ ui.progress(r.offset_pct, "secondary", "w-full") }}{% endif %}
+  </div>
+</div>
+{%- endmacro %}

@@ -1,0 +1,6 @@
+{% extends "layouts/app.html" %}
+{% import "components/ui.html" as ui %}
+{% import "components/items.html" as items %}
+{% block content %}
+{% call ui.poll_section("sec-servers", "/partials/servers?server=all", 15) %}{% include "partials/servers.html" %}{% endcall %}
+{% endblock %}

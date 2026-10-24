@@ -1,0 +1,6 @@
+{% extends "layouts/app.html" %}
+{% import "components/ui.html" as ui %}
+{% block content %}
+<p class="mb-3 text-sm muted">Problems reported by your services and connected servers, worst first. Messages are shown exactly as the service reported them.</p>
+{% call ui.poll_section("sec-attention-list", "/partials/attention?server=" ~ scope, 10) %}{% include "partials/attention_list.html" %}{% endcall %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "components/ui.html" as ui %}
+{% block body %}
+<main class="flex min-h-dvh items-center justify-center px-4 py-10">
+  <div class="w-full max-w-sm">
+    <div class="mb-6 flex flex-col items-center gap-3">
+      {{ ui.logo("size-12") }}
+      <h1 class="text-2xl font-semibold">MediaHub</h1>
+      <p class="text-sm muted">{% block subtitle %}{% endblock %}</p>
+    </div>
+    <div class="panel p-6">
+      {% block content %}{% endblock %}
+    </div>
+    <p class="mt-6 text-center text-xs muted">{{ identity.server_name }} · v{{ app_version }}</p>
+  </div>
+</main>
+{% endblock %}

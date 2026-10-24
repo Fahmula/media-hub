@@ -77,7 +77,7 @@ def configure_logging(level: str = "INFO", fmt: LogFormat = LogFormat.JSON) -> N
 
     # httpx logs full request URLs at INFO; keep it quiet. Uvicorn access logs are replaced
     # by our own request logging middleware.
-    for name in ("httpx", "httpcore", "websockets", "uvicorn.access"):
+    for name in ("httpx", "httpcore", "websockets", "uvicorn.access", "alembic"):
         logging.getLogger(name).setLevel(logging.WARNING)
     for name in ("uvicorn", "uvicorn.error"):
         logging.getLogger(name).handlers = []

@@ -1,0 +1,182 @@
+@import "tailwindcss" source(none);
+@source "../../templates";
+@source "../js";
+@source "../../web";
+/* Classes composed from state "tones" in templates (e.g. text-{{ d.state.tone }}). */
+@source inline("text-{primary,secondary,success,warning,error,info,neutral}");
+@source inline("bg-{primary,secondary,success,warning,error,info,neutral,base-300}/10");
+@source inline("border-{primary,secondary,success,warning,error,info,neutral}/40");
+@source inline("badge-{primary,secondary,success,warning,error,info,neutral}");
+@source inline("progress-{primary,secondary,success,warning,error,info,neutral}");
+
+@plugin "../../../../bin/daisyui.mjs" {
+  themes: false;
+  logs: false;
+}
+
+/* Dark default, tuned to the concept: deep navy surfaces, restrained blue accent. */
+@plugin "../../../../bin/daisyui-theme.mjs" {
+  name: "mediahub";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: #111a2b;
+  --color-base-200: #0b1220;
+  --color-base-300: #1a2438;
+  --color-base-content: #dbe3f0;
+  --color-primary: #2f7cf6;
+  --color-primary-content: #ffffff;
+  --color-secondary: #8b5cf6;
+  --color-secondary-content: #ffffff;
+  --color-accent: #38bdf8;
+  --color-accent-content: #04121c;
+  --color-neutral: #1e293b;
+  --color-neutral-content: #cbd5e1;
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+  --color-success: #22c55e;
+  --color-success-content: #04130a;
+  --color-warning: #f5b524;
+  --color-warning-content: #1a1203;
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.625rem;
+  --radius-box: 0.875rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "../../../../bin/daisyui-theme.mjs" {
+  name: "mediahub-light";
+  default: false;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f1f4f9;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #0f172a;
+  --color-primary: #2563eb;
+  --color-primary-content: #ffffff;
+  --color-secondary: #7c3aed;
+  --color-secondary-content: #ffffff;
+  --color-accent: #0284c7;
+  --color-accent-content: #ffffff;
+  --color-neutral: #334155;
+  --color-neutral-content: #f8fafc;
+  --color-info: #2563eb;
+  --color-info-content: #ffffff;
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+  --color-warning: #d97706;
+  --color-warning-content: #ffffff;
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.625rem;
+  --radius-box: 0.875rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Service accent colours, used for icon tiles and badges. */
+@theme {
+  --color-emby: #52b54b;
+  --color-sonarr: #35c5f4;
+  --color-radarr: #ffc230;
+  --color-infinidysk: #a78bfa;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Inter", sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-base-200 text-base-content antialiased;
+  }
+  [x-cloak],
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* Card surface used across the app. */
+  .panel {
+    @apply rounded-box bg-base-100 border border-base-300/60;
+  }
+  .panel-inset {
+    @apply rounded-field bg-base-300/40;
+  }
+  .section-title {
+    @apply text-sm font-semibold tracking-wide text-base-content/90;
+  }
+  .muted {
+    @apply text-base-content/60;
+  }
+  .svc-tile {
+    @apply inline-flex shrink-0 items-center justify-center rounded-full;
+  }
+  .svc-emby {
+    @apply bg-emby/15 text-emby;
+  }
+  .svc-sonarr {
+    @apply bg-sonarr/15 text-sonarr;
+  }
+  .svc-radarr {
+    @apply bg-radarr/15 text-radarr;
+  }
+  .svc-infinidysk {
+    @apply bg-infinidysk/15 text-infinidysk;
+  }
+  .svc-peer {
+    @apply bg-primary/15 text-primary;
+  }
+  .nav-link {
+    @apply flex items-center gap-3 rounded-field px-3 py-2.5 text-sm font-medium text-base-content/70 transition-colors hover:bg-base-300/60 hover:text-base-content;
+  }
+  .nav-link[aria-current="page"] {
+    @apply bg-primary/15 text-base-content;
+  }
+  .nav-link[aria-current="page"] svg {
+    @apply text-primary;
+  }
+  .bottom-link {
+    @apply flex flex-1 flex-col items-center gap-1 py-2 text-[0.7rem] font-medium text-base-content/60;
+  }
+  .bottom-link[aria-current="page"] {
+    @apply text-primary;
+  }
+  .stat-num {
+    @apply text-xl font-semibold tabular-nums leading-tight;
+  }
+  .poster {
+    @apply shrink-0 overflow-hidden rounded-field bg-base-300 object-cover;
+  }
+  .skeleton-line {
+    @apply skeleton h-3 rounded;
+  }
+}
+
+/* htmx's built-in indicator styles are disabled (CSP: no inline styles), so define them. */
+.htmx-indicator {
+  display: none;
+}
+.htmx-request.htmx-indicator,
+.htmx-request .htmx-indicator {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

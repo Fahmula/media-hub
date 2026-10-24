@@ -1,0 +1,9 @@
+{% import "components/items.html" as items %}
+{% import "components/ui.html" as ui %}
+{% if view.issues %}
+<div class="panel divide-y divide-base-300/50 p-2">
+  {% for issue in view.issues %}{{ items.issue_row(issue, view.multi_server) }}{% endfor %}
+</div>
+{% else %}
+<div class="panel">{{ ui.empty_state("circle-check", "All clear", "Nothing needs your attention right now.") }}</div>
+{% endif %}

@@ -1,0 +1,19 @@
+{% extends "layouts/auth.html" %}
+{% set page_title = "Sign in" %}
+{% block subtitle %}Sign in to {{ identity.server_name }}{% endblock %}
+{% block content %}
+<form method="post" action="/login" class="space-y-4">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <input type="hidden" name="next" value="{{ next }}">
+  {{ ui.alert_list(errors) }}
+  <label class="block space-y-1.5">
+    <span class="text-sm font-medium">Username</span>
+    <input class="input w-full" name="username" value="{{ username|default('') }}" autocomplete="username" autocapitalize="none" spellcheck="false" required autofocus>
+  </label>
+  <label class="block space-y-1.5">
+    <span class="text-sm font-medium">Password</span>
+    <input class="input w-full" type="password" name="password" autocomplete="current-password" required>
+  </label>
+  <button class="btn btn-primary w-full" type="submit">Sign in</button>
+</form>
+{% endblock %}
