@@ -38,6 +38,8 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mediahub"]
+# Built CSS is git-ignored but must ship in the wheel (the Docker image builds it first).
+artifacts = ["src/mediahub/static/dist/*.css"]
 
 [tool.ruff]
 line-length = 100

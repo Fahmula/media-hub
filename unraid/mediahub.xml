@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>MediaHub</Name>
+  <Repository>ghcr.io/fahmula/mediahub:latest</Repository>
+  <Registry>https://github.com/Fahmula/media-hub/pkgs/container/mediahub</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Fahmula/media-hub/issues</Support>
+  <Project>https://github.com/Fahmula/media-hub</Project>
+  <Overview>Self-hosted, mobile-first monitoring dashboard for Emby, Sonarr, Radarr and InfiniDysk. See what's playing, what's downloading and what needs attention, and optionally link a trusted second MediaHub read-only.</Overview>
+  <Category>MediaServer:Other Tools: Status:Stable</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Fahmula/media-hub/main/unraid/mediahub.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Fahmula/media-hub/main/src/mediahub/static/img/favicon.svg</Icon>
+  <ExtraParams>--security-opt no-new-privileges:true</ExtraParams>
+  <PostArgs/>
+  <Requires>To show InfiniDysk health, cache metrics and live streams, put MediaHub on the same custom Docker network as InfiniDysk (Network Type: your custom network) and pin FRONTEND_BACKEND_API_KEY in InfiniDysk's template.</Requires>
+  <Config Name="Web UI port" Target="8080" Default="8080" Mode="tcp" Description="Port for the MediaHub web interface." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="Config" Target="/config" Default="/mnt/user/appdata/mediahub" Mode="rw" Description="Database, encryption key and cache. Back this folder up: without secret.key the stored API keys can't be decrypted." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/mediahub</Config>
+  <Config Name="Server name" Target="MEDIAHUB_SERVER_NAME" Default="" Mode="" Description="Display name for this server on first start (e.g. Skynet). Editable later in Settings." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="Secure cookies" Target="MEDIAHUB_COOKIE_SECURE" Default="auto|true|false" Mode="" Description="auto: secure when the request arrives over HTTPS. Use true behind an HTTPS reverse proxy or tailscale serve." Type="Variable" Display="advanced" Required="false" Mask="false">auto</Config>
+  <Config Name="Trusted proxies" Target="MEDIAHUB_TRUSTED_PROXIES" Default="127.0.0.1" Mode="" Description="Comma-separated IPs whose X-Forwarded-For/Proto headers are trusted (your reverse proxy)." Type="Variable" Display="advanced" Required="false" Mask="false">127.0.0.1</Config>
+  <Config Name="Log level" Target="MEDIAHUB_LOG_LEVEL" Default="INFO|DEBUG|WARNING|ERROR" Mode="" Description="" Type="Variable" Display="advanced" Required="false" Mask="false">INFO</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User ID to run as." Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group ID to run as." Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="Demo mode" Target="MEDIAHUB_DEMO_MODE" Default="false|true" Mode="" Description="Show generated sample data (for trying out the UI)." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+</Container>

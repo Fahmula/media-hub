@@ -1,0 +1,33 @@
+# Example deployment. On Unraid, see unraid/mediahub.xml and docs/unraid.md instead.
+services:
+  mediahub:
+    image: ghcr.io/fahmula/mediahub:latest
+    build: .
+    container_name: mediahub
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config:/config
+    environment:
+      PUID: "99"
+      PGID: "100"
+      TZ: "America/New_York"
+      MEDIAHUB_SERVER_NAME: "Skynet"
+      # Set to "true" when MediaHub is served over HTTPS (e.g. tailscale serve / reverse proxy).
+      MEDIAHUB_COOKIE_SECURE: "auto"
+      # Uncomment to try the UI with generated data:
+      # MEDIAHUB_DEMO_MODE: "true"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    cap_add: [CHOWN, FOWNER, SETUID, SETGID, DAC_OVERRIDE]  # only used by the entrypoint before dropping to PUID
+    # To reach InfiniDysk's internal backend (port 8080), join its Docker network:
+    # networks: [media]
+
+# networks:
+#   media:
+#     external: true

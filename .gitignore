@@ -10,3 +10,4 @@ src/mediahub/static/dist/
 *.egg-info/
 dist/
 build/
+/config/
