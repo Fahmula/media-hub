@@ -4,18 +4,29 @@ from __future__ import annotations
 
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from urllib.parse import quote
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import HTTPException
+from fastapi.responses import JSONResponse, RedirectResponse, Response
+from fastapi.staticfiles import StaticFiles
+from sqlalchemy.orm import Session
 
 from mediahub import __version__
 from mediahub.config import Settings
 from mediahub.context import AppContext
 from mediahub.db.app_settings import ensure_identity
 from mediahub.db.crypto import Keyring, load_master_secret, set_keyring
+from mediahub.db.models import User
 from mediahub.db.session import make_engine, make_sessionmaker, run_migrations, session_scope
 from mediahub.logging import configure_logging, get_logger
 from mediahub.runtime_lock import InstanceLock
-from mediahub.web.routes import health
+from mediahub.security.headers import SecurityHeadersMiddleware
+from mediahub.security.passwords import MIN_PASSWORD_LENGTH, hash_password
+from mediahub.security.sessions import purge_expired
+from mediahub.web.deps import LoginRequired, SetupRequired, has_users
+from mediahub.web.routes import auth, health, pages
+from mediahub.web.templating import STATIC_DIR, is_htmx, render
 
 log = get_logger(__name__)
 
@@ -31,6 +42,8 @@ def _build_context(settings: Settings) -> AppContext:
     sessions = make_sessionmaker(engine)
     with session_scope(sessions) as db:
         identity = ensure_identity(db)
+        purge_expired(db)
+        _bootstrap_admin(settings, db)
 
     return AppContext(
         settings=settings,
@@ -39,6 +52,49 @@ def _build_context(settings: Settings) -> AppContext:
         keyring=keyring,
         identity=identity,
     )
+
+
+def _bootstrap_admin(settings: Settings, db: Session) -> None:
+    """Create the admin from MEDIAHUB_ADMIN_USER/PASSWORD when no user exists yet."""
+    if not (settings.admin_user and settings.admin_password) or has_users(db):
+        return
+    password = settings.admin_password.get_secret_value()
+    if len(password) < MIN_PASSWORD_LENGTH:
+        log.error("admin_bootstrap_skipped", reason="password too short")
+        return
+    db.add(User(username=settings.admin_user, password_hash=hash_password(password)))
+    log.info("admin_bootstrapped", username=settings.admin_user)
+
+
+def _install_error_handlers(app: FastAPI) -> None:
+    @app.exception_handler(LoginRequired)
+    async def _login_required(request: Request, exc: LoginRequired) -> Response:
+        if is_htmx(request):
+            return Response(status_code=204, headers={"HX-Redirect": "/login"})
+        target = "/login"
+        if exc.next_path and exc.next_path != "/":
+            target = f"/login?next={quote(exc.next_path, safe='/')}"
+        return RedirectResponse(target, status_code=303)
+
+    @app.exception_handler(SetupRequired)
+    async def _setup_required(request: Request, exc: SetupRequired) -> Response:
+        if is_htmx(request):
+            return Response(status_code=204, headers={"HX-Redirect": "/setup"})
+        return RedirectResponse("/setup", status_code=303)
+
+    @app.exception_handler(HTTPException)
+    async def _http_error(request: Request, exc: HTTPException) -> Response:
+        if request.url.path.startswith("/peer/") or "text/html" not in request.headers.get(
+            "accept", ""
+        ):
+            return JSONResponse({"detail": exc.detail}, status_code=exc.status_code)
+        titles = {403: "Forbidden", 404: "Not found", 405: "Not allowed"}
+        return render(
+            request,
+            "pages/error.html",
+            {"title": titles.get(exc.status_code, "Error"), "message": exc.detail},
+            status_code=exc.status_code,
+        )
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -73,5 +129,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         redoc_url=None,
         openapi_url=None,
     )
+    app.add_middleware(SecurityHeadersMiddleware)
+    _install_error_handlers(app)
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     app.include_router(health.router)
+    app.include_router(auth.router)
+    app.include_router(auth.logout_router)
+    app.include_router(pages.router)
     return app

@@ -1,0 +1,9 @@
+{% extends "layouts/auth.html" %}
+{% set page_title = title %}
+{% block subtitle %}{{ title }}{% endblock %}
+{% block content %}
+<div class="space-y-4 text-center">
+  <p class="text-sm">{{ message }}</p>
+  <a class="btn btn-primary btn-sm" href="/">Back to dashboard</a>
+</div>
+{% endblock %}
