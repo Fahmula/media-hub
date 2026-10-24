@@ -2,7 +2,9 @@
 
 Self-hosted, mobile-first monitoring dashboard for Emby, Sonarr, Radarr and InfiniDysk.
 FastAPI + Jinja2/HTMX + Tailwind v4/daisyUI 5 + SQLite (SQLAlchemy 2, Alembic). Python ≥3.12
-(dev/Docker use 3.13). Plan and phase roadmap: README.md "Status".
+(dev/Docker use 3.13). **Status, decisions and next steps: `PLAN.md`** (local-only, not in git;
+listed in `.git/info/exclude`). Read it first when present, and update
+its Status / Next up sections at the end of a work session.
 
 ## Commands
 
