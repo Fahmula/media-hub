@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.dev-config/
+/bin/
+src/mediahub/static/dist/
+*.egg-info/
+dist/
+build/
