@@ -86,7 +86,31 @@ def isotime(value: datetime | None) -> str:
     return value.astimezone(UTC).isoformat() if value else ""
 
 
+def sparkline(values: list[float] | None, width: int = 120, height: int = 32) -> dict[str, str]:
+    """SVG path data (line and filled area) for a small trend chart, scaled to its own max."""
+    if not values or len(values) < 2:
+        return {"line": "", "area": ""}
+    peak = max(values) or 1.0
+    step = width / (len(values) - 1)
+    pts = [(i * step, height - (v / peak) * (height - 2) - 1) for i, v in enumerate(values)]
+    line = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+    area = f"{line} L{width},{height} L0,{height} Z"
+    return {"line": line, "area": area}
+
+
+def short_reason(reason: str) -> str:
+    """'VideoCodecNotSupported' (Emby transcode reason) → 'video codec not supported'."""
+    words: list[str] = []
+    for ch in reason:
+        if ch.isupper() and words:
+            words.append(" ")
+        words.append(ch.lower())
+    return "".join(words)
+
+
 FILTERS: dict[str, Any] = {
+    "sparkline": sparkline,
+    "short_reason": short_reason,
     "filesize": filesize,
     "bitrate": bitrate,
     "clock": clock,

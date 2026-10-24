@@ -1,0 +1,73 @@
+{% import "components/items.html" as items %}
+{% import "components/ui.html" as ui %}
+{% set multi = view.multi_server %}
+{% if not fv.instances %}
+  <div class="panel">
+    {{ ui.empty_state(ui.SERVICE_ICONS[service_type.value], "No " ~ service_type.label ~ " instances", "Add one in Settings → Services to start monitoring it.") }}
+    <div class="flex justify-center pb-6"><a href="/settings/services/new?type={{ service_type.value }}" class="btn btn-primary btn-sm">{{ icon("plus", "size-4") }} Add {{ service_type.label }}</a></div>
+  </div>
+{% else %}
+  {# Instance health strip #}
+  <div class="mb-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+    {% for snap in fv.snapshots %}
+    <div class="panel flex items-center gap-3 p-3">
+      {{ ui.service_tile(service_type.value, "size-9", "size-4.5") }}
+      <div class="min-w-0 flex-1">
+        <p class="truncate text-sm font-medium">{{ items.source_label(snap.source, multi) }}</p>
+        <p class="truncate text-xs {{ 'text-error' if snap.error else 'muted' }}">{{ snap.error or ("v" ~ snap.version if snap.version else ui.status_label(snap.status)) }}</p>
+      </div>
+      <div class="flex flex-col items-end gap-1">{{ ui.status_badge(snap.status) }}{{ ui.stale_badge({"stale": snap.stale and snap.status.value not in ("disabled", "pending"), "fetched_at": snap.fetched_at}) }}</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% set checks = [] %}{% for snap in fv.snapshots %}{% for c in snap.health_checks %}{% set _ = checks.append((snap, c)) %}{% endfor %}{% endfor %}
+  {% if checks %}
+  <div class="panel mb-4 p-3">
+    {{ ui.section_header("Health checks", checks|length) }}
+    <ul class="space-y-1.5 px-1 text-sm">
+      {% for snap, c in checks %}
+      <li class="flex items-start gap-2">
+        <span class="mt-0.5 {{ {'error': 'text-error', 'warning': 'text-warning'}.get(c.level.value, 'text-info') }}">{{ icon("triangle-alert" if c.level.value != "info" else "info", "size-4") }}</span>
+        <span class="min-w-0 flex-1">{{ c.message }} <span class="text-xs muted">· {{ items.source_label(snap.source, multi) }}</span>{% if c.wiki_url %} <a class="text-xs text-primary hover:underline" href="{{ c.wiki_url }}" target="_blank" rel="noopener noreferrer">Wiki</a>{% endif %}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if service_type.value == "emby" %}
+    {{ ui.section_header("Now playing", fv.sessions|length) }}
+    {% if fv.sessions %}
+    <div class="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{% for s in fv.sessions %}{{ items.session_card(s, multi) }}{% endfor %}</div>
+    {% else %}<div class="panel">{{ ui.empty_state("play", "Nothing playing") }}</div>{% endif %}
+  {% elif service_type.value in ("sonarr", "radarr") %}
+    <div class="grid items-start gap-4 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+      <div>
+        {{ ui.section_header("Queue", fv.downloads|length) }}
+        {% if fv.downloads %}
+        <div class="grid gap-3 lg:grid-cols-2">{% for d in fv.downloads %}{{ items.download_card(d, multi) }}{% endfor %}</div>
+        {% else %}<div class="panel">{{ ui.empty_state("arrow-down-to-line", "Queue is empty") }}</div>{% endif %}
+      </div>
+      <div>
+        {{ ui.section_header("Recent activity") }}
+        {% if fv.history %}
+        <div class="panel divide-y divide-base-300/50 p-2">{% for e in fv.history[:15] %}{{ items.history_row(e, multi) }}{% endfor %}</div>
+        {% else %}<div class="panel">{{ ui.empty_state("history", "No recent activity") }}</div>{% endif %}
+      </div>
+    </div>
+  {% elif service_type.value == "infinidysk" %}
+    <div class="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
+      <div class="space-y-4">
+        {% for snap in fv.snapshots if snap.infinidysk %}
+        <div class="panel p-3">{{ items.stream_stats_panel({"source": snap.source, "stats": snap.infinidysk, "status": snap.status, "stale": snap.stale}, multi) }}</div>
+        {% else %}<div class="panel">{{ ui.empty_state("disc-3", "No statistics yet") }}</div>{% endfor %}
+      </div>
+      <div>
+        {{ ui.section_header("Active reads", fv.reads|length) }}
+        {% if fv.reads %}
+        <div class="panel divide-y divide-base-300/50 p-2">{% for r, snap in fv.reads %}{{ items.active_read_row(r, multi) }}{% endfor %}</div>
+        {% else %}<div class="panel">{{ ui.empty_state("radio-tower", "No active reads", "Configure the backend URL and internal key to see live streams.") }}</div>{% endif %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}

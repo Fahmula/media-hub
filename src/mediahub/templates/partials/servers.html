@@ -1,0 +1,47 @@
+{% import "components/ui.html" as ui %}
+{% import "components/items.html" as items %}
+<div class="space-y-4">
+  {% for card in view.servers %}
+  <section id="server-{{ card.key }}" class="panel scroll-mt-24 p-3 sm:p-4">
+    <div class="mb-3 flex items-center gap-3">
+      <span class="panel-inset flex size-11 shrink-0 items-center justify-center text-base-content/70">{{ icon("server", "size-5") }}</span>
+      <div class="min-w-0 flex-1">
+        <h2 class="flex items-center gap-2 truncate text-lg font-semibold">{{ card.name }}{% if card.is_local %}<span class="badge badge-primary badge-soft badge-xs">This server</span>{% else %}<span class="badge badge-ghost badge-xs">Peer · read-only</span>{% endif %}</h2>
+        <p class="flex flex-wrap items-center gap-x-1.5 text-xs muted">
+          {{ ui.status_badge(card.status) }}
+          <span>· {{ card.services_up }}/{{ card.services|length }} services online</span>
+          {% if not card.is_local %}<span>· last sync {{ card.last_sync|reltime }}</span>{% endif %}
+        </p>
+      </div>
+      {% if card.is_local %}<a href="/settings/services" class="btn btn-ghost btn-sm">{{ icon("settings", "size-4") }}<span class="hidden sm:inline">Manage</span></a>{% endif %}
+    </div>
+    {% if card.error %}<div role="alert" class="alert alert-error alert-soft mb-3 text-sm">{{ icon("wifi-off", "size-4") }}<span>{{ card.error }}</span></div>{% endif %}
+    {% if card.insecure_transport %}<div role="alert" class="alert alert-warning alert-soft mb-3 text-sm">{{ icon("triangle-alert", "size-4") }}<span>This peer is reached over plain HTTP outside Tailscale or a private network. Its access token could be intercepted.</span></div>{% endif %}
+    {% if card.services %}
+    <div class="divide-y divide-base-300/50">
+      {% for svc in card.services %}
+      <div class="flex items-center gap-3 px-1 py-2.5">
+        {{ ui.service_tile(svc.source.slug, "size-9", "size-4.5") }}
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-sm font-medium">{{ svc.source.instance_name }} <span class="font-normal muted">· {{ svc.source.service_type.label if svc.source.service_type }}</span></p>
+          <p class="truncate text-xs {{ 'text-error' if svc.error else 'muted' }}">{{ svc.error or (("v" ~ svc.version) if svc.version else "") }}{% if svc.checked_at %}{{ " · " if svc.error or svc.version }}checked {{ svc.checked_at|reltime }}{% endif %}</p>
+        </div>
+        <div class="flex shrink-0 flex-col items-end gap-1">{{ ui.status_badge(svc.status) }}<span class="text-xs muted">{{ svc.headline }}</span></div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="panel-inset px-3 py-4 text-center text-sm muted">{{ "No services configured yet." if card.is_local else "No data from this server yet." }}</p>
+    {% endif %}
+  </section>
+  {% endfor %}
+  <section class="panel p-4">
+    <div class="flex items-start gap-3">
+      <span class="svc-tile svc-peer size-9">{{ icon("network", "size-4.5") }}</span>
+      <div class="min-w-0 flex-1 space-y-1">
+        <h2 class="font-semibold">Connect another MediaHub</h2>
+        <p class="text-sm muted">Pair with a trusted MediaHub (for example over Tailscale) to see its activity here, read-only. Peer pairing arrives in a later release.</p>
+      </div>
+    </div>
+  </section>
+</div>

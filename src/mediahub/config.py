@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     cookie_secure: CookieSecure = CookieSecure.AUTO
     session_days: int = Field(default=30, ge=1, le=365)
     demo_mode: bool = False
+    # Display name used on first start (editable later in Settings → General).
+    server_name: str | None = None
 
     # Optional overrides. When unset, a key is generated into config_dir/secret.key.
     secret_key: SecretStr | None = None

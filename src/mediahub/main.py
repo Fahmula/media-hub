@@ -20,12 +20,15 @@ from mediahub.db.crypto import Keyring, load_master_secret, set_keyring
 from mediahub.db.models import User
 from mediahub.db.session import make_engine, make_sessionmaker, run_migrations, session_scope
 from mediahub.logging import configure_logging, get_logger
+from mediahub.monitoring.demand import DemandTracker
+from mediahub.monitoring.service import MonitoringService
+from mediahub.monitoring.store import SnapshotStore
 from mediahub.runtime_lock import InstanceLock
 from mediahub.security.headers import SecurityHeadersMiddleware
 from mediahub.security.passwords import MIN_PASSWORD_LENGTH, hash_password
 from mediahub.security.sessions import purge_expired
 from mediahub.web.deps import LoginRequired, SetupRequired, has_users
-from mediahub.web.routes import auth, health, pages
+from mediahub.web.routes import auth, health, images, pages
 from mediahub.web.templating import STATIC_DIR, is_htmx, render
 
 log = get_logger(__name__)
@@ -41,16 +44,19 @@ def _build_context(settings: Settings) -> AppContext:
     run_migrations(engine)
     sessions = make_sessionmaker(engine)
     with session_scope(sessions) as db:
-        identity = ensure_identity(db)
+        identity = ensure_identity(db, settings.server_name)
         purge_expired(db)
         _bootstrap_admin(settings, db)
 
+    store = SnapshotStore(identity=identity)
+    monitor = MonitoringService(settings, sessions, store, DemandTracker())
     return AppContext(
         settings=settings,
         engine=engine,
         sessions=sessions,
         keyring=keyring,
         identity=identity,
+        monitor=monitor,
     )
 
 
@@ -107,6 +113,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lock.acquire()
         ctx = _build_context(settings)
         app.state.ctx = ctx
+        await ctx.monitor.start()
         log.info(
             "startup",
             version=__version__,
@@ -117,6 +124,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         try:
             yield
         finally:
+            await ctx.monitor.stop()
             ctx.engine.dispose()
             lock.release()
             log.info("shutdown")
@@ -135,5 +143,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(health.router)
     app.include_router(auth.router)
     app.include_router(auth.logout_router)
+    app.include_router(images.router)
     app.include_router(pages.router)
     return app

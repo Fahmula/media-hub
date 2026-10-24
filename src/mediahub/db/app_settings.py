@@ -34,7 +34,7 @@ def set_setting(session: Session, key: str, value: Any) -> None:
         row.value = value
 
 
-def ensure_identity(session: Session) -> ServerIdentity:
+def ensure_identity(session: Session, default_name: str | None = None) -> ServerIdentity:
     """Return this installation's identity, creating a stable UUID on first start."""
     server_id = get_setting(session, SERVER_ID)
     if not server_id:
@@ -42,6 +42,6 @@ def ensure_identity(session: Session) -> ServerIdentity:
         set_setting(session, SERVER_ID, server_id)
     name = get_setting(session, SERVER_NAME)
     if not name:
-        name = DEFAULT_SERVER_NAME
+        name = (default_name or DEFAULT_SERVER_NAME).strip()[:64] or DEFAULT_SERVER_NAME
         set_setting(session, SERVER_NAME, name)
     return ServerIdentity(server_id=server_id, server_name=name)

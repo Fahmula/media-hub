@@ -12,6 +12,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
 from mediahub import __version__
+from mediahub.models.common import ServiceType
 from mediahub.security import csrf
 from mediahub.web import filters
 from mediahub.web.icons import icon
@@ -21,7 +22,7 @@ TEMPLATES_DIR = PACKAGE_DIR / "templates"
 STATIC_DIR = PACKAGE_DIR / "static"
 
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
-templates.env.globals.update(icon=icon, app_version=__version__)
+templates.env.globals.update(icon=icon, app_version=__version__, ServiceType=ServiceType)
 templates.env.filters.update(filters.FILTERS)
 
 

@@ -20,7 +20,7 @@
 <div class="lg:grid lg:min-h-dvh lg:grid-cols-[15rem_minmax(0,1fr)]">
   {# ---------- Desktop sidebar ---------- #}
   <aside class="sticky top-0 hidden h-dvh flex-col border-r border-base-300/60 bg-base-100/50 px-3 py-5 lg:flex">
-    <a href="/" class="mb-6 flex items-center gap-2.5 px-3">{{ ui.logo("size-7") }}<span class="text-lg font-semibold tracking-tight">MediaHub</span></a>
+    <a href="/" class="mb-6 flex items-center gap-2.5 px-3">{{ ui.logo("size-7", "side") }}<span class="text-lg font-semibold tracking-tight">MediaHub</span></a>
     <nav class="flex flex-col gap-1" aria-label="Main">
       {{ nav_link("/", "house", "Dashboard") }}
       {{ nav_link("/activity", "activity", "Activity", "/activity") }}
@@ -47,7 +47,7 @@
         {% if back_href %}
         <a href="{{ back_href }}" class="btn btn-ghost btn-sm btn-circle -ml-2 lg:hidden" aria-label="Back">{{ icon("chevron-left", "size-5") }}</a>
         {% else %}
-        <a href="/" class="lg:hidden" aria-label="Dashboard">{{ ui.logo("size-6") }}</a>
+        <a href="/" class="lg:hidden" aria-label="Dashboard">{{ ui.logo("size-6", "top") }}</a>
         {% endif %}
         <h1 class="min-w-0 truncate text-lg font-semibold lg:text-2xl">{{ page_title }}</h1>
         <div class="ml-auto flex items-center gap-1.5">

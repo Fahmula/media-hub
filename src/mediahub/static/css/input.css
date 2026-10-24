@@ -2,6 +2,12 @@
 @source "../../templates";
 @source "../js";
 @source "../../web";
+/* Classes composed from state "tones" in templates (e.g. text-{{ d.state.tone }}). */
+@source inline("text-{primary,secondary,success,warning,error,info,neutral}");
+@source inline("bg-{primary,secondary,success,warning,error,info,neutral,base-300}/10");
+@source inline("border-{primary,secondary,success,warning,error,info,neutral}/40");
+@source inline("badge-{primary,secondary,success,warning,error,info,neutral}");
+@source inline("progress-{primary,secondary,success,warning,error,info,neutral}");
 
 @plugin "../../../../bin/daisyui.mjs" {
   themes: false;
@@ -157,20 +163,6 @@
   .skeleton-line {
     @apply skeleton h-3 rounded;
   }
-}
-
-/* htmx: fade swapped content in, subtly. */
-.htmx-added {
-  opacity: 0;
-}
-.htmx-settling .htmx-added,
-.htmx-added.htmx-settling {
-  opacity: 1;
-  transition: opacity 150ms ease-out;
-}
-.htmx-request.refresh-indicator,
-.htmx-request .refresh-indicator {
-  @apply opacity-100;
 }
 
 @media (prefers-reduced-motion: reduce) {

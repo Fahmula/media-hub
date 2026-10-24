@@ -1,14 +1,15 @@
 {# Reusable UI macros. Import with: {% import "components/ui.html" as ui %} #}
 
-{% macro logo(size="size-8") -%}
+{# `uid` must be unique per page: a gradient defined inside a hidden copy won't render. #}
+{% macro logo(size="size-8", uid="a") -%}
 <svg class="{{ size }}" viewBox="0 0 32 32" aria-hidden="true">
   <defs>
-    <linearGradient id="mh-logo-g" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="mh-logo-{{ uid }}" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#a855f7"/>
     </linearGradient>
   </defs>
-  <path d="M9 5.5c0-1.6 1.7-2.5 3-1.7l15 9.5c1.3.8 1.3 2.6 0 3.4l-15 9.5c-1.3.8-3-.1-3-1.7z" fill="url(#mh-logo-g)"/>
-  <path d="M5 9v14" stroke="url(#mh-logo-g)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M9 5.5c0-1.6 1.7-2.5 3-1.7l15 9.5c1.3.8 1.3 2.6 0 3.4l-15 9.5c-1.3.8-3-.1-3-1.7z" fill="url(#mh-logo-{{ uid }})"/>
+  <path d="M5 9v14" stroke="url(#mh-logo-{{ uid }})" stroke-width="3" stroke-linecap="round"/>
 </svg>
 {%- endmacro %}
 
@@ -76,4 +77,19 @@
 {% else %}
 <div class="poster {{ cls }} flex items-center justify-center text-base-content/30">{{ icon(fallback_icon, "size-5") }}</div>
 {% endif %}
+{%- endmacro %}
+
+{# A section refreshed by polling. Rendered server-side first, so it never flashes empty. #}
+{% macro poll_section(id, url, every, cls="") -%}
+<section id="{{ id }}" class="{{ cls }}" hx-get="{{ url }}" hx-trigger="every {{ every }}s, mh:refresh" hx-swap="innerHTML" data-poll data-loaded="1">
+{{ caller() }}
+</section>
+{%- endmacro %}
+
+{% macro section_header(title, count=None, href=None, link_label="View all") -%}
+<div class="flex items-center gap-2 px-1 pb-2">
+  <h2 class="section-title">{{ title }}</h2>
+  {% if count is not none %}<span class="badge badge-ghost badge-sm tabular-nums">{{ count }}</span>{% endif %}
+  {% if href %}<a href="{{ href }}" class="ml-auto text-xs font-medium text-primary hover:underline">{{ link_label }}</a>{% endif %}
+</div>
 {%- endmacro %}

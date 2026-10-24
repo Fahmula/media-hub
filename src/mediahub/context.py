@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from mediahub.config import Settings
 from mediahub.db.app_settings import ServerIdentity
 from mediahub.db.crypto import Keyring
+from mediahub.monitoring.service import MonitoringService
 
 
 @dataclass
@@ -20,6 +21,7 @@ class AppContext:
     sessions: sessionmaker[Session]
     keyring: Keyring
     identity: ServerIdentity
+    monitor: MonitoringService
 
 
 def get_context(request: Request) -> AppContext:

@@ -1,0 +1,20 @@
+{% import "components/items.html" as items %}
+{% import "components/ui.html" as ui %}
+{% set multi = view.multi_server %}
+{% if tab == "playback" %}
+  {% if fv.sessions %}
+  <div class="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{% for s in fv.sessions %}{{ items.session_card(s, multi) }}{% endfor %}</div>
+  {% else %}<div class="panel">{{ ui.empty_state("play", "Nothing playing", "Active Emby sessions will appear here.") }}</div>{% endif %}
+{% elif tab == "downloads" %}
+  {% if fv.downloads %}
+  <div class="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{% for d in fv.downloads %}{{ items.download_card(d, multi) }}{% endfor %}</div>
+  {% else %}<div class="panel">{{ ui.empty_state("arrow-down-to-line", "Queue is empty", "Sonarr and Radarr queue items will appear here.") }}</div>{% endif %}
+{% elif tab == "history" %}
+  {% if fv.history %}
+  <div class="panel divide-y divide-base-300/50 p-2">{% for e in fv.history %}{{ items.history_row(e, multi) }}{% endfor %}</div>
+  {% else %}<div class="panel">{{ ui.empty_state("history", "No recent activity", "Grabs, imports and failures from Sonarr and Radarr will appear here.") }}</div>{% endif %}
+{% elif tab == "streams" %}
+  {% if fv.reads %}
+  <div class="panel divide-y divide-base-300/50 p-2">{% for r, snap in fv.reads %}{{ items.active_read_row(r, multi) }}{% endfor %}</div>
+  {% else %}<div class="panel">{{ ui.empty_state("radio-tower", "No active reads", "Files InfiniDysk is currently streaming will appear here.") }}</div>{% endif %}
+{% endif %}
