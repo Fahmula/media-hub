@@ -12,6 +12,7 @@ from mediahub.config import Settings
 from mediahub.db.app_settings import ServerIdentity
 from mediahub.db.crypto import Keyring
 from mediahub.monitoring.service import MonitoringService
+from mediahub.web.image_cache import ImageCache
 
 
 @dataclass
@@ -22,6 +23,7 @@ class AppContext:
     keyring: Keyring
     identity: ServerIdentity
     monitor: MonitoringService
+    images: ImageCache
 
 
 def get_context(request: Request) -> AppContext:

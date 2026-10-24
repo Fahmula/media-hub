@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from mediahub.config import Settings
 from mediahub.db.session import session_scope
 from mediahub.instances import repository
-from mediahub.integrations.base import ConnectionTestResult, InstanceConfig
+from mediahub.integrations.base import ConnectionTestResult, InstanceConfig, Integration
 from mediahub.integrations.demo import DemoIntegration, DemoPeerTarget, demo_local_configs
 from mediahub.integrations.registry import integration_class
 from mediahub.logging import get_logger
@@ -123,6 +123,11 @@ class MonitoringService:
                 integration, self.store, order=item.order, on_status=self._persist_status
             )
         )
+
+    def integration(self, instance_id: str) -> Integration | None:
+        """The live integration polling a local instance, e.g. to proxy its images."""
+        target = self.poller.get(instance_id)
+        return target.integration if isinstance(target, InstanceTarget) else None
 
     async def reload_instance(self, instance_id: str) -> None:
         """Re-read one instance after it was created, edited, enabled/disabled or deleted."""

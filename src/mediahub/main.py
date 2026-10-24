@@ -28,6 +28,7 @@ from mediahub.security.headers import SecurityHeadersMiddleware
 from mediahub.security.passwords import MIN_PASSWORD_LENGTH, hash_password
 from mediahub.security.sessions import purge_expired
 from mediahub.web.deps import LoginRequired, SetupRequired, has_users
+from mediahub.web.image_cache import ImageCache
 from mediahub.web.routes import auth, health, images, pages
 from mediahub.web.routes import settings as settings_routes
 from mediahub.web.templating import STATIC_DIR, is_htmx, render
@@ -58,6 +59,7 @@ def _build_context(settings: Settings) -> AppContext:
         keyring=keyring,
         identity=identity,
         monitor=monitor,
+        images=ImageCache(settings.cache_dir / "images"),
     )
 
 

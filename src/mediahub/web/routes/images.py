@@ -1,21 +1,35 @@
 """Image endpoints.
 
-Real posters (Phase 2+) are proxied through signed references so the browser never sees an
-API key and can't make MediaHub fetch arbitrary URLs. Demo mode serves generated SVG posters.
+Real posters are proxied through signed references (``integrations/image_refs.py``) so the
+browser never sees an API key and can't make MediaHub fetch arbitrary URLs. Fetched images are
+kept in an on-disk LRU cache. Demo mode serves generated SVG posters.
 """
 
 from __future__ import annotations
 
+import asyncio
 import hashlib
 from typing import Annotated
 from xml.sax.saxutils import escape
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import Response
 
-from mediahub.web.deps import require_auth
+from mediahub.integrations import image_refs
+from mediahub.integrations.errors import IntegrationError
+from mediahub.web.deps import Ctx, require_auth
 
 router = APIRouter(dependencies=[Depends(require_auth)])
+
+FETCH_TIMEOUT_S = 10.0
+# Raster only: an SVG from upstream could carry script if opened directly.
+ALLOWED_TYPES = frozenset({"image/jpeg", "image/png", "image/webp", "image/gif"})
+IMAGE_HEADERS = {
+    # The URL contains the upstream image tag, so a given URL's bytes never change.
+    "Cache-Control": "private, max-age=604800, immutable",
+    "Content-Security-Policy": "default-src 'none'",
+}
 
 _PALETTES = [
     ("#1e3a8a", "#7c3aed"),
@@ -69,3 +83,29 @@ async def demo_poster(slug: str, t: Annotated[str, Query(max_length=60)] = "") -
             "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'",
         },
     )
+
+
+@router.get("/img/{instance_id}/{item_id}/{tag}/{signature}")
+async def proxied_image(
+    ctx: Ctx, instance_id: str, item_id: str, tag: str, signature: str
+) -> Response:
+    if not image_refs.verify(instance_id, item_id, tag, signature):
+        raise HTTPException(404, "Image not found")
+    key = f"{instance_id}/{item_id}/{tag}"
+    cached = await run_in_threadpool(ctx.images.get, key)
+    if cached is not None:
+        return Response(cached[0], media_type=cached[1], headers=IMAGE_HEADERS)
+    integration = ctx.monitor.integration(instance_id)
+    if integration is None:
+        raise HTTPException(404, "Image not found")
+    try:
+        fetched = await asyncio.wait_for(
+            integration.fetch_image(f"{item_id}/{tag}"), FETCH_TIMEOUT_S
+        )
+    except (IntegrationError, TimeoutError):
+        fetched = None
+    if fetched is None or fetched[1] not in ALLOWED_TYPES:
+        raise HTTPException(404, "Image not available")
+    data, content_type = fetched
+    await run_in_threadpool(ctx.images.put, key, data, content_type)
+    return Response(data, media_type=content_type, headers=IMAGE_HEADERS)
