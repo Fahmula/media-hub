@@ -3,8 +3,8 @@
 ## 1. Add the container
 
 1. **Docker → Add Container → Template repositories**: or copy
-   [`unraid/mediahub.xml`](../unraid/mediahub.xml) to
-   `/boot/config/plugins/dockerMan/templates-user/my-MediaHub.xml` on the flash drive, then pick
+   [`unraid/my-mediahub.xml`](../unraid/my-mediahub.xml) to
+   `/boot/config/plugins/dockerMan/templates-user/my-mediahub.xml` on the flash drive, then pick
    **MediaHub** from the template list.
 2. Check the settings:
    - **Web UI port**: `8080` (change the host side if it's taken).

@@ -12,8 +12,8 @@
   <Overview>Self-hosted, mobile-first monitoring dashboard for Emby, Sonarr, Radarr and InfiniDysk. See what's playing, what's downloading and what needs attention, and optionally link a trusted second MediaHub read-only.</Overview>
   <Category>MediaServer:Other Tools: Status:Stable</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/Fahmula/media-hub/main/unraid/mediahub.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/Fahmula/media-hub/main/src/mediahub/static/img/favicon.svg</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/Fahmula/media-hub/main/unraid/my-mediahub.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Fahmula/media-hub/main/src/mediahub/static/img/icon-512.png</Icon>
   <ExtraParams>--security-opt no-new-privileges:true</ExtraParams>
   <PostArgs/>
   <Requires>To show InfiniDysk health, cache metrics and live streams, put MediaHub on the same custom Docker network as InfiniDysk (Network Type: your custom network) and pin FRONTEND_BACKEND_API_KEY in InfiniDysk's template.</Requires>
