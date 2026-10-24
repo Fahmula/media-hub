@@ -13,6 +13,7 @@ from mediahub.db.app_settings import ServerIdentity
 from mediahub.models.common import ServiceStatus
 from mediahub.models.issues import Issue
 from mediahub.models.snapshot import ServerSnapshot, ServiceSnapshot
+from mediahub.monitoring.issue_states import IssueStates
 from mediahub.monitoring.issues import derive_issues
 
 # A disconnected peer's last data stays visible (marked stale) for this long.
@@ -33,6 +34,7 @@ class PeerState:
 @dataclass
 class SnapshotStore:
     identity: ServerIdentity
+    issue_states: IssueStates = field(default_factory=IssueStates)
     _local: dict[str, ServiceSnapshot] = field(default_factory=dict)
     _order: dict[str, int] = field(default_factory=dict)
     _peers: dict[str, PeerState] = field(default_factory=dict)
@@ -48,6 +50,8 @@ class SnapshotStore:
             self._first_seen.pop(gone, None)  # resolved: a recurrence counts as new
         self._instance_fps[instance_id] = current
         now = datetime.now(UTC)
+        if snapshot.status.is_up:
+            self.issue_states.resolve_missing(snapshot.source.key, current, now)
         visible = [
             i
             for i in issues
@@ -60,7 +64,9 @@ class SnapshotStore:
         return self._local.get(instance_id)
 
     def remove_local(self, instance_id: str) -> None:
-        self._local.pop(instance_id, None)
+        removed = self._local.pop(instance_id, None)
+        if removed is not None:
+            self.issue_states.forget_source(removed.source.key)
         self._order.pop(instance_id, None)
         for fp in self._instance_fps.pop(instance_id, set()):
             self._first_seen.pop(fp, None)
@@ -109,7 +115,13 @@ class SnapshotStore:
 
     # ----- issues ----------------------------------------------------------------------
     def _stamp(self, issue: Issue) -> Issue:
-        first = self._first_seen.setdefault(issue.fingerprint, datetime.now(UTC))
+        first = self._first_seen.get(issue.fingerprint)
+        if first is None:
+            # A restart loses the in-memory times; acted-on issues keep theirs in the DB.
+            state = self.issue_states.get(issue.fingerprint)
+            stored = state.first_seen if state else None
+            first = issue.first_seen or stored or datetime.now(UTC)
+            self._first_seen[issue.fingerprint] = first
         return issue.model_copy(update={"first_seen": first})
 
     def stamp_issue(self, issue: Issue) -> Issue:

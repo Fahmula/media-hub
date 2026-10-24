@@ -68,6 +68,7 @@ class MonitoringService:
 
     async def stop(self) -> None:
         await self.poller.stop()
+        await self.store.issue_states.aclose()
         if self._background:
             await asyncio.gather(*self._background, return_exceptions=True)
 

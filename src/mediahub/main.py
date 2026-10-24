@@ -21,6 +21,7 @@ from mediahub.db.models import User
 from mediahub.db.session import make_engine, make_sessionmaker, run_migrations, session_scope
 from mediahub.logging import configure_logging, get_logger
 from mediahub.monitoring.demand import DemandTracker
+from mediahub.monitoring.issue_states import IssueStates
 from mediahub.monitoring.service import MonitoringService
 from mediahub.monitoring.store import SnapshotStore
 from mediahub.runtime_lock import InstanceLock
@@ -50,7 +51,9 @@ def _build_context(settings: Settings) -> AppContext:
         purge_expired(db)
         _bootstrap_admin(settings, db)
 
-    store = SnapshotStore(identity=identity)
+    issue_states = IssueStates(sessions)
+    issue_states.load()
+    store = SnapshotStore(identity=identity, issue_states=issue_states)
     monitor = MonitoringService(settings, sessions, store, DemandTracker())
     return AppContext(
         settings=settings,

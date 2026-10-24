@@ -343,7 +343,7 @@ def _mock_app(app: str) -> dict[str, respx.Route]:
 
 
 @respx.mock
-async def test_sonarr_poll_full_and_idle() -> None:
+async def test_sonarr_poll_full_and_idle_both_fetch_history() -> None:
     routes = _mock_app("sonarr")
     sonarr = _integration(SonarrIntegration, ServiceType.SONARR)
 
@@ -357,8 +357,8 @@ async def test_sonarr_poll_full_and_idle() -> None:
     assert routes["queue"].calls.last.request.headers["X-Api-Key"] == "K"
 
     idle = await sonarr.poll(full=False)
-    assert idle.downloads is not None and idle.history is None
-    assert routes["history"].call_count == 1
+    assert idle.downloads is not None and idle.history is not None
+    assert routes["history"].call_count == 2
 
 
 @respx.mock

@@ -157,6 +157,17 @@ def _subtitle(record: dict[str, Any], episodes: list[dict[str, Any]]) -> str | N
     return label
 
 
+def _media_ids(rows: list[dict[str, Any]]) -> list[str]:
+    """Episode ids (Sonarr) or the movie id (Radarr), to match failures with later grabs."""
+    ids: set[str] = set()
+    for row in rows:
+        if episode := _int(row.get("episodeId")):
+            ids.add(f"e{episode}")
+        elif movie := _int(row.get("movieId")):
+            ids.add(f"m{movie}")
+    return sorted(ids)
+
+
 def _messages(raw: Any) -> list[StatusMessage]:
     out = []
     for entry in _list(raw):
@@ -198,6 +209,7 @@ def _download(rows: list[dict[str, Any]], source: SourceRef, image_url: ImageUrl
         messages=_messages(first.get("statusMessages")),
         error_message=_str(first.get("errorMessage")),
         episode_count=max(len(episodes), 1),
+        media_ids=_media_ids(rows),
     )
 
 
@@ -251,12 +263,14 @@ def map_history(records: Any, source: SourceRef, image_url: ImageUrl) -> list[Ac
             ActivityEvent(
                 source=source,
                 event_id=str(first["id"]),
+                download_id=_str(first.get("downloadId")),
                 kind=kind,
                 title=title or _str(first.get("sourceTitle")) or "Unknown",
                 subtitle=subtitle,
                 image_url=image,
                 at=at,
                 detail=_event_detail(kind, first),
+                media_ids=_media_ids(rows),
             )
         )
     return events

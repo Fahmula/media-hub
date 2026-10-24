@@ -59,3 +59,10 @@ class Issue(Model):
     link: str | None = None
     # Only shown once it has persisted this long: for states the service retries by itself.
     grace_s: int = 0
+    # The viewing install's own decision, filled in per view (never part of a snapshot).
+    acknowledged_at: datetime | None = None
+    muted_until: datetime | None = None
+
+    @property
+    def hidden(self) -> bool:
+        return self.acknowledged_at is not None or self.muted_until is not None
