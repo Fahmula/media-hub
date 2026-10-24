@@ -40,6 +40,7 @@ class ServiceSnapshot(Model):
     downloads: list[DownloadItem] = []
     history: list[ActivityEvent] = []
     infinidysk: InfiniDyskStats | None = None
+    import_warning_grace_s: int | None = None  # per-instance override of the default
     issues: list[Issue] = []
 
     def is_stale(self, now: datetime | None = None) -> bool:

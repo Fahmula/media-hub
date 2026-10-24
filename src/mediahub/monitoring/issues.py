@@ -10,6 +10,10 @@ from mediahub.models.infinidysk import CircuitState
 from mediahub.models.issues import Issue, IssueCategory, Severity
 from mediahub.models.snapshot import ServiceSnapshot
 
+# An import warning the *arr is still retrying only becomes an issue if it sticks around
+# (e.g. a post-processor like FileFlows is still converting). Configurable per instance.
+IMPORT_WARNING_GRACE_S = 600
+
 
 def _fp(*parts: object) -> str:
     return hashlib.sha1("|".join(map(str, parts)).encode(), usedforsecurity=False).hexdigest()[:16]
@@ -57,12 +61,16 @@ def derive_issues(snap: ServiceSnapshot) -> list[Issue]:
             )
         )
 
+    warning_grace = snap.import_warning_grace_s
+    if warning_grace is None:
+        warning_grace = IMPORT_WARNING_GRACE_S
     for item in snap.downloads:
         if not item.state.needs_attention:
             continue
         category = {
             DownloadState.FAILED: IssueCategory.DOWNLOAD_FAILED,
             DownloadState.IMPORT_BLOCKED: IssueCategory.IMPORT_BLOCKED,
+            DownloadState.IMPORT_WARNING: IssueCategory.IMPORT_BLOCKED,
         }.get(item.state, IssueCategory.DOWNLOAD_STALLED)
         lines = [
             m for msg in item.messages for m in ([msg.title] if msg.title else []) + msg.messages
@@ -77,6 +85,7 @@ def derive_issues(snap: ServiceSnapshot) -> list[Issue]:
                 title=f"{item.title}{f' · {item.subtitle}' if item.subtitle else ''}",
                 detail=detail,
                 link=f"/{src.slug}?instance={src.instance_id}#dl-{item.item_id}",
+                grace_s=warning_grace if item.state is DownloadState.IMPORT_WARNING else 0,
             )
         )
 

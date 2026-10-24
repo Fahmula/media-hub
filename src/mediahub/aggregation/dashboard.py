@@ -23,6 +23,7 @@ SCOPE_LOCAL = "local"
 _DOWNLOAD_ORDER = {
     DownloadState.FAILED: 0,
     DownloadState.IMPORT_BLOCKED: 1,
+    DownloadState.IMPORT_WARNING: 2,
     DownloadState.STALLED: 2,
     DownloadState.DOWNLOADING: 3,
     DownloadState.IMPORTING: 4,

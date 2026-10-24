@@ -57,3 +57,5 @@ class Issue(Model):
     detail: str | None = None  # verbatim upstream message where available
     first_seen: datetime | None = None
     link: str | None = None
+    # Only shown once it has persisted this long: for states the service retries by itself.
+    grace_s: int = 0

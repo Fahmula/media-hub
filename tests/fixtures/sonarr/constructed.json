@@ -1,0 +1,1418 @@
+{
+  "_note": "CONSTRUCTED from the Sonarr source (v4-develop @ cab419a = v4.0.20.3014), not captured. Shapes and enum strings follow QueueResource/HistoryResource; values are illustrative.",
+  "health": [
+    {
+      "message": "Unable to communicate with SABnzbd. Connection refused",
+      "source": "DownloadClientCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/sonarr/system#download-clients-are-unavailable"
+    }
+  ],
+  "history": {
+    "page": 1,
+    "pageSize": 30,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "Sabnzbd",
+          "downloadClientName": "SABnzbd",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "indexer": "Indexer 1 (Prowlarr)",
+          "indexerFlags": "0",
+          "protocol": "1",
+          "releaseGroup": "Group 1",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "2147483648"
+        },
+        "date": "2026-10-24T11:00:00Z",
+        "downloadId": "SABnzbd_nzo_aaa111",
+        "episode": {
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 11,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "Episode 1"
+        },
+        "episodeId": 11,
+        "eventType": "grabbed",
+        "id": 9001,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 1,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 1",
+          "year": 2022
+        },
+        "seriesId": 1,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "indexer": "Indexer 2",
+          "protocol": "2",
+          "releaseGroup": "Group 2",
+          "releaseType": "SeasonPack",
+          "size": "12884901888"
+        },
+        "date": "2026-10-23T18:04:11Z",
+        "downloadId": "HASH0000000000000000000000000000000000010",
+        "episode": {
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 41,
+          "seasonNumber": 2,
+          "seriesId": 4,
+          "title": "Episode 1"
+        },
+        "episodeId": 41,
+        "eventType": "grabbed",
+        "id": 9011,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 4",
+          "year": 2022
+        },
+        "seriesId": 4,
+        "sourceTitle": "Release 5"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "indexer": "Indexer 2",
+          "protocol": "2",
+          "releaseGroup": "Group 2",
+          "releaseType": "SeasonPack",
+          "size": "12884901888"
+        },
+        "date": "2026-10-23T18:04:11Z",
+        "downloadId": "HASH0000000000000000000000000000000000010",
+        "episode": {
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 42,
+          "seasonNumber": 2,
+          "seriesId": 4,
+          "title": "Episode 2"
+        },
+        "episodeId": 42,
+        "eventType": "grabbed",
+        "id": 9012,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 4",
+          "year": 2022
+        },
+        "seriesId": 4,
+        "sourceTitle": "Release 5"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "indexer": "Indexer 2",
+          "protocol": "2",
+          "releaseGroup": "Group 2",
+          "releaseType": "SeasonPack",
+          "size": "12884901888"
+        },
+        "date": "2026-10-23T18:04:11Z",
+        "downloadId": "HASH0000000000000000000000000000000000010",
+        "episode": {
+          "episodeNumber": 3,
+          "hasFile": false,
+          "id": 43,
+          "seasonNumber": 2,
+          "seriesId": 4,
+          "title": "Episode 3"
+        },
+        "episodeId": 43,
+        "eventType": "grabbed",
+        "id": 9013,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 4",
+          "year": 2022
+        },
+        "seriesId": 4,
+        "sourceTitle": "Release 5"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "Sabnzbd",
+          "downloadClientName": "SABnzbd",
+          "droppedPath": "/redacted/file.mkv",
+          "fileId": "77",
+          "importedPath": "/redacted/file.mkv",
+          "releaseGroup": "Group 1",
+          "size": "2147483648"
+        },
+        "date": "2026-10-23T17:00:00Z",
+        "downloadId": "SABnzbd_nzo_ggg020",
+        "episode": {
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 30,
+          "seasonNumber": 2,
+          "seriesId": 3,
+          "title": "Episode 4"
+        },
+        "episodeId": 30,
+        "eventType": "downloadFolderImported",
+        "id": 9020,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 3,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 3",
+          "year": 2022
+        },
+        "seriesId": 3,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "Sabnzbd",
+          "downloadClientName": "SABnzbd",
+          "message": "Unpacking failed, write error or disk is full?",
+          "releaseGroup": "Group 3",
+          "size": "1073741824"
+        },
+        "date": "2026-10-23T16:00:00Z",
+        "downloadId": "SABnzbd_nzo_eee022",
+        "episode": {
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 71,
+          "seasonNumber": 1,
+          "seriesId": 7,
+          "title": "Episode 4"
+        },
+        "episodeId": 71,
+        "eventType": "downloadFailed",
+        "id": 9021,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 7,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 7",
+          "year": 2022
+        },
+        "seriesId": 7,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "reason": "Upgrade",
+          "releaseGroup": "Group 1",
+          "size": "1073741824"
+        },
+        "date": "2026-10-23T15:00:00Z",
+        "episode": {
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 30,
+          "seasonNumber": 2,
+          "seriesId": 3,
+          "title": "Episode 4"
+        },
+        "episodeId": 30,
+        "eventType": "episodeFileDeleted",
+        "id": 9022,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 3,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 3",
+          "year": 2022
+        },
+        "seriesId": 3,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "path": "/redacted/file.mkv",
+          "relativePath": "file.mkv",
+          "sourcePath": "/redacted/file.mkv",
+          "sourceRelativePath": "file.mkv"
+        },
+        "date": "2026-10-23T14:00:00Z",
+        "episode": {
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 30,
+          "seasonNumber": 2,
+          "seriesId": 3,
+          "title": "Episode 4"
+        },
+        "episodeId": 30,
+        "eventType": "episodeFileRenamed",
+        "id": 9023,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 3,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 3",
+          "year": 2022
+        },
+        "seriesId": 3,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClientName": "qBittorrent",
+          "message": "Manually ignored"
+        },
+        "date": "2026-10-23T13:00:00Z",
+        "downloadId": "HASH0000000000000000000000000000000000002",
+        "episode": {
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 21,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Episode 2"
+        },
+        "episodeId": 21,
+        "eventType": "downloadIgnored",
+        "id": 9024,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 2,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 2",
+          "year": 2022
+        },
+        "seriesId": 2,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {},
+        "date": "2026-10-23T12:00:00Z",
+        "episode": {
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 21,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Episode 2"
+        },
+        "episodeId": 21,
+        "eventType": "unknown",
+        "id": 9025,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "id": 2,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 2",
+          "year": 2022
+        },
+        "seriesId": 2,
+        "sourceTitle": "Release 1"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 10
+  },
+  "queue": {
+    "page": 1,
+    "pageSize": 500,
+    "records": [
+      {
+        "added": "2026-10-24T11:00:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_aaa111",
+        "episode": {
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 11,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "Episode 1"
+        },
+        "episodeHasFile": false,
+        "episodeId": 11,
+        "estimatedCompletionTime": "2026-10-24T12:12:34Z",
+        "id": 1001,
+        "indexer": "Indexer 1 (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "series": {
+          "id": 1,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 1",
+          "year": 2022
+        },
+        "seriesId": 1,
+        "size": 2147483648,
+        "sizeleft": 1073741824,
+        "status": "downloading",
+        "statusMessages": [],
+        "timeleft": "00:12:34",
+        "title": "Release 1",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-10-24T10:00:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "qBittorrent",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "HASH0000000000000000000000000000000000002",
+        "episode": {
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 21,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Episode 2"
+        },
+        "episodeHasFile": false,
+        "episodeId": 21,
+        "errorMessage": "The download is stalled with no connections",
+        "id": 1002,
+        "indexer": "Indexer 2",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "series": {
+          "id": 2,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 2",
+          "year": 2022
+        },
+        "seriesId": 2,
+        "size": 3221225472,
+        "sizeleft": 2147483648,
+        "status": "warning",
+        "statusMessages": [],
+        "title": "Release 2",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-10-24T09:00:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "qBittorrent",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "HASH0000000000000000000000000000000000003",
+        "episode": {
+          "episodeNumber": 3,
+          "hasFile": false,
+          "id": 22,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Episode 3"
+        },
+        "episodeHasFile": false,
+        "episodeId": 22,
+        "id": 1003,
+        "indexer": "Indexer 2",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "series": {
+          "id": 2,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 2",
+          "year": 2022
+        },
+        "seriesId": 2,
+        "size": 1073741824,
+        "sizeleft": 1073741824,
+        "status": "paused",
+        "statusMessages": [],
+        "timeleft": "1.02:03:04",
+        "title": "Release 3",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-10-24T08:00:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_bbb444",
+        "episode": {
+          "episodeNumber": 5,
+          "hasFile": false,
+          "id": 31,
+          "seasonNumber": 2,
+          "seriesId": 3,
+          "title": "Episode 5"
+        },
+        "episodeHasFile": false,
+        "episodeId": 31,
+        "id": 1004,
+        "indexer": "Indexer 1 (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 2,
+        "series": {
+          "id": 3,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 3",
+          "year": 2022
+        },
+        "seriesId": 3,
+        "size": 2147483648,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [],
+        "timeleft": "00:00:00",
+        "title": "Release 4",
+        "trackedDownloadState": "importPending",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-10-23T18:04:11Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "qBittorrent",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "HASH0000000000000000000000000000000000010",
+        "episode": {
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 41,
+          "seasonNumber": 2,
+          "seriesId": 4,
+          "title": "Episode 1"
+        },
+        "episodeHasFile": true,
+        "episodeId": 41,
+        "id": 1011,
+        "indexer": "Indexer 2",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 2,
+        "series": {
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 4",
+          "year": 2022
+        },
+        "seriesId": 4,
+        "size": 12884901888,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [
+          {
+            "messages": [],
+            "title": "One or more episodes expected in this release were not imported or missing from the release"
+          },
+          {
+            "messages": [
+              "Not an upgrade for existing episode file(s). Existing quality: WEBDL-1080p. New Quality WEBDL-1080p."
+            ],
+            "title": "Release 5.S02E03.mkv"
+          }
+        ],
+        "timeleft": "00:00:00",
+        "title": "Release 5",
+        "trackedDownloadState": "importBlocked",
+        "trackedDownloadStatus": "warning"
+      },
+      {
+        "added": "2026-10-23T18:04:11Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "qBittorrent",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "HASH0000000000000000000000000000000000010",
+        "episode": {
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 42,
+          "seasonNumber": 2,
+          "seriesId": 4,
+          "title": "Episode 2"
+        },
+        "episodeHasFile": true,
+        "episodeId": 42,
+        "id": 1012,
+        "indexer": "Indexer 2",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 2,
+        "series": {
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 4",
+          "year": 2022
+        },
+        "seriesId": 4,
+        "size": 12884901888,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [
+          {
+            "messages": [],
+            "title": "One or more episodes expected in this release were not imported or missing from the release"
+          },
+          {
+            "messages": [
+              "Not an upgrade for existing episode file(s). Existing quality: WEBDL-1080p. New Quality WEBDL-1080p."
+            ],
+            "title": "Release 5.S02E03.mkv"
+          }
+        ],
+        "timeleft": "00:00:00",
+        "title": "Release 5",
+        "trackedDownloadState": "importBlocked",
+        "trackedDownloadStatus": "warning"
+      },
+      {
+        "added": "2026-10-23T18:04:11Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "qBittorrent",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "HASH0000000000000000000000000000000000010",
+        "episode": {
+          "episodeNumber": 3,
+          "hasFile": false,
+          "id": 43,
+          "seasonNumber": 2,
+          "seriesId": 4,
+          "title": "Episode 3"
+        },
+        "episodeHasFile": true,
+        "episodeId": 43,
+        "id": 1013,
+        "indexer": "Indexer 2",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 2,
+        "series": {
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 4",
+          "year": 2022
+        },
+        "seriesId": 4,
+        "size": 12884901888,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [
+          {
+            "messages": [],
+            "title": "One or more episodes expected in this release were not imported or missing from the release"
+          },
+          {
+            "messages": [
+              "Not an upgrade for existing episode file(s). Existing quality: WEBDL-1080p. New Quality WEBDL-1080p."
+            ],
+            "title": "Release 5.S02E03.mkv"
+          }
+        ],
+        "timeleft": "00:00:00",
+        "title": "Release 5",
+        "trackedDownloadState": "importBlocked",
+        "trackedDownloadStatus": "warning"
+      },
+      {
+        "added": "2026-10-23T12:00:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_ccc020",
+        "episode": {
+          "episodeNumber": 7,
+          "hasFile": false,
+          "id": 51,
+          "seasonNumber": 1,
+          "seriesId": 5,
+          "title": "Episode 7"
+        },
+        "episodeHasFile": true,
+        "episodeId": 51,
+        "id": 1020,
+        "indexer": "Indexer 1 (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "series": {
+          "id": 5,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 5",
+          "year": 2022
+        },
+        "seriesId": 5,
+        "size": 1073741824,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [
+          {
+            "messages": [
+              "Not an upgrade for existing episode file(s). Existing quality: WEBDL-1080p. New Quality WEBDL-720p."
+            ],
+            "title": "Release 6"
+          }
+        ],
+        "timeleft": "00:00:00",
+        "title": "Release 6",
+        "trackedDownloadState": "importPending",
+        "trackedDownloadStatus": "warning"
+      },
+      {
+        "added": "2026-10-23T11:00:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_ddd021",
+        "episode": {
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 61,
+          "seasonNumber": 3,
+          "seriesId": 6,
+          "title": "Episode 1"
+        },
+        "episodeHasFile": false,
+        "episodeId": 61,
+        "id": 1021,
+        "indexer": "Indexer 1 (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 3,
+        "series": {
+          "id": 6,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 6",
+          "year": 2022
+        },
+        "seriesId": 6,
+        "size": 1073741824,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [
+          {
+            "messages": [
+              "Import failed, path does not exist or is not accessible by Sonarr: /redacted/file. Ensure the path exists and the user running Sonarr has the correct permissions to access this file/folder"
+            ],
+            "title": "Release 7"
+          }
+        ],
+        "title": "Release 7",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "warning"
+      },
+      {
+        "added": "2026-10-23T10:00:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_eee022",
+        "episode": {
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 71,
+          "seasonNumber": 1,
+          "seriesId": 7,
+          "title": "Episode 4"
+        },
+        "episodeHasFile": false,
+        "episodeId": 71,
+        "errorMessage": "Unpacking failed, write error or disk is full?",
+        "id": 1022,
+        "indexer": "Indexer 1 (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "series": {
+          "id": 7,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 7",
+          "year": 2022
+        },
+        "seriesId": 7,
+        "size": 1073741824,
+        "sizeleft": 536870912,
+        "status": "failed",
+        "statusMessages": [],
+        "title": "Release 8",
+        "trackedDownloadState": "failedPending",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-10-24T15:10:00Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClientHasPostImportCategory": false,
+        "episode": {
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 12,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "Episode 2"
+        },
+        "episodeHasFile": false,
+        "episodeId": 12,
+        "estimatedCompletionTime": "2026-10-24T16:30:00Z",
+        "id": 99120411,
+        "indexer": "Indexer 1 (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "series": {
+          "id": 1,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://example.invalid/poster.jpg"
+            }
+          ],
+          "seasons": [],
+          "seriesType": "standard",
+          "title": "Series 1",
+          "year": 2022
+        },
+        "seriesId": 1,
+        "size": 2147483648,
+        "sizeleft": 2147483648,
+        "status": "delay",
+        "timeleft": "01:19:12.4310000",
+        "title": "Release 9"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_fff030",
+        "episodeHasFile": false,
+        "id": 1030,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "outputPath": "/redacted/file",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 0,
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "size": 1073741824,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [
+          {
+            "messages": [
+              "Unable to parse file"
+            ],
+            "title": "Release 10"
+          }
+        ],
+        "timeleft": "00:00:00",
+        "title": "Release 10",
+        "trackedDownloadState": "importBlocked",
+        "trackedDownloadStatus": "warning"
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "added",
+    "totalRecords": 12
+  },
+  "queue_status": {
+    "count": 11,
+    "errors": false,
+    "totalCount": 12,
+    "unknownCount": 1,
+    "unknownErrors": false,
+    "unknownWarnings": true,
+    "warnings": true
+  },
+  "system_status": {
+    "appName": "Sonarr",
+    "instanceName": "Sonarr",
+    "version": "4.0.20.3014"
+  }
+}

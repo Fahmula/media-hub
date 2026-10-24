@@ -47,7 +47,13 @@ class SnapshotStore:
         for gone in self._instance_fps.get(instance_id, set()) - current:
             self._first_seen.pop(gone, None)  # resolved: a recurrence counts as new
         self._instance_fps[instance_id] = current
-        self._local[instance_id] = snapshot.model_copy(update={"issues": issues})
+        now = datetime.now(UTC)
+        visible = [
+            i
+            for i in issues
+            if not i.grace_s or (i.first_seen and (now - i.first_seen).total_seconds() >= i.grace_s)
+        ]
+        self._local[instance_id] = snapshot.model_copy(update={"issues": visible})
         self._order[instance_id] = order
 
     def get_local(self, instance_id: str) -> ServiceSnapshot | None:

@@ -18,7 +18,8 @@ class DownloadState(StrEnum):
     STALLED = "stalled"  # client reported a warning (e.g. stalled torrent, missing files)
     AWAITING_IMPORT = "awaiting_import"
     IMPORTING = "importing"
-    IMPORT_BLOCKED = "import_blocked"
+    IMPORT_WARNING = "import_warning"  # import failed but the *arr keeps retrying
+    IMPORT_BLOCKED = "import_blocked"  # needs manual action
     FAILED = "failed"
     UNKNOWN = "unknown"
 
@@ -30,13 +31,19 @@ class DownloadState(StrEnum):
             "stalled": "Warning",
             "awaiting_import": "Awaiting import",
             "importing": "Importing",
+            "import_warning": "Import warning",
             "import_blocked": "Import blocked",
             "failed": "Failed",
         }.get(self.value, "Unknown")
 
     @property
     def needs_attention(self) -> bool:
-        return self in (DownloadState.STALLED, DownloadState.IMPORT_BLOCKED, DownloadState.FAILED)
+        return self in (
+            DownloadState.STALLED,
+            DownloadState.IMPORT_WARNING,
+            DownloadState.IMPORT_BLOCKED,
+            DownloadState.FAILED,
+        )
 
     @property
     def tone(self) -> str:
@@ -68,6 +75,7 @@ class DownloadItem(Model):
     protocol: str | None = None
     client: str | None = None
     indexer: str | None = None
+    quality: str | None = None
     size_bytes: int | None = None
     remaining_bytes: int | None = None
     eta_s: float | None = None

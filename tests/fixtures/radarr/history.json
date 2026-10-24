@@ -1,0 +1,1963 @@
+{
+  "health": [
+    {
+      "message": "Movie Title 1 (tmdbid 0) was removed from TMDb",
+      "source": "RemovedMovieCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#movie-was-removed-from-tmdb"
+    }
+  ],
+  "history": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "droppedPath": "/redacted/file.mkv",
+          "fileId": "18168",
+          "importedPath": "/redacted/file.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "Group 1",
+          "size": "12719823810"
+        },
+        "date": "2026-10-24T19:46:20Z",
+        "downloadId": "DOWNLOAD1",
+        "eventType": "downloadFolderImported",
+        "id": 18973,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "31",
+          "ageHours": "764.8058169190833",
+          "ageMinutes": "45888.349015203334",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 1",
+          "indexerFlags": "0",
+          "indexerId": "30",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-09-22T22:50:20Z",
+          "releaseGroup": "Group 1",
+          "releaseSource": "UserInvokedSearch",
+          "size": "13809841947",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-24T19:38:40Z",
+        "downloadId": "DOWNLOAD1",
+        "eventType": "grabbed",
+        "id": 18972,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 1"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "indexer": "Indexer 2",
+          "message": "Aborted, cannot be completed - https://sabnzbd.org/not-complete",
+          "releaseGroup": "Group 2",
+          "size": "0"
+        },
+        "date": "2026-10-24T19:37:18Z",
+        "downloadId": "DOWNLOAD2",
+        "eventType": "downloadFailed",
+        "id": 18971,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 2"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "27",
+          "ageHours": "650.5231904174723",
+          "ageMinutes": "39031.39142511",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 2",
+          "indexerFlags": "0",
+          "indexerId": "22",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-09-27T17:05:50Z",
+          "releaseGroup": "Group 2",
+          "releaseSource": "UserInvokedSearch",
+          "size": "10512948000",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-24T19:37:13Z",
+        "downloadId": "DOWNLOAD2",
+        "eventType": "grabbed",
+        "id": 18970,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 2"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "indexer": "Indexer 2",
+          "message": "Aborted, cannot be completed - https://sabnzbd.org/not-complete",
+          "releaseGroup": "Group 3",
+          "size": "0"
+        },
+        "date": "2026-10-24T19:35:16Z",
+        "downloadId": "DOWNLOAD3",
+        "eventType": "downloadFailed",
+        "id": 18969,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 3"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "9",
+          "ageHours": "220.7356865732222",
+          "ageMinutes": "13244.141194451666",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 2",
+          "indexerFlags": "0",
+          "indexerId": "22",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-10-15T14:50:59Z",
+          "releaseGroup": "Group 3",
+          "releaseSource": "UserInvokedSearch",
+          "size": "2924159000",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-24T19:35:07Z",
+        "downloadId": "DOWNLOAD3",
+        "eventType": "grabbed",
+        "id": 18968,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 3"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "Group 3",
+          "size": "169"
+        },
+        "date": "2026-10-24T19:34:42Z",
+        "eventType": "movieFileDeleted",
+        "id": 18967,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 4"
+      },
+      {
+        "customFormatScore": 1700,
+        "customFormats": [
+          {
+            "id": 3,
+            "name": "AMZN"
+          },
+          {
+            "id": 4,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "customFormatScore": "1700",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "droppedPath": "/redacted/file.mkv",
+          "fileId": "18151",
+          "importedPath": "/redacted/file.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "Group 4",
+          "size": "5876916486"
+        },
+        "date": "2026-10-21T16:16:51Z",
+        "downloadId": "DOWNLOAD4",
+        "eventType": "downloadFolderImported",
+        "id": 18966,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-21T15:34:49Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-10-20T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4292,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-09-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-21T15:34:53Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18151,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-10-20T00:00:00Z",
+          "runtime": 112,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24,
+            15
+          ],
+          "title": "Movie 2",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4292,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 5"
+      },
+      {
+        "customFormatScore": 1700,
+        "customFormats": [
+          {
+            "id": 3,
+            "name": "AMZN"
+          },
+          {
+            "id": 4,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "customFormatScore": "1700",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "droppedPath": "/redacted/file.mkv",
+          "fileId": "18150",
+          "importedPath": "/redacted/file.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "Group 5",
+          "size": "6739607170"
+        },
+        "date": "2026-10-21T16:13:58Z",
+        "downloadId": "DOWNLOAD5",
+        "eventType": "downloadFolderImported",
+        "id": 18965,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-21T15:32:57Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-10-20T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4291,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-09-02T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-21T15:33:01Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18150,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-12-15T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-10-20T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24,
+            15
+          ],
+          "title": "Movie 3",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4291,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 6"
+      },
+      {
+        "customFormatScore": 1700,
+        "customFormats": [
+          {
+            "id": 3,
+            "name": "AMZN"
+          },
+          {
+            "id": 4,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "age": "1",
+          "ageHours": "36.77498658272222",
+          "ageMinutes": "2206.49919511",
+          "customFormatScore": "1700",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 1",
+          "indexerFlags": "0",
+          "indexerId": "30",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-10-20T02:48:28Z",
+          "releaseGroup": "Group 4",
+          "releaseSource": "Search",
+          "size": "6259513524",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-21T15:34:57Z",
+        "downloadId": "DOWNLOAD4",
+        "eventType": "grabbed",
+        "id": 18964,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-21T15:34:49Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-10-20T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4292,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-09-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-21T15:34:53Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18151,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-10-20T00:00:00Z",
+          "runtime": 112,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24,
+            15
+          ],
+          "title": "Movie 2",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4292,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 5"
+      },
+      {
+        "customFormatScore": 1700,
+        "customFormats": [
+          {
+            "id": 3,
+            "name": "AMZN"
+          },
+          {
+            "id": 4,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "age": "1",
+          "ageHours": "24.528988613583333",
+          "ageMinutes": "1471.7393169033332",
+          "customFormatScore": "1700",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 1",
+          "indexerFlags": "0",
+          "indexerId": "30",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-10-20T15:01:19Z",
+          "releaseGroup": "Group 5",
+          "releaseSource": "Search",
+          "size": "7191672240",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-21T15:33:03Z",
+        "downloadId": "DOWNLOAD5",
+        "eventType": "grabbed",
+        "id": 18963,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-21T15:32:57Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-10-20T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4291,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-09-02T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-21T15:33:01Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18150,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-12-15T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-10-20T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24,
+            15
+          ],
+          "title": "Movie 3",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4291,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 6"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 12,
+            "name": "x265"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "droppedPath": "/redacted/file.mkv",
+          "fileId": "18149",
+          "importedPath": "/redacted/file.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "Group 6",
+          "size": "2049455396"
+        },
+        "date": "2026-10-21T01:14:02Z",
+        "downloadId": "DOWNLOAD6",
+        "eventType": "downloadFolderImported",
+        "id": 18962,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-04T13:03:57Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-09-18T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4267,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-08-06T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "minimumAvailability": "inCinemas",
+          "monitored": true,
+          "movieFileId": 18149,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-12-14T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-08-06T00:00:00Z",
+          "runtime": 112,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            13,
+            24
+          ],
+          "title": "Movie 4",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4267,
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 7"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 12,
+            "name": "x265"
+          }
+        ],
+        "data": {
+          "age": "0",
+          "ageHours": "0.03747843819444444",
+          "ageMinutes": "2.24870674",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "SABnzbd",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 2",
+          "indexerFlags": "0",
+          "indexerId": "22",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-10-21T00:31:24Z",
+          "releaseGroup": "Group 6",
+          "releaseSource": "Rss",
+          "size": "2044446000",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-21T00:33:38Z",
+        "downloadId": "DOWNLOAD6",
+        "eventType": "grabbed",
+        "id": 18961,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-04T13:03:57Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-09-18T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4267,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-08-06T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "minimumAvailability": "inCinemas",
+          "monitored": true,
+          "movieFileId": 18149,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-12-14T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-08-06T00:00:00Z",
+          "runtime": 112,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            13,
+            24
+          ],
+          "title": "Movie 4",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4267,
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 7"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "infinidysk",
+          "droppedPath": "/redacted/file.strm",
+          "fileId": "18116",
+          "importedPath": "/redacted/file.strm",
+          "indexerFlags": "0",
+          "releaseGroup": "Group 3",
+          "size": "169"
+        },
+        "date": "2026-10-16T23:07:15Z",
+        "downloadId": "DOWNLOAD7",
+        "eventType": "downloadFolderImported",
+        "id": 18960,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 3"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "1",
+          "ageHours": "32.268561754",
+          "ageMinutes": "1936.1137052866666",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "infinidysk",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 2",
+          "indexerFlags": "0",
+          "indexerId": "22",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-10-15T14:50:59Z",
+          "releaseGroup": "Group 3",
+          "releaseSource": "UserInvokedSearch",
+          "size": "2924159000",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-16T23:07:05Z",
+        "downloadId": "DOWNLOAD7",
+        "eventType": "grabbed",
+        "id": 18959,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-07-05T20:31:33Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2026-07-28T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 4221,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2026-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-24T19:38:35Z",
+          "minimumAvailability": "inCinemas",
+          "monitored": false,
+          "movieFileId": 18168,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2026-09-08T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2026-06-24T00:00:00Z",
+          "runtime": 108,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            24
+          ],
+          "title": "Movie 1",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2026,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 4221,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 3"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 12,
+            "name": "x265"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "infinidysk",
+          "droppedPath": "/redacted/file.strm",
+          "fileId": "18115",
+          "importedPath": "/redacted/file.strm",
+          "indexerFlags": "0",
+          "releaseGroup": null,
+          "size": "169"
+        },
+        "date": "2026-10-16T22:44:51Z",
+        "downloadId": "DOWNLOAD8",
+        "eventType": "downloadFolderImported",
+        "id": 18958,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2022-01-28T19:35:35Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2008-06-13T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 271,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2008-06-12T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-16T22:44:44Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18115,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2008-09-22T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2008-06-13T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            23
+          ],
+          "title": "Movie 5",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2008,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 271,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 8"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 12,
+            "name": "x265"
+          }
+        ],
+        "data": {
+          "age": "184",
+          "ageHours": "4432.545991253611",
+          "ageMinutes": "265952.7594752767",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "infinidysk",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 1",
+          "indexerFlags": "0",
+          "indexerId": "30",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-04-15T06:12:04Z",
+          "releaseGroup": null,
+          "releaseSource": "UserInvokedSearch",
+          "size": "3692085526",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-16T22:44:49Z",
+        "downloadId": "DOWNLOAD8",
+        "eventType": "grabbed",
+        "id": 18957,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2022-01-28T19:35:35Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2008-06-13T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 271,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2008-06-12T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-16T22:44:44Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18115,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2008-09-22T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2008-06-13T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            23
+          ],
+          "title": "Movie 5",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2008,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 271,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 8"
+      },
+      {
+        "customFormatScore": 1700,
+        "customFormats": [
+          {
+            "id": 4,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "Group 7",
+          "size": "169"
+        },
+        "date": "2026-10-16T22:44:39Z",
+        "eventType": "movieFileDeleted",
+        "id": 18956,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2022-01-28T19:35:35Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2008-06-13T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 271,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2008-06-12T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-16T22:44:44Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18115,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2008-09-22T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2008-06-13T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            23
+          ],
+          "title": "Movie 5",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2008,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 271,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 9"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 12,
+            "name": "x265"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "infinidysk",
+          "droppedPath": "/redacted/file.strm",
+          "fileId": "18114",
+          "importedPath": "/redacted/file.strm",
+          "indexerFlags": "0",
+          "releaseGroup": "Group 8",
+          "size": "169"
+        },
+        "date": "2026-10-16T22:43:01Z",
+        "downloadId": "DOWNLOAD9",
+        "eventType": "downloadFolderImported",
+        "id": 18955,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2024-11-15T13:23:55Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2024-11-26T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 3854,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2024-10-25T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-16T23:26:23Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18114,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2024-12-17T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2024-11-26T00:00:00Z",
+          "runtime": 120,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            23
+          ],
+          "title": "Movie 6",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2024,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 3854,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 10"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 12,
+            "name": "x265"
+          }
+        ],
+        "data": {
+          "age": "1",
+          "ageHours": "25.462588767222222",
+          "ageMinutes": "1527.7553261316666",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "infinidysk",
+          "downloadUrl": "REDACTED",
+          "guid": "REDACTED",
+          "imdbId": "tt0000000",
+          "indexer": "Indexer 1",
+          "indexerFlags": "0",
+          "indexerId": "30",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "REDACTED",
+          "protocol": "1",
+          "publishedDate": "2026-10-15T21:15:13Z",
+          "releaseGroup": "Group 8",
+          "releaseSource": "UserInvokedSearch",
+          "size": "5577811148",
+          "tmdbId": "tt0000000"
+        },
+        "date": "2026-10-16T22:42:58Z",
+        "downloadId": "DOWNLOAD9",
+        "eventType": "grabbed",
+        "id": 18954,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2024-11-15T13:23:55Z",
+          "alternateTitles": [],
+          "certification": "",
+          "cleanTitle": "",
+          "digitalRelease": "2024-11-26T00:00:00Z",
+          "folderName": "/redacted/file",
+          "genres": [],
+          "id": 3854,
+          "images": [],
+          "imdbId": "tt0000000",
+          "inCinemas": "2024-10-25T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [],
+          "lastSearchTime": "2026-10-16T23:26:23Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 18114,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "",
+          "overview": "",
+          "path": "/redacted/file",
+          "physicalRelease": "2024-12-17T00:00:00Z",
+          "popularity": null,
+          "qualityProfileId": 4,
+          "ratings": {},
+          "releaseDate": "2024-11-26T00:00:00Z",
+          "runtime": 120,
+          "secondaryYearSourceId": null,
+          "sortTitle": "",
+          "status": "released",
+          "studio": "",
+          "tags": [
+            23
+          ],
+          "title": "Movie 6",
+          "titleSlug": "",
+          "tmdbId": 0,
+          "website": "",
+          "year": 2024,
+          "youTubeTrailerId": ""
+        },
+        "movieId": 3854,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Release 10"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 18086
+  },
+  "queue": {
+    "page": 1,
+    "pageSize": 500,
+    "records": [],
+    "sortDirection": "ascending",
+    "sortKey": "added",
+    "totalRecords": 0
+  },
+  "queue_status": {
+    "count": 0,
+    "errors": false,
+    "totalCount": 0,
+    "unknownCount": 0,
+    "unknownErrors": false,
+    "unknownWarnings": false,
+    "warnings": false
+  },
+  "system_status": {
+    "appData": "/redacted/file",
+    "appName": "Radarr",
+    "authentication": "forms",
+    "branch": "master",
+    "buildTime": "2026-09-14T15:54:38Z",
+    "databaseType": "sqLite",
+    "databaseVersion": "3.53.4",
+    "instanceName": "Radarr",
+    "isAdmin": false,
+    "isContainerized": true,
+    "isDebug": false,
+    "isDocker": true,
+    "isLinux": true,
+    "isNetCore": true,
+    "isOsx": false,
+    "isProduction": true,
+    "isUserInteractive": true,
+    "isWindows": false,
+    "migrationVersion": 242,
+    "mode": "console",
+    "osName": "alpine",
+    "osVersion": "3.24.2",
+    "packageAuthor": "[linuxserver.io](https://linuxserver.io)",
+    "packageUpdateMechanism": "docker",
+    "packageVersion": "6.4.4.10685-ls323",
+    "runtimeName": "netcore",
+    "runtimeVersion": "8.0.27",
+    "startTime": "2026-10-21T09:12:14Z",
+    "startupPath": "/redacted/file",
+    "urlBase": "",
+    "version": "6.4.4.10685"
+  }
+}

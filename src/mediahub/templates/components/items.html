@@ -147,7 +147,7 @@
         </div>
         {{ download_state_badge(d) }}
       </div>
-      <p class="text-xs muted">{{ source_label(d.source, show_server) }}{% if d.client %} · {{ d.client }}{% endif %}{% if d.protocol %} · {{ d.protocol|title }}{% endif %}{% if d.indexer %} · {{ d.indexer }}{% endif %}</p>
+      <p class="text-xs muted">{{ source_label(d.source, show_server) }}{% if d.client %} · {{ d.client }}{% endif %}{% if d.protocol %} · {{ d.protocol|title }}{% endif %}{% if d.indexer %} · {{ d.indexer }}{% endif %}{% if d.quality %} · {{ d.quality }}{% endif %}</p>
       {% if d.size_bytes %}
       <p class="text-xs tabular-nums">
         {{ (d.size_bytes - (d.remaining_bytes or 0))|filesize }} / {{ d.size_bytes|filesize }}

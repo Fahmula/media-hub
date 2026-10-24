@@ -95,6 +95,7 @@ class InstanceTarget(PollTarget):
             downloads=result.downloads if result.downloads is not None else base.downloads,
             history=result.history if result.history is not None else base.history,
             infinidysk=result.infinidysk or base.infinidysk,
+            import_warning_grace_s=result.import_warning_grace_s,
         )
         self._publish(snapshot)
         self._report(True, None, now)
