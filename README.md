@@ -98,6 +98,14 @@ New database migrations:
 MEDIAHUB_CONFIG_DIR=./.dev-config uv run alembic revision --autogenerate -m "describe change"
 ```
 
+### Releasing
+
+Merging to `main` runs CI only; no image is built. To publish one, run **Actions → Release**
+on `main` and choose `patch`, `minor` or `major`. It runs CI, bumps the latest `vX.Y.Z` tag,
+creates a GitHub release with generated notes, and pushes `ghcr.io/fahmula/mediahub` tagged
+`X.Y.Z`, `X.Y` and `latest` (the app reports the tag as its version). Pushing a `v*` tag by
+hand builds the image too; pre-release tags such as `v1.0.0-rc1` don't move `latest`.
+
 ### Layout
 
 ```

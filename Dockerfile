@@ -40,6 +40,9 @@ ENV PATH="/app/.venv/bin:$PATH" \
     PGID=100 \
     UMASK=022
 
+ARG MEDIAHUB_VERSION=""
+ENV MEDIAHUB_VERSION=${MEDIAHUB_VERSION}
+
 COPY --from=builder /app/.venv /app/.venv
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod 0755 /usr/local/bin/entrypoint.sh && mkdir -p /config

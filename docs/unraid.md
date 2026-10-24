@@ -13,8 +13,9 @@
    - **Network type**: see step 3 if you use InfiniDysk.
 3. **Apply**, then open the Web UI and create the admin account.
 
-> The image is `ghcr.io/fahmula/mediahub`, published by the repository's GitHub Actions
-> workflow. Until that runs, build it on the server (`docker build -t ghcr.io/fahmula/mediahub .`
+> The image is `ghcr.io/fahmula/mediahub`, published only when a release is cut (Actions →
+> **Release** → patch/minor/major), tagged `X.Y.Z`, `X.Y` and `latest`. Until the first release,
+> build it on the server (`docker build -t ghcr.io/fahmula/mediahub .`
 > in a checkout) or change the template's repository.
 
 ## 2. Add your services
