@@ -13,7 +13,7 @@ import respx
 from mediahub.integrations import image_refs
 from mediahub.integrations.base import InstanceConfig
 from mediahub.integrations.emby.integration import EmbyIntegration
-from mediahub.integrations.emby.mapper import map_session
+from mediahub.integrations.emby.mapper import map_session, strm_target
 from mediahub.models.common import ServiceType, SourceRef
 from mediahub.models.playback import HdrType, MediaKind, PlaybackSession, PlaybackState, PlayMethod
 
@@ -44,6 +44,17 @@ def sessions(name: str) -> dict[str, PlaybackSession]:
         assert mapped is not None
         out[raw["NowPlayingItem"]["Name"]] = mapped
     return out
+
+
+def test_file_name_is_basename_only() -> None:
+    by_name = sessions("movie-and-paused")
+    assert by_name["Movie 1"].file_name == "file.strm"  # STRM library (InfiniDysk)
+    assert by_name["Episode 1"].file_name == "file.mkv"
+    assert sessions("show-and-livetv")["Channel 1"].file_name is None
+    raw = fixture("movie-and-paused")["sessions"][0]
+    raw["NowPlayingItem"]["Path"] = "D:\\Media\\Movie (2020)\\Movie.mkv"
+    mapped = map_session(raw, SOURCE, fake_url)
+    assert mapped is not None and mapped.file_name == "Movie.mkv"
 
 
 def test_episode_direct_stream() -> None:
@@ -164,6 +175,9 @@ async def test_poll_maps_sessions_with_signed_images() -> None:
     respx.get("http://emby:8096/emby/Sessions").mock(
         return_value=httpx.Response(200, json=[*capture["sessions"], {"Id": "idle"}])
     )
+    respx.get(url__regex=r"http://emby:8096/emby/Users/.*").mock(
+        return_value=httpx.Response(200, json={"MediaSources": []})
+    )
     cfg = InstanceConfig(
         id="emby-1",
         service_type=ServiceType.EMBY,
@@ -183,3 +197,51 @@ async def test_poll_maps_sessions_with_signed_images() -> None:
     _, _, instance_id, item_id, tag, signature = url.split("/")
     assert image_refs.verify(instance_id, item_id, tag, signature)
     assert not image_refs.verify(instance_id, item_id, tag + "x", signature)
+
+
+def test_strm_target_is_last_path_segment_only() -> None:
+    url = "http://10.0.0.5:3000/view/.ids/4/0/c/6/b/40c6bd4c-971e?downloadKey=SECRET&extension=mkv"
+    assert strm_target(url) == "40c6bd4c-971e"
+    assert strm_target("http://h/view/content/movies/A%20B.mkv?k=1") == "A B.mkv"
+    assert strm_target("/local/file.mkv") is None and strm_target(None) is None
+
+
+@respx.mock
+async def test_poll_looks_up_strm_target_once() -> None:
+    raw = fixture("movie-and-paused")["sessions"][0]  # Movie 1 plays /redacted/file.strm
+    user, item = raw["UserId"], raw["NowPlayingItem"]["Id"]
+    source = raw["PlayState"]["MediaSourceId"]
+    respx.get("http://emby:8096/emby/System/Info").mock(
+        return_value=httpx.Response(200, json={"Version": "4.11.0.9"})
+    )
+    respx.get("http://emby:8096/emby/Sessions").mock(return_value=httpx.Response(200, json=[raw]))
+    lookup = respx.get(f"http://emby:8096/emby/Users/{user}/Items/{item}").mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                "MediaSources": [
+                    {"Id": "other", "Path": "http://idk:3000/view/.ids/a/wrong?downloadKey=S"},
+                    {"Id": source, "Path": "http://idk:3000/view/.ids/4/0/abc-123?downloadKey=S"},
+                ]
+            },
+        )
+    )
+    cfg = InstanceConfig(
+        id="emby-1",
+        service_type=ServiceType.EMBY,
+        name="Emby",
+        base_url="http://emby:8096",
+        secrets={"api_key": "K"},
+    )
+    integration = EmbyIntegration(cfg, SOURCE)
+    try:
+        first = await integration.poll(full=False)
+        second = await integration.poll(full=False)
+    finally:
+        await integration.aclose()
+    assert lookup.call_count == 1  # cached per item and media source
+    assert lookup.calls.last.request.url.params["Fields"] == "MediaSources"
+    for result in (first, second):
+        assert result.sessions is not None
+        assert result.sessions[0].strm_target == "abc-123"
+        assert "downloadKey" not in result.sessions[0].model_dump_json()

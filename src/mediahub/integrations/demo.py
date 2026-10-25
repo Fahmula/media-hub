@@ -34,7 +34,9 @@ from mediahub.models.infinidysk import (
     CacheStats,
     CircuitState,
     InfiniDyskStats,
+    ProblemOutcome,
     ProviderStats,
+    ReadProblem,
 )
 from mediahub.models.issues import Severity
 from mediahub.models.playback import (
@@ -361,6 +363,7 @@ def _session(play: _Play, src: SourceRef, idx: int) -> PlaybackSession:
         client=play.client,
         client_version="4.9.1",
         remote_address="192.168.1.42",
+        file_name=None if play.kind is MediaKind.LIVE_TV else f"{_demo_file(play)}.strm",
         state=PlaybackState.PAUSED if play.paused else PlaybackState.PLAYING,
         position_s=position,
         duration_s=play.duration_s,
@@ -427,6 +430,41 @@ def _history(service: ServiceType, src: SourceRef) -> list[ActivityEvent]:
     return events
 
 
+def _demo_file(play: _Play) -> str:
+    return f"{play.title.replace(' ', '.')}.2160p.mkv"
+
+
+def _demo_problems(kind: int, file_name: str) -> list[ReadProblem]:
+    """0 clean, 1 recovered, 2 failed: the demo shows every health state."""
+    now = datetime.now(UTC)
+    path = f'"/content/movies/{file_name}"'
+    if kind == 1:
+        return [
+            ReadProblem(
+                at=now - timedelta(minutes=4),
+                outcome=ProblemOutcome.RECOVERED,
+                message=f'Article "a1b2c3@news.example" missing on all providers while reading '
+                f'"{file_name}". Filling the 768000-byte gap to preserve later file offsets.',
+            )
+        ]
+    if kind == 2:
+        return [
+            ReadProblem(
+                at=now - timedelta(minutes=6),
+                outcome=ProblemOutcome.RECOVERED,
+                message=f'Article "d4e5f6@news.example" missing on all providers while reading '
+                f'"{file_name}". Filling the 768000-byte gap to preserve later file offsets.',
+            ),
+            ReadProblem(
+                at=now - timedelta(minutes=1),
+                outcome=ProblemOutcome.FAILED,
+                message=f"File {path} has missing articles: Article with message-id "
+                "d4e5f6@news.example not found.",
+            ),
+        ]
+    return []
+
+
 def _infinidysk(seed: int, plays: list[_Play], src: SourceRef) -> InfiniDyskStats:
     rng = random.Random(seed + int(time.time() // 10))
     t = time.time() / 30
@@ -438,8 +476,8 @@ def _infinidysk(seed: int, plays: list[_Play], src: SourceRef) -> InfiniDyskStat
     reads = [
         ActiveRead(
             read_id=f"r{i}",
-            file_name=f"{p.title.replace(' ', '.')}.2160p.mkv",
-            path=f"/mnt/nzbdav/movies/{p.title}",
+            file_name=_demo_file(p),
+            path=f"/content/movies/{_demo_file(p)}",
             client_ip="172.18.0.5",
             client_label="Emby",
             started_at=datetime.now(UTC) - timedelta(minutes=12 + 7 * i),
@@ -448,6 +486,8 @@ def _infinidysk(seed: int, plays: list[_Play], src: SourceRef) -> InfiniDyskStat
             file_size=int((29.7 - 5 * i) * GB),
             offset_pct=62.0 - 13 * i,
             speed_bps=(95 - 17 * i) * 1024**2,
+            providers=["Newshosting", "Eweka"] if i else ["Newshosting"],
+            problems=_demo_problems((i + seed) % 3, _demo_file(p)),
         )
         for i, p in enumerate(plays)
         if p.method is not PlayMethod.UNKNOWN and not p.paused
@@ -480,6 +520,8 @@ def _infinidysk(seed: int, plays: list[_Play], src: SourceRef) -> InfiniDyskStat
                 error_rate=0.011,
                 connections_active=4,
                 connections_max=20,
+                saves=37,
+                last_failure="430 No Such Article",
             ),
         ],
         cache=CacheStats(
@@ -489,6 +531,7 @@ def _infinidysk(seed: int, plays: list[_Play], src: SourceRef) -> InfiniDyskStat
             hit_rate=0.62 + rng.uniform(-0.03, 0.03),
         ),
         reads=reads,
+        articles_recovered=41,
         queue_count=42 if seed == 1 else 18,
     )
 

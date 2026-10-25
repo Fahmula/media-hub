@@ -8,7 +8,9 @@ Wire format taken from the InfiniDysk source (``main`` @ a72e11d7, v1.6.x):
   and ``connectionBudget.activeTransferOperations``.
 * ``/api/get-overview-stats``: ``tiles``, ``throughput[]`` (per-bucket ``bytesServed``,
   bucket size ``throughputBucketSizeMs``), ``providers[]`` (``speedMbPerSec``, ``errorRate``
-  0..1, ``circuitState`` ``closed|open|halfOpen``, ``lastFailureReason``), ``latency``.
+  0..1, ``circuitState`` ``closed|open|halfOpen``, ``lastFailureReason``), ``latency``,
+  ``failover`` (``articlesRecovered``: articles another provider served after a miss in the
+  window; ``rescuedBy[]`` ``{provider, nickname, saves}``).
 * ``/metrics``: ``nzbdav_circuit_state{provider_key}`` (0 closed, 1 open, 2 half-open),
   ``nzbdav_nntp_pool_connections{provider_key,state="active"}``,
   ``nzbdav_nntp_pool_max_connections{provider_key,limit="effective"}``, ``nzbdav_active_reads``
@@ -33,6 +35,7 @@ from mediahub.models.infinidysk import (
     CircuitState,
     InfiniDyskStats,
     ProviderStats,
+    ReadProblem,
 )
 
 _CIRCUIT_WIRE = {
@@ -95,9 +98,18 @@ def client_label(user_agent: str | None) -> str | None:
 
 
 def map_read(
-    raw: Mapping[str, Any], speed_bps: float | None = None, *, idle: bool = False
+    raw: Mapping[str, Any],
+    speed_bps: float | None = None,
+    *,
+    idle: bool = False,
+    problems: list[ReadProblem] | None = None,
 ) -> ActiveRead:
     size = _int(raw.get("fileSize"))
+    served = [
+        (name, _int(p.get("segments")) or 0)
+        for p in map(_dict, _list(raw.get("providers")))
+        if (name := _str(p.get("nickname")) or _str(p.get("host")))
+    ]
     offset = _num(raw.get("currentOffset"))
     return ActiveRead(
         read_id=str(raw.get("id", "")),
@@ -112,6 +124,8 @@ def map_read(
         offset_pct=min(100.0, offset / size * 100) if size and offset is not None else None,
         speed_bps=speed_bps,
         idle=idle,
+        providers=[name for name, _ in sorted(served, key=lambda s: -s[1])],
+        problems=problems or [],
     )
 
 
@@ -153,6 +167,12 @@ def map_providers(
         if (key := _str(_dict(row).get("provider")))
     }
     live = {key: b for b in breakers if (key := _str(_dict(b).get("provider")))}
+    rescued = _dict((overview or {}).get("failover")).get("rescuedBy")
+    saves = {
+        key: _int(r.get("saves")) or 0
+        for r in map(_dict, _list(rescued))
+        if (key := _str(r.get("provider")))
+    }
     metric_circuits = metrics.by_label("nzbdav_circuit_state", "provider_key") if metrics else {}
     # connectionBudget is often null (seen live), so the pool gauges come first.
     pool_active = (
@@ -193,6 +213,7 @@ def map_providers(
                 else _int(item.get("effectiveMaxConnections"))
                 or _int(budget.get("effectiveTransferLimit")),
                 over_limit=item.get("overLimit") is True,
+                saves=saves.get(key, 0) if key and isinstance(rescued, list) else None,
             )
         )
     return out
@@ -217,6 +238,7 @@ class LiveState:
     error: str | None = None
     tiles: dict[str, Any] | None = None  # latest ``ls`` payload, None when stale
     reads: list[ActiveRead] = field(default_factory=list)
+    recent: list[ActiveRead] = field(default_factory=list)  # files no longer being read
 
 
 def build_stats(
@@ -254,6 +276,8 @@ def build_stats(
         ),
         cache=map_cache(metrics) if metrics is not None else None,
         reads=live.reads if live.connected else [],
+        recent_reads=live.recent if live.connected else [],
         live=live.connected,
         feed_error=live.error,
+        articles_recovered=_int(_dict((overview or {}).get("failover")).get("articlesRecovered")),
     )

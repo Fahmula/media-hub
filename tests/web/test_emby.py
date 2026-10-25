@@ -12,6 +12,12 @@ from fastapi.testclient import TestClient
 from mediahub.integrations import image_refs
 from mediahub.integrations.emby.mapper import map_session
 from mediahub.models.common import ServiceStatus, ServiceType, SourceRef
+from mediahub.models.infinidysk import (
+    ActiveRead,
+    InfiniDyskStats,
+    ProblemOutcome,
+    ReadProblem,
+)
 from mediahub.models.snapshot import ServiceSnapshot
 
 FIXTURES = Path(__file__).parent.parent / "fixtures" / "emby"
@@ -125,3 +131,44 @@ def test_layout_toggle_is_remembered(authed: TestClient) -> None:
     partial = authed.get("/partials/service/emby").text  # cookie now carries the choice
     assert "md:grid-cols-2" not in partial and "Movie 1" in partial
     assert "Detailed" in authed.get("/emby?layout=bogus").text
+
+
+def _infinidysk_snapshot(client: TestClient, problem: str | None) -> ServiceSnapshot:
+    identity = client.app.state.ctx.identity  # type: ignore[attr-defined]
+    problems = (
+        [ReadProblem(at=datetime.now(UTC), outcome=ProblemOutcome.FAILED, message=problem)]
+        if problem
+        else []
+    )
+    return ServiceSnapshot(
+        source=SourceRef(
+            server_id=identity.server_id,
+            server_name=identity.server_name,
+            instance_id="idk-1",
+            instance_name="InfiniDysk",
+            service_type=ServiceType.INFINIDYSK,
+        ),
+        status=ServiceStatus.OK,
+        infinidysk=InfiniDyskStats(
+            live=True,
+            reads=[
+                ActiveRead(read_id="r1", file_name="file", providers=["Primary"], problems=problems)
+            ],
+        ),
+    )
+
+
+def test_stream_health_replaces_transcode_bar(authed: TestClient) -> None:
+    store = authed.app.state.ctx.monitor.store  # type: ignore[attr-defined]
+    store.put_local(_captured_snapshot(authed, "movie-and-paused"))  # Movie 1 plays file.strm
+    store.put_local(_infinidysk_snapshot(authed, 'File "file" has missing articles: gone'))
+    html = authed.get("/partials/service/emby").text
+    assert "Playback problem" in html and "has missing articles: gone" in html
+    assert "Transcoding audio only" not in html  # the old bar
+    assert "Transcode (" in html and "transcoded 3%" in html  # folded into the details
+    rows = authed.get("/partials/dashboard/streams").text
+    assert "InfiniDysk: Playback problem" in rows
+
+    store.put_local(_infinidysk_snapshot(authed, None))
+    html = authed.get("/activity?tab=playback").text
+    assert "No problems reported" in html and "Served by Primary" in html

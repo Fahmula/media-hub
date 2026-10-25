@@ -3,10 +3,17 @@
 API notes (Emby 4.x): token in ``X-Emby-Token``; all routes under ``/emby``;
 ``/System/Info/Public`` needs no auth and ``/System/Info`` validates the key. ``/Sessions``
 lists every connected client; only entries with a ``NowPlayingItem`` are playing.
+
+``/Sessions`` has no ``MediaSources``. For a STRM item (``Path`` ends in ``.strm``) the URL it
+points to is only in ``/Users/{user}/Items/{item}`` → ``MediaSources[].Path``. Its last path
+segment is InfiniDysk's item id, which is how a stream is matched to the InfiniDysk read (the
+.strm file itself is usually renamed by Sonarr/Radarr). Looked up once per item and cached.
 """
 
 from __future__ import annotations
 
+import asyncio
+import time
 from typing import Any, ClassVar
 
 from mediahub.integrations.base import (
@@ -17,7 +24,7 @@ from mediahub.integrations.base import (
     Integration,
     PollResult,
 )
-from mediahub.integrations.emby.mapper import map_session
+from mediahub.integrations.emby.mapper import map_session, strm_target
 from mediahub.integrations.errors import ErrorKind, IntegrationError
 from mediahub.integrations.http import get_json, make_client, request
 from mediahub.integrations.image_refs import image_url, valid_part
@@ -28,6 +35,8 @@ from mediahub.models.snapshot import HealthCheck
 
 IMAGE_MAX_WIDTH = 300
 IMAGE_MAX_BYTES = 5 * 1024 * 1024
+STRM_CACHE_MAX = 500
+STRM_RETRY_S = 300.0  # a failed lookup is retried after this long
 
 
 def emby_api_root(base_url: str) -> str:
@@ -60,6 +69,8 @@ class EmbyIntegration(Integration):
             headers={"X-Emby-Token": config.secrets.get("api_key", "")},
             verify_tls=config.options.get("verify_tls", True),
         )
+        # (item id, media source id) -> (target segment or None, monotonic time looked up)
+        self._strm: dict[tuple[str, str], tuple[str | None, float]] = {}
 
     async def test_connection(self) -> ConnectionTestResult:
         result = ConnectionTestResult(ok=False)
@@ -100,8 +111,66 @@ class EmbyIntegration(Integration):
         return PollResult(
             version=info.get("Version"),
             health_checks=checks,
-            sessions=self.map_sessions(sessions),
+            sessions=await self._with_strm_targets(sessions, self.map_sessions(sessions)),
         )
+
+    async def _with_strm_targets(
+        self, raw: list[Any], sessions: list[PlaybackSession]
+    ) -> list[PlaybackSession]:
+        wanted: dict[str, tuple[str, str, str]] = {}  # session id -> (user, item, source)
+        for entry in raw:
+            if not isinstance(entry, dict) or not isinstance(entry.get("NowPlayingItem"), dict):
+                continue
+            item = entry["NowPlayingItem"]
+            path, user, item_id = item.get("Path"), entry.get("UserId"), item.get("Id")
+            source = (entry.get("PlayState") or {}).get("MediaSourceId") or ""
+            if (
+                isinstance(path, str)
+                and path.lower().endswith(".strm")
+                and isinstance(user, str)
+                and isinstance(item_id, str)
+                and valid_part(user)
+                and valid_part(item_id)
+            ):
+                wanted[str(entry.get("Id"))] = (user, item_id, str(source))
+        if not wanted:
+            return sessions
+        now = time.monotonic()
+        missing = {
+            (user, item, source)
+            for user, item, source in wanted.values()
+            if (cached := self._strm.get((item, source))) is None
+            or (cached[0] is None and now - cached[1] > STRM_RETRY_S)
+        }
+        if missing:
+            await asyncio.gather(*(self._lookup_strm(*m, now) for m in missing))
+        out = []
+        for s in sessions:
+            key = wanted.get(s.session_id)
+            target = self._strm.get((key[1], key[2]), (None, 0.0))[0] if key else None
+            out.append(s.model_copy(update={"strm_target": target}) if target else s)
+        return out
+
+    async def _lookup_strm(self, user: str, item_id: str, source_id: str, now: float) -> None:
+        target = None
+        try:
+            item = await get_json(
+                self._client, f"/Users/{user}/Items/{item_id}", params={"Fields": "MediaSources"}
+            )
+        except IntegrationError:
+            item = None
+        raw = item.get("MediaSources") if isinstance(item, dict) else None
+        sources = [s for s in raw or [] if isinstance(s, dict)]
+        chosen = next((s for s in sources if s.get("Id") == source_id), None) or (
+            sources[0] if sources else None
+        )
+        if chosen is not None:
+            target = strm_target(
+                chosen.get("Path") if isinstance(chosen.get("Path"), str) else None
+            )
+        if len(self._strm) >= STRM_CACHE_MAX:
+            self._strm.clear()
+        self._strm[(item_id, source_id)] = (target, now)
 
     def map_sessions(self, raw: list[Any]) -> list[PlaybackSession]:
         instance_id = self.config.id

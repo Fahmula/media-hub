@@ -13,7 +13,7 @@ allowlist.
 Every poll reads provider usage (frontend) and, with a backend URL, ``/health``, ``/ready`` and
 ``/metrics``: cheap, and enough for issues (circuits, byte limits, health). While someone is
 looking, polls add the overview statistics (at most every 30 s, like InfiniDysk's own UI;
-the query is not free) and keep the live WebSocket feed open. See ``mapper.py`` for fields.
+the query is not free). The live WebSocket feed is kept open all the time. See ``mapper.py``.
 """
 
 from __future__ import annotations
@@ -41,9 +41,12 @@ from mediahub.integrations.http import USER_AGENT, get_json, make_client, reques
 from mediahub.integrations.infinidysk.mapper import build_stats
 from mediahub.integrations.infinidysk.metrics import Metrics
 from mediahub.integrations.infinidysk.ws import LiveFeed
+from mediahub.logging import get_logger
 from mediahub.models.common import ServiceStatus, ServiceType, SourceRef
 from mediahub.models.issues import Severity
 from mediahub.models.snapshot import HealthCheck
+
+log = get_logger(__name__)
 
 # Read-only routes only. Anything else is refused before a request is made.
 FRONTEND_READ_PATHS = frozenset(
@@ -53,6 +56,8 @@ SAB_READ_MODES = frozenset({"queue", "history", "warnings", "status", "server_st
 BACKEND_READ_PATHS = frozenset({"/health", "/ready", "/metrics"})
 
 OVERVIEW_PARAMS = {"window": "1h", "sections": "window,detail"}
+# Once per feed connect: problems logged before MediaHub was watching (see logs.py).
+LOG_BACKFILL_PARAMS = {"levels": "Information,Warning,Error,Fatal", "limit": "2000"}
 OVERVIEW_EVERY_S = 30.0
 OVERVIEW_MAX_AGE_S = 90.0  # keep showing the last overview through a failed refresh
 
@@ -233,13 +238,13 @@ class InfiniDyskIntegration(Integration):
                     )
                 )
 
-        overview = None
-        if full:
-            overview = await self._fresh_overview(checks)
-            if self._feed is not None:
-                self._feed.start()
-        elif self._feed is not None:
-            await self._feed.stop()  # nobody is looking: no live feed, no overview queries
+        # The overview query isn't free: only while someone is looking. The live feed always
+        # runs, or a read burst of a buffering player is missed and its stream can't be matched.
+        overview = await self._fresh_overview(checks) if full else None
+        if self._feed is not None:
+            self._feed.start()
+            if self._feed.connected and self._feed.needs_backfill:
+                await self._backfill_logs(self._feed)
 
         status = ServiceStatus.DEGRADED if checks else ServiceStatus.OK
         return PollResult(
@@ -249,11 +254,22 @@ class InfiniDyskIntegration(Integration):
                 usage=usage,
                 overview=overview,
                 metrics=metrics,
-                live=self._feed.state() if self._feed is not None and full else None,
+                live=self._feed.state() if self._feed is not None else None,
                 healthy=healthy,
                 ready=ready,
             ),
         )
+
+    async def _backfill_logs(self, feed: LiveFeed) -> None:
+        feed.needs_backfill = False  # one try per connect; the live topic covers the rest
+        try:
+            data = await self._get("/api/get-logs", LOG_BACKFILL_PARAMS)
+        except IntegrationError as exc:
+            log.warning("infinidysk_log_backfill_failed", error=exc.message)
+            return
+        entries = data.get("entries") if isinstance(data, dict) else None
+        if isinstance(entries, list):
+            feed.logs.add(entries)
 
     async def _fresh_overview(self, checks: list[HealthCheck]) -> dict[str, Any] | None:
         now = time.monotonic()

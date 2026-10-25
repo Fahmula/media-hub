@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import time
 from collections.abc import Iterator
 from pathlib import Path
@@ -55,6 +56,11 @@ def test_dashboard_shows_both_servers_and_issues(demo_client: TestClient) -> Non
     assert "Brother Server" in html
     assert "Needs attention" in html
     assert "The download is stalled with no connections" in html
+    assert "sec-status" not in html and "Services online" not in html
+
+
+def test_status_partial_is_gone(demo_client: TestClient) -> None:
+    assert demo_client.get("/partials/dashboard/status").status_code == 404
 
 
 def test_scope_selection_is_remembered(demo_client: TestClient) -> None:
@@ -72,3 +78,16 @@ def test_demo_poster_escapes_title(demo_client: TestClient) -> None:
     resp = demo_client.get("/img/demo/x.svg", params={"t": "<script>alert(1)</script>"})
     assert resp.status_code == 200
     assert "<script>" not in resp.text
+
+
+def test_layout_grids_have_a_base_column_template() -> None:
+    """An implicit grid column grows to its widest unbreakable line (a truncated title, a
+    release name) and pushes the page sideways on phones; `grid-cols-1` is minmax(0, 1fr)."""
+    templates = Path(__file__).parents[2] / "src" / "mediahub" / "templates"
+    unsized = []
+    for path in templates.rglob("*.html"):
+        for classes in re.findall(r'class="([^"]*)"', path.read_text()):
+            names = classes.split()
+            if "grid" in names and not any(re.fullmatch(r"grid-cols-\S+", n) for n in names):
+                unsized.append(f"{path.relative_to(templates)}: {classes}")
+    assert unsized == []

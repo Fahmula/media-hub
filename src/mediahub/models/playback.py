@@ -117,6 +117,10 @@ class PlaybackSession(Model):
     client: str | None = None
     client_version: str | None = None
     remote_address: str | None = None  # stripped before data leaves this server
+    file_name: str | None = None  # basename of the played file (e.g. "X.mkv.strm"), no path
+    # STRM items: last path segment of the URL inside the .strm (InfiniDysk's item id). Only
+    # that segment: the URL's query carries InfiniDysk's download key.
+    strm_target: str | None = None
     state: PlaybackState = PlaybackState.PLAYING
     position_s: float | None = None
     duration_s: float | None = None

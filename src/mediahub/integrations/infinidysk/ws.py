@@ -6,16 +6,20 @@ internal ``FRONTEND_BACKEND_API_KEY`` (a wrong key is closed with 1008 "Unauthor
 ``{"Topic": "<name>", "Message": "<string>"}``. On connect InfiniDysk replays the last message
 of *every* state topic, subscribed or not, and some of those aren't JSON (``cxs`` is
 ``key|...``), so frames are filtered by topic first. We subscribe to ``ls`` (live tiles,
-every 5 s; JSON) and ``ar`` (active reads as JSON, sent only when something changed).
+every 5 s; JSON), ``ar`` (active reads as JSON, sent only when something changed) and ``log``
+(log lines, batched; the only per-stream problem signal, see ``logs.py``).
 
 InfiniDysk drops a read 15 s after its last byte, but players buffer ahead: seen live, Emby
 (STRM, ffmpeg) buffered ~850 MB in the first minute and the read vanished while playback went
 on. So dropped reads stay listed as idle for ``IDLE_LINGER_S`` after their last activity,
-until the same file is read again (InfiniDysk then starts a new read id).
+until the same file is read again (InfiniDysk then starts a new read id). Seen live: Emby's
+transcoder ran ahead and InfiniDysk had no read for minutes while the episode played, so files
+read in the last ``FILE_MEMORY_S`` are also kept (``LiveState.recent``) to link a playing Emby
+stream to its file and its log problems.
 
-The feed only runs while someone is looking (started by full polls, stopped by idle ones)
-and reconnects with backoff. Nothing here is ever sent upstream except the key and the
-subscription.
+The feed runs whenever the instance is polled (it is one cheap connection; missing a read
+burst means a stream can't be matched) and reconnects with backoff. Nothing here is ever sent
+upstream except the key and the subscription.
 """
 
 from __future__ import annotations
@@ -31,16 +35,24 @@ from websockets.asyncio.client import connect as ws_connect
 from websockets.exceptions import ConnectionClosed, InvalidHandshake, InvalidStatus
 
 from mediahub.integrations.http import USER_AGENT
+from mediahub.integrations.infinidysk.logs import LogBook
 from mediahub.integrations.infinidysk.mapper import LiveState, map_read
 from mediahub.logging import get_logger
 
 log = get_logger(__name__)
 
-TOPICS = ("ls", "ar")
+TOPICS = ("ls", "ar", "log")
 TILES_MAX_AGE_S = 15.0  # ``ls`` comes every 5 s; older means the feed is stuck
 SPEED_WINDOW_S = 10.0
 IDLE_READ_S = 5.0  # no bytes for this long: report 0 B/s rather than the last rate
 IDLE_LINGER_S = 600.0
+FILE_MEMORY_S = 6 * 3600.0
+MAX_FILES = 100
+# Log lines about a file count from the start of its playback (minus this slack). A read
+# that starts within PLAYBACK_GAP_S of the file's last activity continues the same playback
+# (players buffer far ahead), so a reopened file keeps the earlier problems.
+PLAYBACK_GAP_S = 1800.0
+PROBLEM_SLACK_MS = 5000.0
 MAX_FRAME_BYTES = 4 * 1024 * 1024
 BACKOFF_S = (2.0, 5.0, 15.0, 30.0, 60.0)
 
@@ -66,6 +78,13 @@ class LiveFeed:
         self._samples: dict[str, deque[tuple[float, float]]] = {}
         # Reads InfiniDysk dropped: id -> (last raw read, wall-clock time it was dropped).
         self._idle: dict[str, tuple[dict[str, Any], float]] = {}
+        # File key -> (playback start, last activity), unix ms. Survives reopened reads.
+        self._playbacks: dict[object, tuple[float, float]] = {}
+        # File key -> (last raw read of it, wall-clock time last seen). Survives reconnects.
+        self._files: dict[object, tuple[dict[str, Any], float]] = {}
+        # Kept across reconnects: the backfill after each connect dedupes against it.
+        self.logs = LogBook()
+        self.needs_backfill = False
 
     @property
     def running(self) -> bool:
@@ -82,6 +101,8 @@ class LiveFeed:
             with contextlib.suppress(asyncio.CancelledError):
                 await task
         self._reset()
+        self._files.clear()
+        self._playbacks.clear()
 
     def _reset(self) -> None:
         self.connected = False
@@ -93,15 +114,40 @@ class LiveFeed:
     def state(self) -> LiveState:
         now = time.monotonic()
         tiles = self._tiles if now - self._tiles_at <= TILES_MAX_AGE_S else None
-        reads = [map_read(raw, self._speed(raw, now)) for raw in self._reads]
         wall = time.time()
         self._idle = {
             read_id: (raw, dropped_at)
             for read_id, (raw, dropped_at) in self._idle.items()
             if wall - _last_activity(raw, dropped_at) <= IDLE_LINGER_S
         }
-        reads += [map_read(raw, 0.0, idle=True) for raw, _ in self._idle.values()]
-        return LiveState(connected=self.connected, error=self.error, tiles=tiles, reads=reads)
+        idle = [raw for raw, _ in self._idle.values()]
+        shown = {_file_key(raw) for raw in [*self._reads, *idle]}
+        self._files = {
+            k: v for k, v in self._files.items() if k in shown or wall - v[1] <= FILE_MEMORY_S
+        }
+        self._playbacks = {k: v for k, v in self._playbacks.items() if k in self._files}
+
+        def problems(raw: dict[str, Any]) -> list[Any]:
+            playback = self._playbacks.get(_file_key(raw))
+            since = playback[0] if playback else None
+            return self.logs.problems(
+                raw.get("path") if isinstance(raw.get("path"), str) else None,
+                raw.get("fileName") if isinstance(raw.get("fileName"), str) else None,
+                since - PROBLEM_SLACK_MS if since is not None else None,
+            )
+
+        reads = [
+            map_read(raw, self._speed(raw, now), problems=problems(raw)) for raw in self._reads
+        ]
+        reads += [map_read(raw, 0.0, idle=True, problems=problems(raw)) for raw in idle]
+        recent = [
+            map_read(raw, 0.0, idle=True, problems=problems(raw))
+            for key, (raw, _) in self._files.items()
+            if key not in shown
+        ]
+        return LiveState(
+            connected=self.connected, error=self.error, tiles=tiles, reads=reads, recent=recent
+        )
 
     # ----- connection --------------------------------------------------------------------
     async def _run(self) -> None:
@@ -120,6 +166,7 @@ class LiveFeed:
                     async for frame in ws:
                         if not self.connected:  # the key was accepted: frames only follow then
                             self.connected, self.error, failures = True, None, 0
+                            self.needs_backfill = True  # ``log`` isn't replayed on subscribe
                         self.handle(frame)
                     # Closed cleanly by InfiniDysk (e.g. it restarted).
                     self.error = describe_close(ws.close_code, ws.close_reason)
@@ -158,11 +205,18 @@ class LiveFeed:
             self._tiles, self._tiles_at = payload, time.monotonic()
         elif topic == "ar" and isinstance(payload.get("reads"), list):
             self._set_reads([r for r in payload["reads"] if isinstance(r, dict)])
+        elif topic == "log" and isinstance(payload.get("entries"), list):
+            self.logs.add(payload["entries"])
 
     def _set_reads(self, reads: list[dict[str, Any]]) -> None:
         now = time.monotonic()
         seen = set()
         for raw in reads:
+            self._track_playback(raw)
+            self._files[_file_key(raw)] = (raw, time.time())
+            if len(self._files) > MAX_FILES:
+                oldest = min(self._files, key=lambda k: self._files[k][1])
+                del self._files[oldest]
             read_id = str(raw.get("id", ""))
             seen.add(read_id)
             bytes_read = raw.get("bytesRead")
@@ -184,6 +238,18 @@ class LiveFeed:
             if read_id not in seen and _file_key(entry[0]) not in reading
         }
         self._reads = reads
+
+    def _track_playback(self, raw: dict[str, Any]) -> None:
+        started, last = raw.get("startedAt"), raw.get("lastActivityAt")
+        if not isinstance(started, int | float) or started <= 0:
+            return
+        last = last if isinstance(last, int | float) else started
+        key = _file_key(raw)
+        prev = self._playbacks.get(key)
+        if prev is not None and started - prev[1] <= PLAYBACK_GAP_S * 1000:
+            self._playbacks[key] = (min(prev[0], started), max(prev[1], last))
+        else:
+            self._playbacks[key] = (started, last)
 
     def _speed(self, raw: dict[str, Any], now: float) -> float | None:
         last = raw.get("lastActivityAt")

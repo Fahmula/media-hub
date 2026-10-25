@@ -1,25 +1,6 @@
 {% import "components/items.html" as items %}
 {% import "components/ui.html" as ui %}
-<div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-  <a href="/activity?tab=playback" class="panel flex items-center gap-3 p-3 transition-colors hover:border-primary/40">
-    {{ ui.service_tile("emby", "size-10", "size-5") }}
-    <div><p class="stat-num">{{ view.sessions|length }}</p><p class="text-xs muted">Streams{% if view.transcodes %} · {{ view.transcodes }} transcoding{% endif %}</p></div>
-  </a>
-  <a href="/activity?tab=downloads" class="panel flex items-center gap-3 p-3 transition-colors hover:border-primary/40">
-    <span class="svc-tile size-10 bg-primary/15 text-primary">{{ icon("arrow-down-to-line", "size-5") }}</span>
-    <div><p class="stat-num">{{ view.active_downloads }}</p><p class="text-xs muted">Downloading · {{ view.downloads|length }} queued</p></div>
-  </a>
-  <a href="/attention" class="panel flex items-center gap-3 p-3 transition-colors hover:border-primary/40">
-    <span class="svc-tile size-10 {{ 'bg-error/15 text-error' if view.error_count else ('bg-warning/15 text-warning' if view.issues else 'bg-success/15 text-success') }}">{{ icon("triangle-alert" if view.issues else "circle-check", "size-5") }}</span>
-    <div><p class="stat-num">{{ view.issues|length }}</p><p class="text-xs muted">Need{{ "s" if view.issues|length == 1 }} attention</p></div>
-  </a>
-  <a href="/servers" class="panel flex items-center gap-3 p-3 transition-colors hover:border-primary/40">
-    <span class="svc-tile size-10 bg-success/15 text-success">{{ icon("shield-check", "size-5") }}</span>
-    <div><p class="stat-num">{{ view.services_up }}<span class="text-sm font-normal muted">/{{ view.services_monitored }}</span></p><p class="text-xs muted">Services online</p></div>
-  </a>
-</div>
-
-<div class="mt-3 grid gap-3 lg:mt-4 lg:gap-4 {{ 'md:grid-cols-2' if view.servers|length > 1 }}">
+<div class="grid grid-cols-1 gap-3 lg:gap-4 {{ 'md:grid-cols-2' if view.servers|length > 1 }}">
   {% for card in view.servers %}
   <div class="panel p-3 sm:p-4">
     <div class="mb-3 flex items-center gap-3">

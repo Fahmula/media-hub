@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from typing import Any
+from urllib.parse import unquote, urlsplit
 
 from mediahub.models.common import SourceRef
 from mediahub.models.playback import (
@@ -81,6 +82,21 @@ def _seconds(ticks: Any) -> float | None:
 def _lower(value: Any) -> str | None:
     text = _str(value)
     return text.lower() if text else None
+
+
+def _basename(path: str | None) -> str | None:
+    if not path:
+        return None
+    return path.replace("\\", "/").rstrip("/").rsplit("/", 1)[-1] or None
+
+
+def strm_target(url: str | None) -> str | None:
+    """Last path segment of a STRM target URL, e.g. InfiniDysk's
+    ``http://host:3000/view/.ids/4/0/c/6/b/<item id>?downloadKey=…`` → ``<item id>``.
+    The query (a secret download key) is never looked at."""
+    if not url or "://" not in url:
+        return None
+    return _basename(unquote(urlsplit(url).path))
 
 
 def hdr_type(video: dict[str, Any]) -> HdrType | None:
@@ -221,6 +237,7 @@ def map_session(raw: Any, source: SourceRef, image_url: ImageUrl) -> PlaybackSes
         client=_str(session.get("Client")),
         client_version=_str(session.get("ApplicationVersion")),
         remote_address=_str(session.get("RemoteEndPoint")),
+        file_name=_basename(_str(item.get("Path"))),
         state=PlaybackState.PAUSED if play.get("IsPaused") is True else PlaybackState.PLAYING,
         position_s=_seconds(play.get("PositionTicks")),
         duration_s=_seconds(item.get("RunTimeTicks")),

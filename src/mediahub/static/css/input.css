@@ -100,6 +100,9 @@
   }
   body {
     @apply bg-base-200 text-base-content antialiased;
+    /* Release names and paths are long unbroken words: wrap them instead of widening the
+       page on phones. Unlike "anywhere", this doesn't shrink min-content sizes. */
+    overflow-wrap: break-word;
   }
   [x-cloak],
   [hidden] {
