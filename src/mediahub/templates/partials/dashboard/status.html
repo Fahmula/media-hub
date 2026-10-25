@@ -1,8 +1,0 @@
-{% import "components/items.html" as items %}
-{% import "components/ui.html" as ui %}
-{{ ui.section_header("System status", none, "/servers", "Servers") }}
-{% if view.snapshots %}
-  <div class="space-y-0.5">{% for svc in view.servers|map(attribute="services")|sum(start=[]) %}{{ items.service_status_row(svc, view.multi_server) }}{% endfor %}</div>
-{% else %}
-  {{ ui.empty_state("server", "No services yet", "Add your Emby, Sonarr, Radarr and InfiniDysk instances in Settings.") }}
-{% endif %}

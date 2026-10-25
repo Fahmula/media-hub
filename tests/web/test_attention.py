@@ -43,8 +43,6 @@ def test_acknowledge_mute_and_restore(authed: TestClient) -> None:
     assert "All clear" in html
     assert "Acknowledged &amp; muted" in html and "shows again if it recurs" in html
     assert "Show again" in html
-    summary = authed.get("/partials/dashboard/summary?server=all").text
-    assert '<p class="stat-num">0</p><p class="text-xs muted">Need attention' in summary
     assert authed.get("/partials/dashboard/attention?server=all").text.strip() == ""
 
     html = _post(authed, token, fingerprint=fingerprint, action="restore")

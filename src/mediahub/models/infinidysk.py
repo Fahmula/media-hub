@@ -17,6 +17,56 @@ class CircuitState(StrEnum):
     UNKNOWN = "unknown"
 
 
+class StreamHealth(StrEnum):
+    OK = "ok"
+    WARNING = "warning"
+    RECOVERED = "recovered"
+    FAILED = "failed"
+
+    @property
+    def label(self) -> str:
+        return {
+            "ok": "No problems reported",
+            "warning": "Warning",
+            "recovered": "Recovered",
+            "failed": "Playback problem",
+        }[self.value]
+
+    @property
+    def tone(self) -> str:
+        return {"ok": "success", "failed": "error"}.get(self.value, "warning")
+
+    @property
+    def icon(self) -> str:
+        return {"ok": "circle-check", "failed": "circle-x"}.get(self.value, "triangle-alert")
+
+
+class ProblemOutcome(StrEnum):
+    RECOVERED = "recovered"  # InfiniDysk filled a gap; playback went on
+    RETRIED = "retried"  # InfiniDysk answered 503 so the player retries
+    REPAIR = "repair"  # InfiniDysk started repairing the file
+    WARNING = "warning"  # another warning naming the file
+    FAILED = "failed"  # the read was aborted or returned an error to the player
+
+    @property
+    def label(self) -> str:
+        return {
+            "recovered": "Gap filled",
+            "retried": "Retried",
+            "repair": "Repair",
+            "warning": "Warning",
+            "failed": "Failed",
+        }[self.value]
+
+
+class ReadProblem(Model):
+    """One InfiniDysk log line about a file being read, kept verbatim."""
+
+    at: datetime
+    outcome: ProblemOutcome
+    message: str
+
+
 class ProviderStats(Model):
     name: str
     circuit: CircuitState = CircuitState.UNKNOWN
@@ -26,6 +76,7 @@ class ProviderStats(Model):
     connections_active: int | None = None
     connections_max: int | None = None
     over_limit: bool = False  # reached its configured byte limit
+    saves: int | None = None  # articles it served after another provider missed them (1 h)
 
 
 class CacheStats(Model):
@@ -58,6 +109,18 @@ class ActiveRead(Model):
     # InfiniDysk stopped tracking it (no data for 15 s); the player may still be playing
     # from its buffer. Kept for a while so buffered playback doesn't vanish from the list.
     idle: bool = False
+    providers: list[str] = []  # providers that served segments of this read
+    problems: list[ReadProblem] = []  # newest last; from InfiniDysk's log (see infinidysk.logs)
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def health(self) -> StreamHealth:
+        outcomes = {p.outcome for p in self.problems}
+        if ProblemOutcome.FAILED in outcomes:
+            return StreamHealth.FAILED
+        if outcomes - {ProblemOutcome.WARNING}:
+            return StreamHealth.RECOVERED
+        return StreamHealth.WARNING if outcomes else StreamHealth.OK
 
 
 class InfiniDyskStats(Model):
@@ -74,9 +137,13 @@ class InfiniDyskStats(Model):
     providers: list[ProviderStats] = []
     cache: CacheStats | None = None
     reads: list[ActiveRead] = []
+    # Files read in the last hours that InfiniDysk isn't reading now: a player can play from
+    # its buffer for many minutes. Used to link Emby streams to their file; not listed.
+    recent_reads: list[ActiveRead] = []
     live: bool = False  # reads come from the live feed (backend WebSocket)
     feed_error: str | None = None  # why the live feed isn't connected, when configured
     queue_count: int | None = None
+    articles_recovered: int | None = None  # rescued by another provider, overview window (1 h)
 
     @computed_field  # type: ignore[prop-decorator]
     @property

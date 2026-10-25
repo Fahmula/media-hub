@@ -29,7 +29,7 @@ from mediahub.integrations.infinidysk.mapper import (
 from mediahub.integrations.infinidysk.metrics import Metrics, parse
 from mediahub.integrations.infinidysk.ws import IDLE_LINGER_S, LiveFeed
 from mediahub.models.common import ServiceStatus, ServiceType, SourceRef
-from mediahub.models.infinidysk import CircuitState
+from mediahub.models.infinidysk import CircuitState, StreamHealth
 from mediahub.models.issues import IssueCategory
 from mediahub.models.snapshot import ServiceSnapshot
 from mediahub.monitoring.issues import derive_issues
@@ -45,6 +45,19 @@ SRC = SourceRef(
     service_type=ServiceType.INFINIDYSK,
 )
 FRONT = "http://idk:3000"
+# The constructed ``ar`` read's file, as InfiniDysk renders it (Serilog quotes strings).
+READ_PATH = "/content/movies/Movie.1.2026.2160p.WEB-DL/Movie.1.2026.2160p.WEB-DL.mkv"
+LOG_ENTRIES = [
+    {
+        "seq": 7,
+        "ts": 1792999280000 + 60_000,  # a minute into the constructed read
+        "level": "Warning",
+        "msg": 'Article "abc@x" missing on all providers while reading '
+        '"Movie.1.2026.2160p.WEB-DL.mkv". Filling the 768000-byte gap to preserve later '
+        "file offsets.",
+        "source": "NzbWebDAV.Streams.MultiSegmentStream",
+    }
+]
 BACK = "http://idk:8080"
 
 
@@ -196,6 +209,9 @@ def _mock(router: Any = respx) -> dict[str, respx.Route]:
         "metrics": router.get(f"{BACK}/metrics").mock(
             return_value=httpx.Response(200, text=FIXTURE["metrics"])
         ),
+        "logs": router.get(f"{FRONT}/api/get-logs").mock(
+            return_value=httpx.Response(200, json={"status": True, "entries": LOG_ENTRIES})
+        ),
     }
 
 
@@ -266,7 +282,7 @@ async def test_live_feed_subscribes_and_tracks_state(backend: tuple[str, list[st
     feed.start()
     await _wait(lambda: feed.state().tiles is not None)
     state = feed.state()
-    assert received == ["internal-key", '{"sub": ["ls", "ar"]}']
+    assert received == ["internal-key", '{"sub": ["ls", "ar", "log"]}']
     assert state.connected and state.error is None
     assert [r.file_name for r in state.reads] == ["Movie.1.2026.2160p.WEB-DL.mkv"]
     await feed.stop()
@@ -282,20 +298,33 @@ async def test_live_feed_reports_rejected_key(backend: tuple[str, list[str]]) ->
     await feed.stop()
 
 
-async def test_idle_poll_stops_the_feed(backend: tuple[str, list[str]]) -> None:
+async def test_feed_runs_on_idle_polls_too(backend: tuple[str, list[str]]) -> None:
     url, _ = backend
     integration = _integration(internal_key="internal-key")
     integration._feed = LiveFeed(url, "internal-key")
     with respx.mock(assert_all_called=False) as mock:
-        _mock(mock)
+        routes = _mock(mock)
         await integration.poll(full=True)
         assert integration._feed.running
         await _wait(lambda: integration._feed is not None and integration._feed.connected)
         full = await integration.poll(full=True)
         assert full.infinidysk is not None and full.infinidysk.live
         assert full.infinidysk.active_reads == 1
-        await integration.poll(full=False)
-        assert not integration._feed.running
+        # Logged before the feed connected: backfilled once, attached to the read.
+        assert routes["logs"].call_count == 1
+        params = routes["logs"].calls.last.request.url.params
+        assert params["levels"] == "Information,Warning,Error,Fatal"
+        read = full.infinidysk.reads[0]
+        assert read.health is StreamHealth.RECOVERED
+        assert read.problems[0].message.startswith('Article "abc@x" missing on all providers')
+        assert read.providers == ["Primary"]
+        await integration.poll(full=True)
+        assert routes["logs"].call_count == 1  # once per connect; the log topic does the rest
+        idle = await integration.poll(full=False)
+        # Nobody looking: no overview query, but the feed keeps watching reads.
+        assert integration._feed.running and routes["overview"].call_count == 1
+        assert idle.infinidysk is not None and idle.infinidysk.live
+        assert [r.read_id for r in idle.infinidysk.reads] == [read.read_id]
     await integration.aclose()
 
 

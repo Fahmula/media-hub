@@ -8,7 +8,7 @@
     <span class="badge badge-warning badge-soft badge-sm tabular-nums">{{ view.issues|length }}</span>
     {% if view.issues|length > 3 %}<a href="/attention" class="ml-auto text-xs font-medium text-primary hover:underline">View all</a>{% endif %}
   </div>
-  <div class="grid gap-x-4 lg:grid-cols-3">
+  <div class="grid grid-cols-1 gap-x-4 lg:grid-cols-3">
     {% for issue in view.issues[:3] %}{{ items.issue_row(issue, view.multi_server) }}{% endfor %}
   </div>
 </div>

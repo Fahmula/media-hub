@@ -27,9 +27,7 @@ from mediahub.web.templating import render
 
 router = APIRouter(dependencies=[Depends(require_auth), Depends(verify_csrf)])
 
-DASHBOARD_SECTIONS = frozenset(
-    {"attention", "summary", "streams", "downloads", "status", "infinidysk"}
-)
+DASHBOARD_SECTIONS = frozenset({"attention", "summary", "streams", "downloads", "infinidysk"})
 ActivityTab = Literal["playback", "downloads", "history", "streams"]
 # Mute choices on Needs Attention, in hours.
 MUTE_HOURS = (1, 24, 168)
