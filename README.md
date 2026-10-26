@@ -2,14 +2,14 @@
 
 A self-hosted, mobile-first dashboard for keeping an eye on **Emby**, **Sonarr**, **Radarr** and
 **InfiniDysk**: what's playing, what's downloading, and what needs attention. Each install
-monitors its own services; trusted installs can be linked read-only (coming in a later phase).
+monitors its own services; trusted installs can be linked read-only to see each other.
 
 Built with FastAPI, Jinja2 + HTMX, Tailwind CSS + daisyUI, SQLite. One small container, no
 Redis, no Node.js at runtime.
 
-> **Status: Phase 4.** Emby live sessions, Sonarr/Radarr queues and history, InfiniDysk
-> streaming, provider and cache metrics with live reads, and a Needs Attention list you can
-> acknowledge or mute. Linking installs (peer federation) lands in Phase 5.
+> **Status: Phase 5.** Emby live sessions, Sonarr/Radarr queues and history, InfiniDysk
+> streaming, provider and cache metrics with live reads, a Needs Attention list you can
+> acknowledge or mute, and read-only linking of MediaHub installs.
 
 ## Quick start
 
@@ -34,6 +34,20 @@ Served over HTTPS, MediaHub can be installed from the browser (**Install app** /
 **Add to Home Screen**) and opens like a native app, with an offline page when the server is
 unreachable. The service worker only caches static assets and that page, never monitoring
 data. Over plain `http://` it works as a normal website.
+
+### Link two installs
+
+Each MediaHub can show another one's activity, read-only. On the server to be read, open
+**Settings → Connected servers → Access tokens**, create a token (shown once) and copy it. On
+the other server, **Link a server** with the first one's URL and that token. To see each other,
+do it in both directions.
+
+- Use a private network: ideally the other server's Tailscale HTTPS name (`tailscale serve`).
+  Plain `http://` outside Tailscale or a LAN is flagged, since the token could be intercepted.
+- A linked server sees everything you see except credentials, client IP addresses and file
+  paths (removed before data leaves your server). It only ever sees your own services, never
+  the servers you link to.
+- Revoke a token at any time; that server loses access immediately.
 
 ## Configuration
 
@@ -67,6 +81,9 @@ encrypted with a key derived from `secret.key`; without it they must be re-enter
 - Redirects from services are never followed; the browser can't make MediaHub fetch arbitrary
   URLs. InfiniDysk calls are restricted to a read-only allowlist (some of its GET routes change
   state).
+- Linked servers authenticate with a bearer token (stored only as a SHA-256 hash, revocable,
+  rate limited) on a separate read-only `/peer/v1` API without cookies. Client IPs and file
+  paths are stripped from everything served there; a peer's own peers are never relayed.
 - The container drops to `PUID:PGID`, needs no privileges and no Docker socket, and runs with a
   read-only root filesystem.
 

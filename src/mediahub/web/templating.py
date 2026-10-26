@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
 
 from mediahub import __version__
@@ -46,6 +46,13 @@ THEMES = {"dark": "mediahub", "light": "mediahub-light"}
 
 def is_htmx(request: Request) -> bool:
     return request.headers.get("hx-request") == "true"
+
+
+def redirect(url: str, request: Request) -> Response:
+    """After a form post: a 303, or ``HX-Redirect`` for htmx (it doesn't follow 3xx usefully)."""
+    if is_htmx(request):
+        return Response(status_code=204, headers={"HX-Redirect": url})
+    return RedirectResponse(url, status_code=303)
 
 
 def render(

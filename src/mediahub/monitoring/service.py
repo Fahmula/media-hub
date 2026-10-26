@@ -1,8 +1,9 @@
-"""Owns the poller and keeps poll targets in sync with configured instances."""
+"""Owns the poller and keeps poll targets in sync with configured instances and peers."""
 
 from __future__ import annotations
 
 import asyncio
+from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -21,6 +22,10 @@ from mediahub.monitoring.demand import DemandTracker
 from mediahub.monitoring.poller import Poller
 from mediahub.monitoring.store import SnapshotStore
 from mediahub.monitoring.targets import InstanceTarget
+from mediahub.peers import repository as peer_repository
+from mediahub.peers.client import PeerClient
+from mediahub.peers.repository import PeerConfig
+from mediahub.peers.target import PeerTarget, target_key
 
 log = get_logger(__name__)
 
@@ -34,6 +39,15 @@ class LoadedInstance:
     service_type: ServiceType
     order: int
     config: InstanceConfig | None  # None when stored credentials can't be decrypted
+
+
+@dataclass(frozen=True)
+class LoadedPeer:
+    id: str
+    name: str
+    enabled: bool
+    config: PeerConfig | None  # None when the stored token can't be decrypted
+    last_success_at: datetime | None = None
 
 
 class MonitoringService:
@@ -57,6 +71,8 @@ class MonitoringService:
         items = await asyncio.to_thread(self._load)
         for item in items:
             await self._apply(item)
+        for peer in await asyncio.to_thread(self._load_peers):
+            await self._apply_peer(peer)
         if self._settings.demo_mode:
             for order, config in enumerate(demo_local_configs(), start=len(items)):
                 source = self.source_for(config)
@@ -158,12 +174,98 @@ class MonitoringService:
         finally:
             await integration.aclose()
 
+    # ----- peers -----------------------------------------------------------------------
+    def _load_peers(self) -> list[LoadedPeer]:
+        with session_scope(self._sessions) as db:
+            return [
+                LoadedPeer(
+                    row.id,
+                    row.name,
+                    row.enabled,
+                    peer_repository.safe_to_config(row),
+                    row.last_success_at,
+                )
+                for row in peer_repository.list_peers(db)
+            ]
+
+    async def _apply_peer(self, peer: LoadedPeer) -> None:
+        if not peer.enabled:
+            await self.poller.remove(target_key(peer.id))
+            self.store.remove_peer(peer.id, forget=False)
+            return
+        state = self.store.peer(peer.id, peer.name)
+        state.last_success_at = state.last_success_at or peer.last_success_at
+        if peer.config is None:
+            await self.poller.remove(target_key(peer.id))
+            state.status = ServiceStatus.ERROR
+            state.error = (
+                "The stored access token can't be decrypted (was the secret key changed?). "
+                "Enter it again in Settings → Connected servers."
+            )
+            return
+        await self.poller.add(
+            PeerTarget(
+                peer.config,
+                self.store,
+                self.demand,
+                on_status=self._persist_peer_status,
+                on_server_id=self._remember_server_id,
+            )
+        )
+
+    def peer_client(self, peer_id: str) -> PeerClient | None:
+        target = self.poller.get(target_key(peer_id))
+        return target.client if isinstance(target, PeerTarget) else None
+
+    async def reload_peer(self, peer_id: str) -> None:
+        """Re-read one peer after it was created, edited, enabled/disabled or deleted."""
+        peers = await asyncio.to_thread(self._load_peers)
+        peer = next((p for p in peers if p.id == peer_id), None)
+        if peer is None:
+            await self.poller.remove(target_key(peer_id))
+            self.store.remove_peer(peer_id)
+            return
+        if peer.config is not None and self.store.get_peer(peer_id) is not None:
+            # Name, URL or token changed: start from a clean slate, not the old data.
+            self.store.remove_peer(peer_id, forget=False)
+        await self._apply_peer(peer)
+        if peer.enabled and peer.config is not None:
+            await self.poller.poll_now(target_key(peer_id))
+
+    async def test_peer(self, config: PeerConfig) -> ConnectionTestResult:
+        client = PeerClient(config, self.store.identity.server_id)
+        try:
+            return await asyncio.wait_for(client.test(), TEST_TIMEOUT_S)
+        except TimeoutError:
+            result = ConnectionTestResult(ok=False)
+            result.add("Reach the peer", False, f"Timed out after {TEST_TIMEOUT_S:.0f}s")
+            return result
+        finally:
+            await client.aclose()
+
     # ----- status persistence ----------------------------------------------------------
     def _persist_status(self, instance_id: str, ok: bool, error: str | None, at: datetime) -> None:
         def write() -> None:
             with session_scope(self._sessions) as db:
                 repository.record_status(db, instance_id, ok, error, at)
 
+        self._in_background(write)
+
+    def _persist_peer_status(self, peer_id: str, ok: bool, error: str | None, at: datetime) -> None:
+        def write() -> None:
+            with session_scope(self._sessions) as db:
+                peer_repository.record_status(db, peer_id, ok, error, at)
+
+        self._in_background(write)
+
+    def _remember_server_id(self, peer_id: str, server_id: str) -> None:
+        def write() -> None:
+            with session_scope(self._sessions) as db:
+                peer_repository.remember_server_id(db, peer_id, server_id)
+
+        self._in_background(write)
+
+    def _in_background(self, write: Callable[[], None]) -> None:
         task = asyncio.create_task(asyncio.to_thread(write))
         self._background.add(task)
         task.add_done_callback(self._background.discard)

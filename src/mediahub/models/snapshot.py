@@ -42,8 +42,12 @@ class ServiceSnapshot(Model):
     infinidysk: InfiniDyskStats | None = None
     import_warning_grace_s: int | None = None  # per-instance override of the default
     issues: list[Issue] = []
+    # Set on a peer's services while that peer isn't responding: last known data only.
+    peer_down: bool = False
 
     def is_stale(self, now: datetime | None = None) -> bool:
+        if self.peer_down:
+            return True
         if self.fetched_at is None:
             return self.status is not ServiceStatus.PENDING
         now = now or datetime.now(UTC)
@@ -61,4 +65,5 @@ class ServerSnapshot(Model):
     server_name: str
     is_local: bool = True
     generated_at: datetime
+    app_version: str | None = None  # the MediaHub version that produced it (peer snapshots)
     services: list[ServiceSnapshot] = []

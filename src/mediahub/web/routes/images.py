@@ -16,6 +16,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import Response
 
+from mediahub.context import AppContext
 from mediahub.integrations import image_refs
 from mediahub.integrations.errors import IntegrationError
 from mediahub.web.deps import Ctx, require_auth
@@ -89,6 +90,36 @@ async def demo_poster(slug: str, t: Annotated[str, Query(max_length=60)] = "") -
 async def proxied_image(
     ctx: Ctx, instance_id: str, item_id: str, tag: str, signature: str
 ) -> Response:
+    return await serve_signed_image(ctx, instance_id, item_id, tag, signature)
+
+
+@router.get("/img/peer/{peer_id}/{instance_id}/{item_id}/{tag}/{signature}")
+async def peer_image(
+    ctx: Ctx, peer_id: str, instance_id: str, item_id: str, tag: str, signature: str
+) -> Response:
+    """A poster on a linked peer, fetched through its ``/peer/v1/img`` (it checks the
+    signature, which only it can make)."""
+    parts = (peer_id, instance_id, item_id, tag, signature)
+    if not all(image_refs.valid_part(p) for p in parts):
+        raise HTTPException(404, "Image not found")
+    key = "peer/" + "/".join(parts[:4])
+    cached = await run_in_threadpool(ctx.images.get, key)
+    if cached is not None:
+        return Response(cached[0], media_type=cached[1], headers=IMAGE_HEADERS)
+    client = ctx.monitor.peer_client(peer_id)
+    if client is None:
+        raise HTTPException(404, "Image not found")
+    try:
+        fetched = await asyncio.wait_for(client.fetch_image("/".join(parts[1:])), FETCH_TIMEOUT_S)
+    except TimeoutError:
+        fetched = None
+    return await _store_and_send(ctx, key, fetched)
+
+
+async def serve_signed_image(
+    ctx: AppContext, instance_id: str, item_id: str, tag: str, signature: str
+) -> Response:
+    """An image on a local instance, by a reference this server signed."""
     if not image_refs.verify(instance_id, item_id, tag, signature):
         raise HTTPException(404, "Image not found")
     key = f"{instance_id}/{item_id}/{tag}"
@@ -104,6 +135,10 @@ async def proxied_image(
         )
     except (IntegrationError, TimeoutError):
         fetched = None
+    return await _store_and_send(ctx, key, fetched)
+
+
+async def _store_and_send(ctx: AppContext, key: str, fetched: tuple[bytes, str] | None) -> Response:
     if fetched is None or fetched[1] not in ALLOWED_TYPES:
         raise HTTPException(404, "Image not available")
     data, content_type = fetched

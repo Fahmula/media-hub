@@ -97,8 +97,37 @@ class SnapshotStore:
         state.name = name
         return state
 
-    def remove_peer(self, peer_id: str) -> None:
-        self._peers.pop(peer_id, None)
+    def get_peer(self, peer_id: str) -> PeerState | None:
+        return self._peers.get(peer_id)
+
+    def put_peer(self, state: PeerState, snapshot: ServerSnapshot, now: datetime) -> None:
+        """A fresh snapshot from a peer: issues it no longer reports clear their acks here."""
+        for service in snapshot.services:
+            if service.status.is_up:
+                present = {i.fingerprint for i in service.issues}
+                self.issue_states.resolve_missing(service.source.key, present, now)
+        state.snapshot = snapshot
+        state.status = ServiceStatus.OK
+        state.error = None
+        state.last_success_at = now
+
+    def peer_linked_as(self, server_id: str, exclude: str) -> PeerState | None:
+        """Another peer entry already showing this server (the same MediaHub linked twice)."""
+        return next(
+            (
+                p
+                for p in self._peers.values()
+                if p.peer_id != exclude and p.snapshot and p.snapshot.server_id == server_id
+            ),
+            None,
+        )
+
+    def remove_peer(self, peer_id: str, *, forget: bool = True) -> None:
+        """Drop a peer's data; ``forget`` also drops what the user decided about its issues."""
+        state = self._peers.pop(peer_id, None)
+        if forget and state is not None and state.snapshot is not None:
+            for service in state.snapshot.services:
+                self.issue_states.forget_source(service.source.key)
 
     def peers(self) -> list[PeerState]:
         return sorted(self._peers.values(), key=lambda p: p.name.lower())
@@ -107,11 +136,14 @@ class SnapshotStore:
         snap = state.snapshot
         if snap is None:
             return None
+        if state.status is ServiceStatus.OK:
+            return snap
         if state.last_success_at is not None:
             age = (datetime.now(UTC) - state.last_success_at).total_seconds()
-            if state.status is not ServiceStatus.OK and age > REMOTE_RETENTION_S:
+            if age > REMOTE_RETENTION_S:
                 return None
-        return snap
+        services = [s.model_copy(update={"peer_down": True}) for s in snap.services]
+        return snap.model_copy(update={"services": services})
 
     # ----- issues ----------------------------------------------------------------------
     def _stamp(self, issue: Issue) -> Issue:

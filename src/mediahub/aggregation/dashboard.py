@@ -67,7 +67,7 @@ class ServerCard:
 
     @property
     def services_up(self) -> int:
-        return sum(1 for s in self.services if s.status.is_up)
+        return sum(1 for s in self.services if s.status.is_up and not s.stale)
 
 
 @dataclass(frozen=True)

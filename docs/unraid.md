@@ -44,8 +44,14 @@ Don't publish port 8080 of InfiniDysk to your LAN for this; the shared network i
 ## 4. Remote access and peers
 
 MediaHub is designed for a private network such as Tailscale. For HTTPS, `tailscale serve`
-in front of MediaHub works well; then set **Secure cookies** to `true`. Linking your install
-with your brother's (read-only, token-authenticated) arrives in Phase 5.
+in front of MediaHub works well; then set **Secure cookies** to `true`.
+
+To link your install with another one (read-only), on the server to be read go to
+**Settings → Connected servers**, create an access token and copy it (it's shown once). On the
+other server, **Link a server**, enter the first server's Tailscale URL (e.g.
+`https://mediahub.your-tailnet.ts.net`) and paste the token. **Test connection** checks the URL
+and token before saving. Repeat in the other direction for both to see each other. Client IPs,
+file paths and credentials never leave a server; revoking the token cuts access immediately.
 
 ### Install as an app
 

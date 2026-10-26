@@ -13,7 +13,7 @@
           {% if not card.is_local %}<span>· last sync {{ card.last_sync|reltime }}</span>{% endif %}
         </p>
       </div>
-      {% if card.is_local %}<a href="/settings/services" class="btn btn-ghost btn-sm">{{ icon("settings", "size-4") }}<span class="hidden sm:inline">Manage</span></a>{% endif %}
+      {% if card.is_local %}<a href="/settings#services" class="btn btn-ghost btn-sm">{{ icon("settings", "size-4") }}<span class="hidden sm:inline">Manage</span></a>{% endif %}
     </div>
     {% if card.error %}<div role="alert" class="alert alert-error alert-soft mb-3 text-sm">{{ icon("wifi-off", "size-4") }}<span>{{ card.error }}</span></div>{% endif %}
     {% if card.insecure_transport %}<div role="alert" class="alert alert-warning alert-soft mb-3 text-sm">{{ icon("triangle-alert", "size-4") }}<span>This peer is reached over plain HTTP outside Tailscale or a private network. Its access token could be intercepted.</span></div>{% endif %}
@@ -23,7 +23,7 @@
       <div class="flex items-center gap-3 px-1 py-2.5">
         {{ ui.service_tile(svc.source.slug, "size-9", "size-4.5") }}
         <div class="min-w-0 flex-1">
-          <p class="truncate text-sm font-medium">{{ svc.source.instance_name }} <span class="font-normal muted">· {{ svc.source.service_type.label if svc.source.service_type }}</span></p>
+          <p class="flex items-center gap-1.5 truncate text-sm font-medium">{{ svc.source.instance_name }} <span class="font-normal muted">· {{ svc.source.service_type.label if svc.source.service_type }}</span>{% if svc.stale and svc.status.value not in ("disabled", "pending") %}<span class="text-warning" title="Data is stale">{{ icon("clock", "size-3") }}</span>{% endif %}</p>
           <p class="truncate text-xs {{ 'text-error' if svc.error else 'muted' }}">{{ svc.error or (("v" ~ svc.version) if svc.version else "") }}{% if svc.checked_at %}{{ " · " if svc.error or svc.version }}checked {{ svc.checked_at|reltime }}{% endif %}</p>
         </div>
         <div class="flex shrink-0 flex-col items-end gap-1">{{ ui.status_badge(svc.status) }}<span class="text-xs muted">{{ svc.headline }}</span></div>
@@ -40,7 +40,8 @@
       <span class="svc-tile svc-peer size-9">{{ icon("network", "size-4.5") }}</span>
       <div class="min-w-0 flex-1 space-y-1">
         <h2 class="font-semibold">Connect another MediaHub</h2>
-        <p class="text-sm muted">Pair with a trusted MediaHub (for example over Tailscale) to see its activity here, read-only. Peer pairing arrives in a later release.</p>
+        <p class="text-sm muted">Link a trusted MediaHub (for example over Tailscale) to see its activity here, read-only. Create an access token on one server and paste it into the other.</p>
+        <a href="/settings#peers" class="btn btn-outline btn-sm mt-2">{{ icon("link-2", "size-4") }} Connected servers</a>
       </div>
     </div>
   </section>
