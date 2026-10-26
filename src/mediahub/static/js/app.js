@@ -2,6 +2,7 @@
 // - Live/paused toggle and tab-visibility gating for polled sections ([data-poll])
 // - Theme toggle (persisted in a cookie so the server renders the right theme, no flash)
 // - Toasts for failed requests
+// - Service worker registration (installable app, offline page)
 (() => {
   "use strict";
 
@@ -57,6 +58,7 @@
       const root = document.documentElement;
       const light = root.dataset.theme !== "mediahub-light";
       root.dataset.theme = light ? "mediahub-light" : "mediahub";
+      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", light ? "#f1f4f9" : "#0b1220");
       document.cookie = `mh_theme=${light ? "light" : "dark"}; path=/; max-age=31536000; samesite=lax`;
     }
   });
@@ -106,4 +108,13 @@
   });
 
   document.addEventListener("DOMContentLoaded", renderLiveToggle);
+
+  // Only available in secure contexts (HTTPS or localhost).
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js", { updateViaCache: "none" }).catch(() => {
+        /* not installable; the app works the same without it */
+      });
+    });
+  }
 })();
