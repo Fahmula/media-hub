@@ -24,13 +24,14 @@ from mediahub.monitoring.demand import DemandTracker
 from mediahub.monitoring.issue_states import IssueStates
 from mediahub.monitoring.service import MonitoringService
 from mediahub.monitoring.store import SnapshotStore
+from mediahub.peers import api as peer_api
 from mediahub.runtime_lock import InstanceLock
 from mediahub.security.headers import SecurityHeadersMiddleware
 from mediahub.security.passwords import MIN_PASSWORD_LENGTH, hash_password
 from mediahub.security.sessions import purge_expired
 from mediahub.web.deps import LoginRequired, SetupRequired, has_users
 from mediahub.web.image_cache import ImageCache
-from mediahub.web.routes import auth, health, images, pages, pwa
+from mediahub.web.routes import auth, health, images, pages, peers, pwa
 from mediahub.web.routes import settings as settings_routes
 from mediahub.web.templating import STATIC_DIR, is_htmx, render
 
@@ -151,6 +152,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(auth.router)
     app.include_router(auth.logout_router)
     app.include_router(images.router)
+    app.include_router(peer_api.router)
     app.include_router(settings_routes.router)
+    app.include_router(peers.router)
     app.include_router(pages.router)
     return app

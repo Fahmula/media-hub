@@ -64,6 +64,6 @@ filterwarnings = [
 
 [tool.mypy]
 python_version = "3.12"
-packages = ["mediahub.models", "mediahub.integrations"]
+packages = ["mediahub.models", "mediahub.integrations", "mediahub.monitoring", "mediahub.peers"]
 mypy_path = "src"
 ignore_missing_imports = true

@@ -21,6 +21,29 @@ StatusCallback = Callable[[str, bool, str | None, datetime], None]
 PERSIST_SUCCESS_EVERY_S = 300
 
 
+class StatusReporter:
+    """Calls back when the persisted status should change: on a change, or a periodic success."""
+
+    def __init__(self, key: str, callback: StatusCallback | None) -> None:
+        self._key = key
+        self._callback = callback
+        self._persisted: tuple[bool, str | None] | None = None
+        self._persisted_at: datetime | None = None
+
+    def report(self, ok: bool, error: str | None, at: datetime) -> None:
+        if self._callback is None:
+            return
+        state = (ok, error)
+        due = (
+            ok
+            and self._persisted_at is not None
+            and (at - self._persisted_at).total_seconds() >= PERSIST_SUCCESS_EVERY_S
+        )
+        if state != self._persisted or due:
+            self._persisted, self._persisted_at = state, at
+            self._callback(self._key, ok, error, at)
+
+
 class InstanceTarget(PollTarget):
     def __init__(
         self,
@@ -35,9 +58,7 @@ class InstanceTarget(PollTarget):
         self.key = integration.config.id
         self._store = store
         self._order = order
-        self._on_status = on_status
-        self._persisted: tuple[bool, str | None] | None = None
-        self._persisted_at: datetime | None = None
+        self._status = StatusReporter(self.key, on_status)
 
     def interval(self, active: bool) -> float:
         return float(self.integration.interval_s) if active else IDLE_INTERVAL_S
@@ -65,7 +86,7 @@ class InstanceTarget(PollTarget):
                     }
                 )
             )
-            self._report(False, exc.message, now)
+            self._status.report(False, exc.message, now)
             return False
         except Exception:
             log.exception("integration_poll_failed", instance=self.integration.config.name)
@@ -79,7 +100,7 @@ class InstanceTarget(PollTarget):
                     }
                 )
             )
-            self._report(False, "Unexpected error while polling", now)
+            self._status.report(False, "Unexpected error while polling", now)
             return False
 
         snapshot = ServiceSnapshot(
@@ -98,24 +119,11 @@ class InstanceTarget(PollTarget):
             import_warning_grace_s=result.import_warning_grace_s,
         )
         self._publish(snapshot)
-        self._report(True, None, now)
+        self._status.report(True, None, now)
         return True
 
     def _publish(self, snapshot: ServiceSnapshot) -> None:
         self._store.put_local(snapshot, order=self._order)
-
-    def _report(self, ok: bool, error: str | None, at: datetime) -> None:
-        if self._on_status is None:
-            return
-        state = (ok, error)
-        due = (
-            ok
-            and self._persisted_at is not None
-            and (at - self._persisted_at).total_seconds() >= PERSIST_SUCCESS_EVERY_S
-        )
-        if state != self._persisted or due:
-            self._persisted, self._persisted_at = state, at
-            self._on_status(self.key, ok, error, at)
 
     async def aclose(self) -> None:
         await self.integration.aclose()

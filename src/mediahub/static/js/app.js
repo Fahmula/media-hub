@@ -60,6 +60,18 @@
       root.dataset.theme = light ? "mediahub-light" : "mediahub";
       document.querySelector('meta[name="theme-color"]')?.setAttribute("content", light ? "#f1f4f9" : "#0b1220");
       document.cookie = `mh_theme=${light ? "light" : "dark"}; path=/; max-age=31536000; samesite=lax`;
+      return;
+    }
+    const copyBtn = evt.target.closest("[data-copy]");
+    if (copyBtn) {
+      const input = document.getElementById(copyBtn.dataset.copy);
+      if (!input) return;
+      input.select();
+      // The Clipboard API needs a secure context (HTTPS or localhost); otherwise the text
+      // stays selected for a manual copy.
+      const failed = () => toast("Couldn't copy: the text is selected, copy it manually", "warning");
+      if (!navigator.clipboard) return failed();
+      navigator.clipboard.writeText(input.value).then(() => toast("Copied", "success"), failed);
     }
   });
 

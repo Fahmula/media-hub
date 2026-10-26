@@ -6,7 +6,7 @@ from dataclasses import replace
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, Request
-from fastapi.responses import HTMLResponse, RedirectResponse, Response
+from fastapi.responses import HTMLResponse, Response
 from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 from starlette.concurrency import run_in_threadpool
@@ -24,16 +24,11 @@ from mediahub.models.common import ServiceType
 from mediahub.security.csrf import verify_csrf
 from mediahub.security.passwords import MIN_PASSWORD_LENGTH, hash_password, verify_password
 from mediahub.web.deps import CurrentUser, require_auth
-from mediahub.web.templating import render
+from mediahub.web.routes.peers import load_peer_settings
+from mediahub.web.templating import redirect, render
 
 log = get_logger(__name__)
 router = APIRouter(prefix="/settings", dependencies=[Depends(require_auth), Depends(verify_csrf)])
-
-
-def _redirect(url: str, request: Request) -> Response:
-    if request.headers.get("hx-request") == "true":
-        return Response(status_code=204, headers={"HX-Redirect": url})
-    return RedirectResponse(url, status_code=303)
 
 
 # ----- overview / general ------------------------------------------------------------------
@@ -41,15 +36,17 @@ def _redirect(url: str, request: Request) -> Response:
 async def settings_home(
     request: Request, ctx: AppContext = Depends(get_context), saved: str | None = None
 ) -> HTMLResponse:
-    def load() -> list[ServiceInstance]:
+    def load() -> tuple[list[ServiceInstance], dict[str, Any]]:
         with session_scope(ctx.sessions) as db:
-            return repository.list_instances(db)
+            instances = repository.list_instances(db)
+        return instances, load_peer_settings(ctx)
 
-    instances = await run_in_threadpool(load)
+    instances, peer_settings = await run_in_threadpool(load)
     return render(
         request,
         "pages/settings/index.html",
         {
+            **peer_settings,
             "page_title": "Settings",
             "instances": instances,
             "snapshots": {i.id: ctx.monitor.store.get_local(i.id) for i in instances},
@@ -170,7 +167,7 @@ async def create_service(request: Request, ctx: AppContext = Depends(get_context
         )
     log.info("instance_created", type=form.service_type.value, name=form.name)
     await ctx.monitor.reload_instance(instance_id)
-    return _redirect("/settings?saved=service", request)
+    return redirect("/settings?saved=service", request)
 
 
 def _load_instance(ctx: AppContext, instance_id: str) -> ServiceInstance:
@@ -258,7 +255,7 @@ async def update_service(
         )
     log.info("instance_updated", type=form.service_type.value, name=form.name)
     await ctx.monitor.reload_instance(instance_id)
-    return _redirect("/settings?saved=service", request)
+    return redirect("/settings?saved=service", request)
 
 
 @router.post("/services/{instance_id}/toggle")
@@ -274,7 +271,7 @@ async def toggle_service(
 
     await run_in_threadpool(flip)
     await ctx.monitor.reload_instance(instance_id)
-    return _redirect("/settings", request)
+    return redirect("/settings", request)
 
 
 @router.post("/services/{instance_id}/delete")
@@ -293,7 +290,7 @@ async def delete_service(
     name = await run_in_threadpool(remove)
     log.info("instance_deleted", name=name)
     await ctx.monitor.reload_instance(instance_id)
-    return _redirect("/settings?saved=deleted", request)
+    return redirect("/settings?saved=deleted", request)
 
 
 # ----- account -----------------------------------------------------------------------------
