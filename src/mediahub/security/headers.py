@@ -35,7 +35,7 @@ _HEADERS = [
     (b"cross-origin-opener-policy", b"same-origin"),
 ]
 
-_QUIET_PATHS = ("/healthz", "/static/")
+_QUIET_PATHS = ("/healthz", "/static/", "/sw.js", "/manifest.webmanifest")
 
 
 class SecurityHeadersMiddleware:

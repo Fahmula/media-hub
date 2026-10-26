@@ -30,7 +30,7 @@ from mediahub.security.passwords import MIN_PASSWORD_LENGTH, hash_password
 from mediahub.security.sessions import purge_expired
 from mediahub.web.deps import LoginRequired, SetupRequired, has_users
 from mediahub.web.image_cache import ImageCache
-from mediahub.web.routes import auth, health, images, pages
+from mediahub.web.routes import auth, health, images, pages, pwa
 from mediahub.web.routes import settings as settings_routes
 from mediahub.web.templating import STATIC_DIR, is_htmx, render
 
@@ -147,6 +147,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     _install_error_handlers(app)
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     app.include_router(health.router)
+    app.include_router(pwa.router)
     app.include_router(auth.router)
     app.include_router(auth.logout_router)
     app.include_router(images.router)

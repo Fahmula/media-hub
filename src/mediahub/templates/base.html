@@ -4,11 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0b1220">
+  <meta name="theme-color" content="{{ '#f1f4f9' if theme == 'mediahub-light' else '#0b1220' }}">
   <meta name="robots" content="noindex, nofollow">
   <meta name="htmx-config" content='{"includeIndicatorStyles": false, "allowEval": false, "allowScriptTags": false, "selfRequestsOnly": true, "historyCacheSize": 0, "defaultSettleDelay": 0}'>
   <title>{% block title %}{{ page_title|default("Dashboard") }}{% endblock %} · MediaHub</title>
   <link rel="icon" href="{{ static_url('img/favicon.svg') }}" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="{{ static_url('img/apple-touch-icon.png') }}">
+  <meta name="apple-mobile-web-app-title" content="MediaHub">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="{{ static_url('dist/app.css') }}">
   <script src="{{ static_url('vendor/htmx-2.0.10.min.js') }}" defer></script>
   <script src="{{ static_url('js/app.js') }}" defer></script>

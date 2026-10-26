@@ -39,6 +39,9 @@ git-ignored. Classes built from variables (e.g. `text-{{ tone }}`) must be safel
 - `db/` — models, `EncryptedJSON` (Fernet) for secrets, `UTCDateTime`; migrations in
   `migrations/versions/` (keep migrations free of app-type imports: use `sa.Text`/`sa.DateTime`).
 - `peers/redact.py` — strips IPs/paths before data leaves the server (Phase 5 federation).
+- `web/routes/pwa.py` — unauthenticated manifest, `/sw.js` (from `static/js/sw.js`, version
+  and precache list filled in) and `/offline`. The service worker must never cache pages or
+  partials (live, signed-in data); icons come from `scripts/build-icons.sh`.
 
 ## Rules and gotchas
 

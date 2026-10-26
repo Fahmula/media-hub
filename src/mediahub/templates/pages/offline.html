@@ -1,0 +1,31 @@
+{#- Standalone (not base.html): cached by the service worker, so no session or CSRF context. -#}
+{% import "components/ui.html" as ui %}
+<!doctype html>
+<html lang="en" data-theme="mediahub">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Offline · MediaHub</title>
+  <link rel="icon" href="{{ static_url('img/favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ static_url('dist/app.css') }}">
+  <script src="{{ static_url('js/offline.js') }}"></script>
+</head>
+<body class="min-h-dvh">
+<main class="flex min-h-dvh items-center justify-center px-4 py-10">
+  <div class="w-full max-w-sm">
+    <div class="mb-6 flex flex-col items-center gap-3">
+      {{ ui.logo("size-12") }}
+      <h1 class="text-2xl font-semibold">MediaHub</h1>
+      <p class="text-sm muted">Offline</p>
+    </div>
+    <div class="panel space-y-4 p-6 text-center">
+      <p class="text-sm">Can't reach MediaHub. Check your connection or VPN, then try again.</p>
+      <button type="button" class="btn btn-primary btn-sm" data-retry>Try again</button>
+    </div>
+  </div>
+</main>
+</body>
+</html>

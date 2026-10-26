@@ -28,6 +28,13 @@ simulated second server.
 
 See [docs/unraid.md](docs/unraid.md). A template is in [unraid/mediahub.xml](unraid/mediahub.xml).
 
+### Install as an app
+
+Served over HTTPS, MediaHub can be installed from the browser (**Install app** /
+**Add to Home Screen**) and opens like a native app, with an offline page when the server is
+unreachable. The service worker only caches static assets and that page, never monitoring
+data. Over plain `http://` it works as a normal website.
+
 ## Configuration
 
 Everything except the environment below lives in the web UI and the `/config` volume.

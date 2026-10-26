@@ -47,6 +47,14 @@ MediaHub is designed for a private network such as Tailscale. For HTTPS, `tailsc
 in front of MediaHub works well; then set **Secure cookies** to `true`. Linking your install
 with your brother's (read-only, token-authenticated) arrives in Phase 5.
 
+### Install as an app
+
+Over HTTPS (e.g. `tailscale serve`), MediaHub can be installed on a phone or desktop: Chrome or
+Edge → **Install app** / **Add to Home screen**, Safari on iOS → **Share → Add to Home Screen**.
+It then opens full screen with its own icon and shows an offline page when the server can't be
+reached. Browsers only allow this over HTTPS (or `localhost`); over plain `http://` the site
+still works, just as a normal tab or bookmark.
+
 ## 5. Backups
 
 Back up `/mnt/user/appdata/mediahub` (the Appdata Backup plugin covers it). `secret.key` and
