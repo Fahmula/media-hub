@@ -83,7 +83,7 @@ class FieldSpec:
     required: bool = False
     placeholder: str = ""
     help: str = ""
-    kind: str = "text"  # text | url | checkbox | minutes
+    kind: str = "text"  # text | url | checkbox | minutes | percent
 
 
 class Integration(ABC):

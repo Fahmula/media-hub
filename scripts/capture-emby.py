@@ -4,9 +4,9 @@ Usage (play something first, then):
     uv run python scripts/capture-emby.py <label>     # e.g. direct-play, transcode-hdr
 
 Reads EMBY_URL and EMBY_API_KEY from the environment or from .dev-config/emby.env. Writes
-tests/fixtures/emby/<label>.json holding /System/Info/Public, /Sessions (active ones) and the
-item detail for each playing item. Nothing is ever sent anywhere except the configured Emby
-server, and the output is safe to commit:
+tests/fixtures/emby/<label>.json holding /System/Info/Public, /Sessions (active ones), the
+item detail for each playing item and, for episodes, the series' episode list. Nothing is
+ever sent anywhere except the configured Emby server, and the output is safe to commit:
 
 * masked: client IPs, device ids and names, tokens, user names, the server name
 * anonymized: what was watched. Titles become "Movie 1", "Series 1", "Channel 1"...
@@ -54,12 +54,14 @@ TYPE_LABELS = {
 ITEM_NAME_KEYS = {"Name", "SortName", "ForcedSortName", "OriginalTitle"}
 ITEM_LABEL_KEYS = {
     "SeriesName": "Series",
+    "SeasonName": "Season",  # can be the show's own name ("Slow Horses", seen live)
     "ChannelName": "Channel",
     "EpisodeTitle": "Episode",
     "Album": "Album",
     "AlbumArtist": "Artist",
 }
 ITEM_CLEAR_KEYS = {
+    "PremiereDate",  # a whole season's air dates identify the show
     "Overview",
     "Taglines",
     "People",
@@ -167,15 +169,21 @@ def main() -> None:
         public = get("/System/Info/Public")
         sessions = [s for s in get("/Sessions") if s.get("NowPlayingItem")]
         items = {}
+        episodes = {}
         for session in sessions:
             item, user = session["NowPlayingItem"], session.get("UserId")
             if user and item.get("Id") and item["Id"] not in items:
                 items[item["Id"]] = get(f"/Users/{user}/Items/{item['Id']}")
+            series = item.get("SeriesId")
+            if user and series and series not in episodes:
+                query = "IsMissing=false&EnableImages=false&EnableUserData=false"
+                episodes[series] = get(f"/Shows/{series}/Episodes?UserId={user}&{query}")
 
     fixture = {
         "system_info_public": redact(public),
         "sessions": redact(sessions),
         "items": redact(items),
+        "episodes": redact(episodes),
     }
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out = OUT_DIR / f"{label}.json"

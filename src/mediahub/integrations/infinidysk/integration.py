@@ -8,7 +8,10 @@ InfiniDysk exposes two HTTP surfaces:
 
 Several InfiniDysk GET routes change state (backups, queue resets, SAB pause/delete), so
 every request goes through :meth:`InfiniDyskIntegration._get`, which enforces a read-only
-allowlist.
+allowlist. The one exception is :meth:`InfiniDyskIntegration.recheck_file` (``POST
+/api/recheck-file``), used only by the opt-in next-episode check: it queues one file's health
+check, the same request InfiniDysk's own Files page sends. That check then follows the file
+through the read-only active-checks and history routes.
 
 Every poll reads provider usage (frontend) and, with a backend URL, ``/health``, ``/ready`` and
 ``/metrics``: cheap, and enough for issues (circuits, byte limits, health). While someone is
@@ -20,9 +23,13 @@ from __future__ import annotations
 
 import asyncio
 import contextlib
+import json
 import time
+from dataclasses import dataclass
+from datetime import datetime
 from typing import Any, ClassVar
 from urllib.parse import urlsplit, urlunsplit
+from uuid import UUID
 
 import httpx
 from websockets.asyncio.client import connect as ws_connect
@@ -49,17 +56,30 @@ from mediahub.models.snapshot import HealthCheck
 log = get_logger(__name__)
 
 # Read-only routes only. Anything else is refused before a request is made.
+ACTIVE_CHECKS_PATH = "/api/get-active-health-checks"
+CHECK_HISTORY_PATH = "/api/get-health-check-history"
 FRONTEND_READ_PATHS = frozenset(
-    {"/api/get-overview-stats", "/api/get-provider-usage", "/api/get-arr-health", "/api/get-logs"}
+    {
+        "/api/get-overview-stats",
+        "/api/get-provider-usage",
+        "/api/get-arr-health",
+        "/api/get-logs",
+        ACTIVE_CHECKS_PATH,
+        CHECK_HISTORY_PATH,
+    }
 )
 SAB_READ_MODES = frozenset({"queue", "history", "warnings", "status", "server_stats"})
 BACKEND_READ_PATHS = frozenset({"/health", "/ready", "/metrics"})
+# The only write MediaHub sends (see the module docstring). Never reachable through _get.
+RECHECK_PATH = "/api/recheck-file"
 
 OVERVIEW_PARAMS = {"window": "1h", "sections": "window,detail"}
 # Once per feed connect: problems logged before MediaHub was watching (see logs.py).
 LOG_BACKFILL_PARAMS = {"levels": "Information,Warning,Error,Fatal", "limit": "2000"}
 OVERVIEW_EVERY_S = 30.0
 OVERVIEW_MAX_AGE_S = 90.0  # keep showing the last overview through a failed refresh
+# Newest health-check results read per look (newest first; InfiniDysk allows up to 250).
+CHECK_HISTORY_PAGE = 100
 
 
 def assert_read_only(path: str, params: dict[str, Any] | None, *, backend: bool) -> None:
@@ -73,6 +93,56 @@ def assert_read_only(path: str, params: dict[str, Any] | None, *, backend: bool)
         allowed = path in FRONTEND_READ_PATHS
     if not allowed:
         raise IntegrationError(ErrorKind.PROTOCOL, f"Refusing non-allowlisted request to {path}")
+
+
+@dataclass(frozen=True)
+class RecheckOutcome:
+    """InfiniDysk's answer to a recheck request.
+
+    ``state`` is ``queued``, ``already-queued`` or ``already-running`` when accepted (202),
+    else None with InfiniDysk's ``error`` text, e.g. "File no longer exists." (404).
+    """
+
+    state: str | None
+    error: str | None = None
+    not_found: bool = False
+
+
+@dataclass(frozen=True)
+class ActiveCheck:
+    """A health check InfiniDysk is running now. ``phase``: "Checking" or "Repairing"."""
+
+    phase: str | None
+    progress: int | None  # percent
+
+
+@dataclass(frozen=True)
+class CheckResult:
+    """A finished health check from InfiniDysk's history.
+
+    ``result``: 0 healthy, 1 unhealthy, 2 degraded. ``repair``: 0 none, 1 repaired, 2 deleted,
+    3 action needed, 4 repaired via PAR2 (InfiniDysk's ``HealthCheckResult`` enums).
+    """
+
+    dav_item_id: UUID
+    at: datetime
+    result: int
+    repair: int
+    message: str | None
+
+
+def _items(data: Any, path: str) -> list[dict[str, Any]]:
+    items = data.get("items") if isinstance(data, dict) else None
+    if not isinstance(items, list):
+        raise IntegrationError(ErrorKind.PROTOCOL, f"Unexpected reply from {path}")
+    return [i for i in items if isinstance(i, dict)]
+
+
+def _uuid(value: Any) -> UUID | None:
+    try:
+        return UUID(value) if isinstance(value, str) else None
+    except ValueError:
+        return None
 
 
 def ws_url(backend_url: str) -> str:
@@ -133,6 +203,79 @@ class InfiniDyskIntegration(Integration):
     async def _get(self, path: str, params: dict[str, Any] | None = None) -> Any:
         assert_read_only(path, params, backend=False)
         return await get_json(self._client, path, params=params)
+
+    async def recheck_file(self, dav_item_id: UUID) -> RecheckOutcome:
+        """Ask InfiniDysk to health-check one file soon. Raises ``IntegrationError``."""
+        response = await request(
+            self._client,
+            "POST",
+            RECHECK_PATH,
+            accept=(202, 404, 409),
+            # A multipart form with exactly one plain field (no filename): what InfiniDysk accepts.
+            files={"davItemId": (None, str(dav_item_id))},
+        )
+        try:
+            body = response.json()
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            body = None
+        if not isinstance(body, dict):
+            if response.status_code == 404:  # not InfiniDysk's JSON 404: a wrong base URL
+                raise IntegrationError(
+                    ErrorKind.PROTOCOL, f"Not found: {RECHECK_PATH} — check the base URL"
+                )
+            raise IntegrationError(
+                ErrorKind.PROTOCOL,
+                f"Unexpected reply from {RECHECK_PATH} (HTTP {response.status_code})",
+            )
+        if response.status_code == 202:
+            state = body.get("state")
+            return RecheckOutcome(state=state if isinstance(state, str) else "queued")
+        error = body.get("error")
+        return RecheckOutcome(
+            state=None,
+            error=error if isinstance(error, str) and error else f"HTTP {response.status_code}",
+            not_found=response.status_code == 404,
+        )
+
+    async def active_checks(self) -> dict[UUID, ActiveCheck]:
+        """Health checks running now, by InfiniDysk item id. Raises ``IntegrationError``."""
+        data = await self._get(ACTIVE_CHECKS_PATH)
+        out: dict[UUID, ActiveCheck] = {}
+        for item in _items(data, ACTIVE_CHECKS_PATH):
+            item_id = _uuid(item.get("id"))
+            if item_id is None:
+                continue
+            phase, progress = item.get("phase"), item.get("progress")
+            out[item_id] = ActiveCheck(
+                phase=phase if isinstance(phase, str) else None,
+                progress=progress if isinstance(progress, int) else None,
+            )
+        return out
+
+    async def check_results(self) -> list[CheckResult]:
+        """The newest finished health checks, newest first. Raises ``IntegrationError``."""
+        data = await self._get(CHECK_HISTORY_PATH, {"pageSize": str(CHECK_HISTORY_PAGE)})
+        out: list[CheckResult] = []
+        for item in _items(data, CHECK_HISTORY_PATH):
+            item_id = _uuid(item.get("davItemId"))
+            result, repair = item.get("result"), item.get("repairStatus")
+            try:
+                at = datetime.fromisoformat(str(item.get("createdAt")))
+            except ValueError:
+                continue
+            if item_id is None or not isinstance(result, int) or not isinstance(repair, int):
+                continue
+            message = item.get("message")
+            out.append(
+                CheckResult(
+                    dav_item_id=item_id,
+                    at=at,
+                    result=result,
+                    repair=repair,
+                    message=message if isinstance(message, str) and message else None,
+                )
+            )
+        return out
 
     async def _backend_text(self, path: str) -> str:
         assert self._backend is not None

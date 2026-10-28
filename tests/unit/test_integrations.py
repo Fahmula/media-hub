@@ -112,6 +112,10 @@ def test_map_health_skips_ok_and_maps_levels() -> None:
     ("path", "params", "backend", "allowed"),
     [
         ("/api/get-overview-stats", None, False, True),
+        ("/api/get-active-health-checks", None, False, True),
+        ("/api/get-health-check-history", {"pageSize": "100"}, False, True),
+        ("/api/recheck-file", None, False, False),
+        ("/api/requeue-action-needed-health-checks", None, False, False),
         ("/api/db-backup-create", None, False, False),
         ("/api/reset-health-check-queue", None, False, False),
         ("/api", {"mode": "queue"}, False, True),

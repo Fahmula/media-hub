@@ -13,12 +13,18 @@ from mediahub.config import Settings
 from mediahub.db.session import session_scope
 from mediahub.instances import repository
 from mediahub.integrations.base import ConnectionTestResult, InstanceConfig, Integration
-from mediahub.integrations.demo import DemoIntegration, DemoPeerTarget, demo_local_configs
+from mediahub.integrations.demo import (
+    DemoIntegration,
+    DemoNextEpisodeTarget,
+    DemoPeerTarget,
+    demo_local_configs,
+)
 from mediahub.integrations.registry import integration_class
 from mediahub.logging import get_logger
 from mediahub.models.common import ServiceStatus, ServiceType, SourceRef
 from mediahub.models.snapshot import ServiceSnapshot
 from mediahub.monitoring.demand import DemandTracker
+from mediahub.monitoring.next_episode import NextEpisodeTarget
 from mediahub.monitoring.poller import Poller
 from mediahub.monitoring.store import SnapshotStore
 from mediahub.monitoring.targets import InstanceTarget
@@ -73,6 +79,7 @@ class MonitoringService:
             await self._apply(item)
         for peer in await asyncio.to_thread(self._load_peers):
             await self._apply_peer(peer)
+        await self.poller.add(NextEpisodeTarget(self.store, self.local_integrations))
         if self._settings.demo_mode:
             for order, config in enumerate(demo_local_configs(), start=len(items)):
                 source = self.source_for(config)
@@ -80,6 +87,7 @@ class MonitoringService:
                     InstanceTarget(DemoIntegration(config, source), self.store, order=order)
                 )
             await self.poller.add(DemoPeerTarget(self.store))
+            await self.poller.add(DemoNextEpisodeTarget(self.store))
         log.info("monitoring_started", targets=len(self.poller.keys), demo=self._settings.demo_mode)
 
     async def stop(self) -> None:
@@ -145,6 +153,11 @@ class MonitoringService:
         """The live integration polling a local instance, e.g. to proxy its images."""
         target = self.poller.get(instance_id)
         return target.integration if isinstance(target, InstanceTarget) else None
+
+    def local_integrations(self) -> list[Integration]:
+        """Every live integration of an enabled local instance."""
+        targets = (self.poller.get(key) for key in self.poller.keys)
+        return [t.integration for t in targets if isinstance(t, InstanceTarget)]
 
     async def reload_instance(self, instance_id: str) -> None:
         """Re-read one instance after it was created, edited, enabled/disabled or deleted."""

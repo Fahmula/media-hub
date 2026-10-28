@@ -13,7 +13,7 @@ from mediahub.models.common import ServiceStatus, ServiceType, SourceRef
 from mediahub.models.downloads import ActivityEvent, DownloadItem, DownloadState
 from mediahub.models.infinidysk import ActiveRead, InfiniDyskStats
 from mediahub.models.issues import Issue, IssueCategory, Severity
-from mediahub.models.playback import PlaybackSession
+from mediahub.models.playback import NextEpisodeCheck, PlaybackSession
 from mediahub.models.snapshot import ServerSnapshot, ServiceSnapshot
 from mediahub.monitoring.store import PeerState, SnapshotStore
 
@@ -91,6 +91,8 @@ class DashboardView:
     streams: list[StreamStats] = field(default_factory=list)
     # (session source key, session id) -> the InfiniDysk read serving that session's file
     stream_reads: dict[tuple[str, str], ActiveRead] = field(default_factory=dict)
+    # (session source key, session id) -> next-episode check outcome (local sessions only)
+    next_checks: dict[tuple[str, str], NextEpisodeCheck] = field(default_factory=dict)
 
     @property
     def multi_server(self) -> bool:
@@ -98,6 +100,9 @@ class DashboardView:
 
     def read_for(self, session: PlaybackSession) -> ActiveRead | None:
         return self.stream_reads.get((session.source.key, session.session_id))
+
+    def next_check_for(self, session: PlaybackSession) -> NextEpisodeCheck | None:
+        return self.next_checks.get((session.source.key, session.session_id))
 
     @property
     def pending(self) -> bool:
@@ -305,6 +310,11 @@ def build_view(store: SnapshotStore, scope: str) -> DashboardView:
         for service in snap.services:
             view.snapshots.append(service)
             view.sessions.extend(service.sessions)
+            if card.is_local:
+                for s in service.sessions:
+                    key = (s.source.instance_id, s.session_id, s.item_id or "")
+                    if (check := store.next_check(key)) is not None:
+                        view.next_checks[(s.source.key, s.session_id)] = check
             view.downloads.extend(service.downloads)
             view.history.extend(service.history)
             view.issues.extend(service.issues)

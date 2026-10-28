@@ -6,12 +6,14 @@ Everything runs on one event loop, so plain dicts are safe; snapshots are immuta
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
 from mediahub.db.app_settings import ServerIdentity
 from mediahub.models.common import ServiceStatus
 from mediahub.models.issues import Issue
+from mediahub.models.playback import NextEpisodeCheck
 from mediahub.models.snapshot import ServerSnapshot, ServiceSnapshot
 from mediahub.monitoring.issue_states import IssueStates
 from mediahub.monitoring.issues import derive_issues
@@ -40,6 +42,8 @@ class SnapshotStore:
     _peers: dict[str, PeerState] = field(default_factory=dict)
     _first_seen: dict[str, datetime] = field(default_factory=dict)
     _instance_fps: dict[str, set[str]] = field(default_factory=dict)
+    # (emby instance id, session id, item id) -> next-episode check outcome (local only)
+    _next_checks: dict[tuple[str, str, str], NextEpisodeCheck] = field(default_factory=dict)
 
     # ----- local instances -------------------------------------------------------------
     def put_local(self, snapshot: ServiceSnapshot, order: int = 0) -> None:
@@ -70,6 +74,7 @@ class SnapshotStore:
         self._order.pop(instance_id, None)
         for fp in self._instance_fps.pop(instance_id, set()):
             self._first_seen.pop(fp, None)
+        self.drop_next_checks([k for k in self._next_checks if k[0] == instance_id])
 
     def local_snapshots(self) -> list[ServiceSnapshot]:
         return sorted(
@@ -85,6 +90,16 @@ class SnapshotStore:
             generated_at=datetime.now(UTC),
             services=self.local_snapshots(),
         )
+
+    def put_next_check(self, key: tuple[str, str, str], check: NextEpisodeCheck) -> None:
+        self._next_checks[key] = check
+
+    def next_check(self, key: tuple[str, str, str]) -> NextEpisodeCheck | None:
+        return self._next_checks.get(key)
+
+    def drop_next_checks(self, keys: Iterable[tuple[str, str, str]]) -> None:
+        for key in keys:
+            self._next_checks.pop(key, None)
 
     def rename(self, identity: ServerIdentity) -> None:
         self.identity = identity

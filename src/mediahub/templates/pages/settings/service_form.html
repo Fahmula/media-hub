@@ -49,12 +49,18 @@
     {% endfor %}
 
     {% for spec in integration.option_fields %}
+    {% if spec.kind == 'checkbox' %}
+    <label class="flex items-center justify-between gap-3"><span class="text-sm font-medium">{{ spec.label }}{% if spec.help %}<span class="block text-xs font-normal muted">{{ spec.help }}</span>{% endif %}</span>
+      <input type="checkbox" class="toggle toggle-primary" name="option_{{ spec.name }}" {% if form.options.get(spec.name) %}checked{% endif %}></label>
+    {% else %}
+    {% set numeric = spec.kind in ('minutes', 'percent') %}
     <label class="block space-y-1.5">
       <span class="text-sm font-medium">{{ spec.label }}{% if not spec.required %} <span class="font-normal muted">(optional)</span>{% endif %}</span>
-      <input class="input {{ 'w-40' if spec.kind == 'minutes' else 'w-full' }} {{ 'font-mono text-sm' if spec.kind == 'url' }} {{ 'input-error' if form.errors.get('option_' ~ spec.name) }}" name="option_{{ spec.name }}" value="{{ form.options.get(spec.name, '') }}" placeholder="{{ spec.placeholder }}" spellcheck="false"{% if spec.kind == 'minutes' %} inputmode="numeric"{% endif %}>
+      <input class="input {{ 'w-40' if numeric else 'w-full' }} {{ 'font-mono text-sm' if spec.kind == 'url' }} {{ 'input-error' if form.errors.get('option_' ~ spec.name) }}" name="option_{{ spec.name }}" value="{{ form.options.get(spec.name, '') }}" placeholder="{{ spec.placeholder }}" spellcheck="false"{% if numeric %} inputmode="numeric"{% endif %}>
       {% if spec.help %}<span class="block text-xs muted">{{ spec.help }}</span>{% endif %}
       {{ field_error("option_" ~ spec.name) }}
     </label>
+    {% endif %}
     {% endfor %}
   </section>
 

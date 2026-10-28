@@ -73,6 +73,12 @@ def test_episode_direct_stream() -> None:
     assert s.source_stream.hdr is HdrType.SDR
     assert (s.source_stream.video_codec, s.source_stream.audio_codec) == ("hevc", "aac")
     assert s.source_stream.resolution == "1080p"
+    raw = fixture("show-and-livetv")["sessions"][0]
+    assert (s.item_id, s.user_id, s.series_id) == (
+        raw["NowPlayingItem"]["Id"],
+        raw["UserId"],
+        "1018754",
+    )
 
 
 def test_live_tv_uses_pipeline_for_hardware_flags() -> None:
