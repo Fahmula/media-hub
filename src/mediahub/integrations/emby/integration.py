@@ -8,12 +8,17 @@ lists every connected client; only entries with a ``NowPlayingItem`` are playing
 points to is only in ``/Users/{user}/Items/{item}`` → ``MediaSources[].Path``. Its last path
 segment is InfiniDysk's item id, which is how a stream is matched to the InfiniDysk read (the
 .strm file itself is usually renamed by Sonarr/Radarr). Looked up once per item and cached.
+
+``/Shows/{series}/Episodes`` lists a whole series sorted by season and episode, specials
+(season 0) first (checked against a real 526-series library). Missing episodes only appear when
+Emby shows them, as ``LocationType: Virtual``; ``IsMissing=false`` leaves them out.
 """
 
 from __future__ import annotations
 
 import asyncio
 import time
+from dataclasses import dataclass
 from typing import Any, ClassVar
 
 from mediahub.integrations.base import (
@@ -24,7 +29,7 @@ from mediahub.integrations.base import (
     Integration,
     PollResult,
 )
-from mediahub.integrations.emby.mapper import map_session, strm_target
+from mediahub.integrations.emby.mapper import episode_code, map_session, strm_target
 from mediahub.integrations.errors import ErrorKind, IntegrationError
 from mediahub.integrations.http import get_json, make_client, request
 from mediahub.integrations.image_refs import image_url, valid_part
@@ -37,6 +42,15 @@ IMAGE_MAX_WIDTH = 300
 IMAGE_MAX_BYTES = 5 * 1024 * 1024
 STRM_CACHE_MAX = 500
 STRM_RETRY_S = 300.0  # a failed lookup is retried after this long
+DEFAULT_NEXT_EPISODE_PERCENT = 50
+
+
+@dataclass(frozen=True)
+class NextEpisode:
+    item_id: str
+    code: str | None  # "S01E03"
+    name: str | None
+    strm_id: str | None  # InfiniDysk's item id from its .strm; None when it isn't a STRM file
 
 
 def emby_api_root(base_url: str) -> str:
@@ -61,6 +75,23 @@ class EmbyIntegration(Integration):
             help="Emby → Settings → Advanced → API Keys.",
         ),
     )
+    option_fields: ClassVar[tuple[FieldSpec, ...]] = (
+        FieldSpec(
+            "next_episode_check",
+            "Health-check the next episode",
+            kind="checkbox",
+            help="Once an episode is far enough in, ask InfiniDysk to health-check the next one, "
+            "so a broken release is repaired before you get to it. Needs STRM imports; the "
+            "request goes to every InfiniDysk on this server.",
+        ),
+        FieldSpec(
+            "next_episode_percent",
+            "Check the next episode at (% played)",
+            kind="percent",
+            placeholder=str(DEFAULT_NEXT_EPISODE_PERCENT),
+            help=f"0–95. Blank means {DEFAULT_NEXT_EPISODE_PERCENT}.",
+        ),
+    )
 
     def __init__(self, config: InstanceConfig, source: SourceRef) -> None:
         super().__init__(config, source)
@@ -71,6 +102,14 @@ class EmbyIntegration(Integration):
         )
         # (item id, media source id) -> (target segment or None, monotonic time looked up)
         self._strm: dict[tuple[str, str], tuple[str | None, float]] = {}
+
+    @property
+    def next_episode_percent(self) -> int | None:
+        """How far into an episode its next one gets checked; None while the option is off."""
+        if not self.config.options.get("next_episode_check"):
+            return None
+        value = self.config.options.get("next_episode_percent")
+        return value if isinstance(value, int) else DEFAULT_NEXT_EPISODE_PERCENT
 
     async def test_connection(self) -> ConnectionTestResult:
         result = ConnectionTestResult(ok=False)
@@ -151,7 +190,53 @@ class EmbyIntegration(Integration):
             out.append(s.model_copy(update={"strm_target": target}) if target else s)
         return out
 
-    async def _lookup_strm(self, user: str, item_id: str, source_id: str, now: float) -> None:
+    async def next_episode(self, user_id: str, series_id: str, item_id: str) -> NextEpisode | None:
+        """The episode after ``item_id`` in Emby's order, or None at the end of the series.
+
+        Specials are skipped unless a special is playing. Raises ``IntegrationError``.
+        """
+        if not all(valid_part(p) for p in (user_id, series_id, item_id)):
+            return None
+        data = await get_json(
+            self._client,
+            f"/Shows/{series_id}/Episodes",
+            params={
+                "UserId": user_id,
+                "IsMissing": "false",
+                "EnableImages": "false",
+                "EnableUserData": "false",
+            },
+        )
+        raw = data.get("Items") if isinstance(data, dict) else None
+        if not isinstance(raw, list):
+            raise IntegrationError(ErrorKind.PROTOCOL, "Unexpected episode list from Emby")
+        episodes = [e for e in raw if isinstance(e, dict) and isinstance(e.get("Id"), str)]
+        current = next((n for n, e in enumerate(episodes) if e["Id"] == item_id), None)
+        if current is None:
+            return None
+        in_specials = episodes[current].get("ParentIndexNumber") == 0
+        for episode in episodes[current + 1 :]:
+            if episode.get("LocationType") == "Virtual" or not valid_part(episode["Id"]):
+                continue
+            if episode.get("ParentIndexNumber") == 0 and not in_specials:
+                continue
+            name = episode.get("Name")
+            return NextEpisode(
+                item_id=episode["Id"],
+                code=episode_code(episode),
+                name=name if isinstance(name, str) and name else None,
+                strm_id=await self._strm_for(user_id, episode["Id"], ""),
+            )
+        return None
+
+    async def _strm_for(self, user: str, item_id: str, source_id: str) -> str | None:
+        now = time.monotonic()
+        cached = self._strm.get((item_id, source_id))
+        if cached is not None and (cached[0] is not None or now - cached[1] <= STRM_RETRY_S):
+            return cached[0]
+        return await self._lookup_strm(user, item_id, source_id, now)
+
+    async def _lookup_strm(self, user: str, item_id: str, source_id: str, now: float) -> str | None:
         target = None
         try:
             item = await get_json(
@@ -171,6 +256,7 @@ class EmbyIntegration(Integration):
         if len(self._strm) >= STRM_CACHE_MAX:
             self._strm.clear()
         self._strm[(item_id, source_id)] = (target, now)
+        return target
 
     def map_sessions(self, raw: list[Any]) -> list[PlaybackSession]:
         instance_id = self.config.id

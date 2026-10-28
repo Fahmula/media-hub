@@ -40,7 +40,7 @@
     {% if fv.sessions and layout == "compact" %}
     <div class="panel space-y-0.5 p-2">{% for s in fv.sessions %}{{ items.session_row(s, multi, view.read_for(s)) }}{% endfor %}</div>
     {% elif fv.sessions %}
-    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-3">{% for s in fv.sessions %}{{ items.session_card(s, multi, view.read_for(s)) }}{% endfor %}</div>
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-3">{% for s in fv.sessions %}{{ items.session_card(s, multi, view.read_for(s), view.next_check_for(s)) }}{% endfor %}</div>
     {% else %}<div class="panel">{{ ui.empty_state("play", "Nothing playing") }}</div>{% endif %}
   {% elif service_type.value in ("sonarr", "radarr") %}
     <div class="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">

@@ -100,7 +100,15 @@ Transcode{% if t.video_direct %} (audio only){% elif t.audio_direct %} (video on
 {%- if t.reasons %} · {{ t.reasons|map("short_reason")|join(", ") }}{% endif %}
 {%- endmacro %}
 
-{% macro session_card(s, show_server=False, read=None) -%}
+{% macro next_check_line(c) -%}
+{%- set lead = "Next " ~ c.code if c.code else ("" if c.state.value == "no-next" else "Next episode") -%}
+{%- set text = (lead ~ " · " if lead else "") ~ c.state.label ~ (" · " ~ c.progress ~ "%" if c.progress is not none else "") ~ (" · " ~ c.message if c.message else "") -%}
+<p class="mt-2 flex items-center gap-1.5 text-xs {{ 'text-' ~ c.state.tone if c.state.tone else 'muted' }}" title="{{ text }}{% if c.name %} ({{ c.name }}){% endif %}">
+  {{ icon(c.state.icon, "size-3.5") }}<span class="min-w-0 truncate">{{ text }}</span>
+</p>
+{%- endmacro %}
+
+{% macro session_card(s, show_server=False, read=None, next_check=None) -%}
 <article class="panel p-3 sm:p-4">
   <div class="flex gap-3 sm:gap-4">
     {{ ui.poster(s.media.image_url, s.media.title, "h-28 w-20 sm:h-36 sm:w-24") }}
@@ -135,6 +143,7 @@ Transcode{% if t.video_direct %} (audio only){% elif t.audio_direct %} (video on
     </div>
   </div>
   {% if read %}{{ stream_health(read) }}{% endif %}
+  {% if next_check %}{{ next_check_line(next_check) }}{% endif %}
   {% if s.progress_pct is not none %}
   <div class="mt-3 flex items-center gap-2">
     {{ ui.progress(s.progress_pct, "primary", "flex-1") }}

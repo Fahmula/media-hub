@@ -18,6 +18,7 @@ from mediahub.models.infinidysk import (
     ProblemOutcome,
     ReadProblem,
 )
+from mediahub.models.playback import MediaKind, NextCheckState, NextEpisodeCheck
 from mediahub.models.snapshot import ServiceSnapshot
 
 FIXTURES = Path(__file__).parent.parent / "fixtures" / "emby"
@@ -118,6 +119,58 @@ def test_emby_page_renders_real_sessions(
     for text in expected:
         assert text in html, text
     assert "/img/emby-1/" in html
+
+
+@pytest.mark.parametrize(
+    ("check", "expected"),
+    [
+        (
+            NextEpisodeCheck(state=NextCheckState.QUEUED, code="S01E02", name="Episode 2"),
+            "Next S01E02 · health check queued",
+        ),
+        (
+            NextEpisodeCheck(
+                state=NextCheckState.NOT_FOUND, code="S01E02", message="File no longer exists."
+            ),
+            "Next S01E02 · not in InfiniDysk · File no longer exists.",
+        ),
+        (NextEpisodeCheck(state=NextCheckState.NO_NEXT), "No next episode in the library"),
+        (
+            NextEpisodeCheck(state=NextCheckState.CHECKING, code="S01E02", progress=40),
+            "Next S01E02 · being checked · 40%",
+        ),
+        (
+            NextEpisodeCheck(state=NextCheckState.HEALTHY, code="S01E02"),
+            "Next S01E02 · healthy",
+        ),
+        (
+            NextEpisodeCheck(
+                state=NextCheckState.REPAIRED_PAR2, code="S01E02", message="Repaired from PAR2."
+            ),
+            "Next S01E02 · repaired via PAR2 · Repaired from PAR2.",
+        ),
+        (
+            NextEpisodeCheck(state=NextCheckState.ERROR, message="Connection refused"),
+            "Next episode · couldn&#39;t request a health check · Connection refused",
+        ),
+    ],
+)
+def test_stream_card_shows_the_next_episode_check(
+    authed: TestClient, check: NextEpisodeCheck, expected: str
+) -> None:
+    store = authed.app.state.ctx.monitor.store  # type: ignore[attr-defined]
+    snapshot = _captured_snapshot(authed, "show-and-livetv")
+    store.put_local(snapshot)
+    episode = next(s for s in snapshot.sessions if s.media.kind is MediaKind.EPISODE)
+    assert episode.item_id
+    html = authed.get("/partials/service/emby?server=local").text
+    assert "Next S01E02" not in html and "No next episode" not in html
+    store.put_next_check(("emby-1", episode.session_id, "another-item"), check)
+    assert expected not in authed.get("/partials/service/emby?server=local").text
+    store.put_next_check(("emby-1", episode.session_id, episode.item_id), check)
+    html = authed.get("/partials/service/emby?server=local").text
+    assert expected in html
+    assert html.count(expected) == 2  # the line and its tooltip
 
 
 def test_layout_toggle_is_remembered(authed: TestClient) -> None:

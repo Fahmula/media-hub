@@ -43,6 +43,8 @@ from mediahub.models.playback import (
     HdrType,
     MediaInfo,
     MediaKind,
+    NextCheckState,
+    NextEpisodeCheck,
     PlaybackSession,
     PlaybackState,
     PlayMethod,
@@ -662,4 +664,41 @@ class DemoPeerTarget(PollTarget):
                 services=services,
             )
         )
+        return True
+
+
+# What the next-episode check would show for the demo's episodes (by series title).
+DEMO_NEXT_CHECKS = {
+    "One Piece": NextEpisodeCheck(
+        state=NextCheckState.CHECKING, code="S21E1077", name="Luffy's Dream", progress=40
+    ),
+    "Reacher": NextEpisodeCheck(
+        state=NextCheckState.REPAIRED_PAR2,
+        code="S02E07",
+        name="Hard Rain",
+    ),
+}
+
+
+class DemoNextEpisodeTarget(PollTarget):
+    """Sample next-episode check outcomes on the demo's local Emby episodes."""
+
+    key = "demo-next-episode"
+
+    def __init__(self, store: SnapshotStore) -> None:
+        super().__init__()
+        self._store = store
+
+    def interval(self, active: bool) -> float:
+        return 10.0 if active else 60.0
+
+    async def run_once(self, active: bool) -> bool:
+        for snapshot in self._store.local_snapshots():
+            if not snapshot.source.instance_id.startswith("demo-"):
+                continue
+            for session in snapshot.sessions:
+                check = DEMO_NEXT_CHECKS.get(session.media.title)
+                if check is not None and session.media.kind is MediaKind.EPISODE:
+                    key = (snapshot.source.instance_id, session.session_id, session.item_id or "")
+                    self._store.put_next_check(key, check)
         return True

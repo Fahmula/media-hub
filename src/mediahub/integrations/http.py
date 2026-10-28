@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Collection
 from typing import Any
 
 import httpx
@@ -50,13 +51,24 @@ def _describe_transport_error(exc: httpx.TransportError) -> str:
 
 
 async def request(
-    client: httpx.AsyncClient, method: str, path: str, **kwargs: Any
+    client: httpx.AsyncClient,
+    method: str,
+    path: str,
+    *,
+    accept: Collection[int] = (),
+    **kwargs: Any,
 ) -> httpx.Response:
-    """Perform a request, translating failures into ``IntegrationError``."""
+    """Perform a request, translating failures into ``IntegrationError``.
+
+    Statuses in ``accept`` are returned as they are, for routes whose error replies carry a
+    meaningful answer (e.g. 404 "file no longer exists").
+    """
     try:
         response = await client.request(method, path, **kwargs)
     except httpx.TransportError as exc:
         raise IntegrationError(ErrorKind.UNREACHABLE, _describe_transport_error(exc)) from exc
+    if response.status_code in accept:
+        return response
     if response.status_code in (401, 403):
         raise IntegrationError(
             ErrorKind.AUTH, f"Credentials rejected (HTTP {response.status_code})"

@@ -131,14 +131,19 @@ def _first_image(image_url: ImageUrl, *candidates: tuple[Any, Any]) -> str | Non
     return None
 
 
+def episode_code(item: dict[str, Any]) -> str | None:
+    """``S02E06`` from an episode item, or None when Emby has no numbers for it."""
+    season, episode = _int(item.get("ParentIndexNumber")), _int(item.get("IndexNumber"))
+    return f"S{season:02d}E{episode:02d}" if season is not None and episode is not None else None
+
+
 def _media(item: dict[str, Any], image_url: ImageUrl) -> MediaInfo:
     kind = _KINDS.get(item.get("Type") or "", MediaKind.OTHER)
     name = _str(item.get("Name")) or "Unknown"
     year = _int(item.get("ProductionYear"))
     own = (item.get("Id"), _dict(item.get("ImageTags")).get("Primary"))
     if kind is MediaKind.EPISODE:
-        season, episode = _int(item.get("ParentIndexNumber")), _int(item.get("IndexNumber"))
-        code = f"S{season:02d}E{episode:02d}" if season is not None and episode is not None else ""
+        code = episode_code(item)
         series = (item.get("SeriesId"), item.get("SeriesPrimaryImageTag"))
         series_name = _str(item.get("SeriesName"))
         episode_name = _str(item.get("Name")) if series_name else None  # else it's the title
@@ -238,6 +243,9 @@ def map_session(raw: Any, source: SourceRef, image_url: ImageUrl) -> PlaybackSes
         client_version=_str(session.get("ApplicationVersion")),
         remote_address=_str(session.get("RemoteEndPoint")),
         file_name=_basename(_str(item.get("Path"))),
+        item_id=_str(item.get("Id")),
+        user_id=_str(session.get("UserId")),
+        series_id=_str(item.get("SeriesId")),
         state=PlaybackState.PAUSED if play.get("IsPaused") is True else PlaybackState.PLAYING,
         position_s=_seconds(play.get("PositionTicks")),
         duration_s=_seconds(item.get("RunTimeTicks")),

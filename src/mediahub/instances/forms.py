@@ -20,6 +20,7 @@ SECRET_MAX = 512
 MIN_INTERVAL_S = 2
 MAX_INTERVAL_S = 3600
 MAX_OPTION_MINUTES = 1440
+MAX_OPTION_PERCENT = 95
 
 
 @dataclass
@@ -139,6 +140,12 @@ def _parse_option(form: InstanceForm, data: Mapping[str, Any], spec: FieldSpec) 
     if spec.kind == "minutes":
         if not value.isdigit() or int(value) > MAX_OPTION_MINUTES:
             form.errors[key] = f"Use a whole number of minutes up to {MAX_OPTION_MINUTES}."
+            return
+        form.options[spec.name] = int(value)
+        return
+    if spec.kind == "percent":
+        if not value.isdigit() or int(value) > MAX_OPTION_PERCENT:
+            form.errors[key] = f"Use a whole number from 0 to {MAX_OPTION_PERCENT}."
             return
         form.options[spec.name] = int(value)
         return

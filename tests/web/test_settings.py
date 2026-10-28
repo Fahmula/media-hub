@@ -178,3 +178,25 @@ def test_change_password(authed: TestClient) -> None:
         headers=headers,
     )
     assert "Password changed" in ok.text
+
+
+def test_emby_next_episode_options_round_trip(authed: TestClient) -> None:
+    with respx.mock(assert_all_called=False) as router:
+        router.get("http://emby:8096/emby/System/Info").mock(
+            return_value=httpx.Response(200, json={"Version": "4.11.0.9"})
+        )
+        router.get("http://emby:8096/emby/Sessions").mock(return_value=httpx.Response(200, json=[]))
+        form = authed.get("/settings/services/new?type=emby").text
+        assert 'name="option_next_episode_check"' in form and 'type="checkbox"' in form
+        resp = _create(
+            authed,
+            service_type="emby",
+            name="Emby",
+            base_url="http://emby:8096",
+            option_next_episode_check="on",
+            option_next_episode_percent="70",
+        )
+        assert resp.status_code == 303, resp.text
+        edit = authed.get(f"/settings/services/{_instance_id(authed)}").text
+    assert re.search(r'name="option_next_episode_check"\s+checked', edit)
+    assert re.search(r'name="option_next_episode_percent" value="70"', edit)
