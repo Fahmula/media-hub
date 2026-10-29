@@ -251,3 +251,103 @@ async def test_poll_looks_up_strm_target_once() -> None:
         assert result.sessions is not None
         assert result.sessions[0].strm_target == "abc-123"
         assert "downloadKey" not in result.sessions[0].model_dump_json()
+
+
+TOPLIST_STRM = (
+    "/data/media/cloud/movies-hd-cloud/Movie 1 (2026)/Movie 1 (2026) - [WEBDL-1080p].strm"
+)
+
+
+@respx.mock
+async def test_poll_follows_a_toplist_copy_to_the_library_strm() -> None:
+    """Shaped like the live Trending library: the playing copy's own source is the path of
+    the library's .strm, and Emby lists the library item's version on the copy too."""
+    raw = fixture("movie-and-paused")["sessions"][0]
+    user, item = raw["UserId"], raw["NowPlayingItem"]["Id"]
+    raw["PlayState"]["MediaSourceId"] = f"mediasource_{item}"
+    respx.get("http://emby:8096/emby/System/Info").mock(
+        return_value=httpx.Response(200, json={"Version": "4.11.0.9"})
+    )
+    respx.get("http://emby:8096/emby/Sessions").mock(return_value=httpx.Response(200, json=[raw]))
+    respx.get(f"http://emby:8096/emby/Users/{user}/Items/{item}").mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                "Id": item,
+                "MediaSources": [
+                    {"Id": f"mediasource_{item}", "ItemId": item, "Path": TOPLIST_STRM},
+                    {"Id": "mediasource_77", "ItemId": "77", "Path": "http://other/stream/x"},
+                ],
+            },
+        )
+    )
+    by_path = respx.get("http://emby:8096/emby/Items").mock(
+        return_value=httpx.Response(
+            200,
+            json={
+                "Items": [
+                    {
+                        "Id": "77",
+                        "Path": TOPLIST_STRM.upper(),  # Emby matches paths case-insensitively
+                        "MediaSources": [
+                            {"Id": "mediasource_76", "ItemId": "76", "Path": "http://x/76"},
+                            {
+                                "Id": "mediasource_77",
+                                "ItemId": "77",
+                                "Path": "http://idk:3000/view/.ids/c/1/abc-777?downloadKey=S",
+                            },
+                        ],
+                    }
+                ]
+            },
+        )
+    )
+    integration = EmbyIntegration(
+        InstanceConfig(
+            id="emby-1",
+            service_type=ServiceType.EMBY,
+            name="Emby",
+            base_url="http://emby:8096",
+            secrets={"api_key": "K"},
+        ),
+        SOURCE,
+    )
+    try:
+        result = await integration.poll(full=False)
+    finally:
+        await integration.aclose()
+    assert result.sessions is not None and result.sessions[0].strm_target == "abc-777"
+    assert by_path.calls.last.request.url.params["Path"] == TOPLIST_STRM
+
+
+@respx.mock
+@pytest.mark.parametrize(
+    "items",
+    [
+        [],  # nothing at that path
+        [{"Id": "9", "Path": "/elsewhere.strm", "MediaSources": [{"Path": "http://x/v/9"}]}],
+        [{"Id": "9", "Path": TOPLIST_STRM, "MediaSources": [{"Path": TOPLIST_STRM}]}],  # loop
+    ],
+)
+async def test_toplist_copy_without_a_url_behind_it(items: list[dict[str, Any]]) -> None:
+    respx.get("http://emby:8096/emby/Users/u1/Items/5").mock(
+        return_value=httpx.Response(200, json={"Id": "5", "MediaSources": [{"Path": TOPLIST_STRM}]})
+    )
+    by_path = respx.get("http://emby:8096/emby/Items").mock(
+        return_value=httpx.Response(200, json={"Items": items})
+    )
+    integration = EmbyIntegration(
+        InstanceConfig(
+            id="emby-1",
+            service_type=ServiceType.EMBY,
+            name="Emby",
+            base_url="http://emby:8096",
+            secrets={"api_key": "K"},
+        ),
+        SOURCE,
+    )
+    try:
+        assert await integration._strm_for("u1", "5", "") is None
+    finally:
+        await integration.aclose()
+    assert by_path.call_count <= 3

@@ -9,6 +9,11 @@ points to is only in ``/Users/{user}/Items/{item}`` → ``MediaSources[].Path``.
 segment is InfiniDysk's item id, which is how a stream is matched to the InfiniDysk read (the
 .strm file itself is usually renamed by Sonarr/Radarr). Looked up once per item and cached.
 
+Toplist plugins (Home Screen Companion's "Trending" library, seen live) add copies whose .strm
+holds the local path of the library's own .strm, so the copy's media source ``Path`` is that
+path, not a URL. ``/Items?Path=`` (exact, case-insensitive) finds the item behind it, whose
+media source has the URL.
+
 ``/Shows/{series}/Episodes`` lists a whole series sorted by season and episode, specials
 (season 0) first (checked against a real 526-series library). Missing episodes only appear when
 Emby shows them, as ``LocationType: Virtual``; ``IsMissing=false`` leaves them out.
@@ -42,6 +47,7 @@ IMAGE_MAX_WIDTH = 300
 IMAGE_MAX_BYTES = 5 * 1024 * 1024
 STRM_CACHE_MAX = 500
 STRM_RETRY_S = 300.0  # a failed lookup is retried after this long
+STRM_MAX_HOPS = 3  # .strm files holding the path of another .strm are followed this deep
 DEFAULT_NEXT_EPISODE_PERCENT = 50
 
 
@@ -237,26 +243,51 @@ class EmbyIntegration(Integration):
         return await self._lookup_strm(user, item_id, source_id, now)
 
     async def _lookup_strm(self, user: str, item_id: str, source_id: str, now: float) -> str | None:
-        target = None
         try:
             item = await get_json(
                 self._client, f"/Users/{user}/Items/{item_id}", params={"Fields": "MediaSources"}
             )
         except IntegrationError:
             item = None
-        raw = item.get("MediaSources") if isinstance(item, dict) else None
-        sources = [s for s in raw or [] if isinstance(s, dict)]
-        chosen = next((s for s in sources if s.get("Id") == source_id), None) or (
-            sources[0] if sources else None
-        )
-        if chosen is not None:
-            target = strm_target(
-                chosen.get("Path") if isinstance(chosen.get("Path"), str) else None
-            )
+        path = _source_path(item, source_id)
+        for _ in range(STRM_MAX_HOPS):
+            if path is None or "://" in path or not path.lower().endswith(".strm"):
+                break
+            path = await self._path_behind(path)
+        target = strm_target(path)
         if len(self._strm) >= STRM_CACHE_MAX:
             self._strm.clear()
         self._strm[(item_id, source_id)] = (target, now)
         return target
+
+    async def _path_behind(self, strm_path: str) -> str | None:
+        """Media source path of the library item stored at ``strm_path``."""
+        try:
+            data = await get_json(
+                self._client,
+                "/Items",
+                params={
+                    "Path": strm_path,
+                    "Recursive": "true",
+                    "Fields": "Path,MediaSources",
+                    "EnableImages": "false",
+                    "Limit": 5,
+                },
+            )
+        except IntegrationError:
+            return None
+        raw = data.get("Items") if isinstance(data, dict) else None
+        found = next(
+            (
+                i
+                for i in raw or []
+                if isinstance(i, dict)
+                and isinstance(i.get("Path"), str)
+                and i["Path"].lower() == strm_path.lower()
+            ),
+            None,
+        )
+        return _source_path(found, None) if found is not None else None
 
     def map_sessions(self, raw: list[Any]) -> list[PlaybackSession]:
         instance_id = self.config.id
@@ -284,3 +315,17 @@ class EmbyIntegration(Integration):
 
     async def aclose(self) -> None:
         await self._client.aclose()
+
+
+def _source_path(item: Any, source_id: str | None) -> str | None:
+    """Path of the item's media source ``source_id``, else of the item's own source (Emby
+    may list other versions of the same movie on it), else of its first one."""
+    raw = item.get("MediaSources") if isinstance(item, dict) else None
+    sources = [s for s in raw or [] if isinstance(s, dict)]
+    chosen = (
+        next((s for s in sources if source_id and s.get("Id") == source_id), None)
+        or next((s for s in sources if s.get("ItemId") == item.get("Id")), None)
+        or (sources[0] if sources else None)
+    )
+    path = chosen.get("Path") if chosen is not None else None
+    return path if isinstance(path, str) else None
